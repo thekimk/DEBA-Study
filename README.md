@@ -70,7 +70,7 @@
 - `분석기술이 인간의 머리를 넘어서고` + `인간경험을 포함한 데이터는 공공소유로 폭발적 증가`하면서 `인간의 역할 낮아짐`
 - 데이터분석 현실과 대응배경 이해의 목적은, `어떻게 기술이 인간을 넘어서게 된건지 발전 배경을 이해하는 것!`
 - **강의자료:** [Tutorial-Probability-Statistics-Algorithm-DataScience](https://github.com/thekimk/Tutorial-Probability-Statistics-Algorithm-DataScience)
-- **강의영상:** `구글 드라이브 제공 예정`
+- **강의영상:** `구글 드라이브 방향1 폴더`
 
 ### :book: 방향2: 분석 도구 익히기 (분석도구 $\neq$ 데이터분석)
 - `분석도구`는 역사적으로 계속 `변경`되어 왔지만 `데이터분석`은 역사적으로 `항상 존재`했고 세상 문제가 존재하는 한 `절대 사라지지 않음`
