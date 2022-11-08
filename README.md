@@ -10,11 +10,12 @@
 
 ---
 
-### :book: Live Training at Learning Centre
-- Workspace `기본적인 사용법과 데이터 추출 예시 등`을 제공
-- `실시간`으로 열리는 다양한 수업에 참여하여 `질문 및 피드백을 즉각적`으로 받을 수 있음
-- **접근 페이지:** <a href="https://www.refinitiv.com/en/learning-centre" target="_blank"><img src="https://img.shields.io/badge/Learning Centre-FF0000"/></a>
-- Workspace for Students 예시: `Enrol in classes 아래` $\rightarrow$ `Available classes 클릭` $\rightarrow$ `왼쪽 Filters Product 드롭다운` $\rightarrow$ `Refinitiv Workspace for Students 선택` $\rightarrow$ `원하는 클래스 제목 클릭` $\rightarrow$ `아래 Schedules Classes에서 Time zone 선택` $\rightarrow$ `Enrol 클릭` $\rightarrow$ `신청자 정보 입력 후 하단 Enrol in class 클릭` $\rightarrow$ `등록이 완료되면 확인 이메일 수령`
+### 방향1: 분석 도구 익히기 (분석도구 $\neq$ 데이터분석)
+- `분석도구`는 역사적으로 계속 `변경`되어 왔지만 `데이터분석`은 역사적으로 `항상 존재`했고 세상 문제가 존재하는 한 `절대 사라지지 않음`
+- 역사적으로 `분석도구`는 계속 변경/개발되어 왔지만 `데이터분석 목적은 항상 같았기에` 어떤 도구든 `사용 방법/단계/절차는 거의 동일`
+- 따라서 어떠한 도구를 쓰는지는 중요하지 않지만, `하나의 도구`라도 `데이터 분석 모든 단계를 다룰 줄 아는 능력`이 필요
+- `하나의 도구`라고 익숙해지면 나중에 도구가 변경되어도 데이터 분석 모든 단계를 알기 때문에 `가나다라 같은 기본문법만 알면 쉽게 적응`
+- 분석 도구 익히기의 목적은, 현재 어디서든 누구든 무료로 최신기술을 금방 내 역량으로 반영할 수 있는 `파이썬(Python)에 익숙해 지는 것!`
 
 ### :book: On-demand Training at Learning Centre
 - Workspace `기본적인 사용법과 데이터 추출 예시 등`의 기존 녹화된 영상을 제공
