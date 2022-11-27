@@ -5,9 +5,23 @@
 ---
 
 ## ✋ 김경원 교수 소개
-: <a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>
+<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>
 
 ---
+
+## ✋ 연구실 소개
+: DEBA 연구실은 디지털경제의 표준이 되어가고 있는 `빅데이터와 머신/딥러닝이란 인공지능 이론을 활용`하여,     
+`경제산업 분야의 문제`를 `데이터`를 기반으로 `정량적으로 분석하고 의사결정`함으로써 `전략적으로 문제를 해결`하기 위한 방법을 연구합니다.     
+
+## ✋ 스터디 소개
+저는 `핀테크`를 포함한 전반적인 `금융경제 산업 전반의 거래 시장과 온라인 광고 마케팅`을 주로 연구하지만,     
+여러분들은 스터디에서 아래 `3가지의 목표를 달성`하는 것을 목표로 합니다.     
+(1) 파이썬이라는 프로그래밍 도구를 통해 데이터를 직접 다방면으로 핸들링 하기
+(2) 아래의 비즈니스 문제 대상 데이터 중 관심있는 데이터를 직접 선택하여 분석하고
+비즈니스 활용 기획과 전략을 제시하기
+(3) 본인이 관심있는 다른 데이터를 사용하여
+향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비하기
+
 
 ### :book: 방향1: 데이터분석의 현실과 대응배경 이해
 - 인류의 역사에 맞추어 `데이터분석`은 항상 존재해 왔음
