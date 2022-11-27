@@ -24,7 +24,7 @@
 - `스포츠, 비즈니스, 교육, 문화, 인간, 금융, 여행, 마케팅, 의학, 이커머스, 서비스 등`
 
 | **분야** | **비즈니스 목적** | **파일명** | **종속변수 Y** | **설명 참고링크** |
-|---|---|---|---|---|
+|:---:|---|---|---|---|
 |     Sports    |     러슬링 토너먼트의 선수 순위를 정확하게   예측하여 투기 승률을 향상    |     `Regression_WrestlingTournamentRank.csv`    |     `rank`    |     [바로가기](https://www.kaggle.com/datasets/julienjta/wrestling-world-tournament)    |
 |     Business    |     중고차 가격을 정확하게 예측하여 저평가된   중고차의 특징을 예측하여 구매전략 지원    |     `Regression_UsedCarPrice.csv`    |     `price`    |     [바로가기](https://www.kaggle.com/datasets/vijayaadithyanvg/car-price-predictionused-cars)    |
 |     Education    |     학생들의 환경에 따른 중등학업성취도(GradeScore)를 정확하게 예측하여 교육환경 특징 파악 및 교육방향 지원    |     `Regression_StudentPerformance.csv`    |     `GradeScore`    |     [바로가기](https://www.kaggle.com/datasets/ishandutta/student-performance-data-set)    |
