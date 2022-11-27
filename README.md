@@ -48,7 +48,7 @@
 
 - 전공제한은 없으나 `무역학부를 우대`하며, 본인의 `E정보시스템, E데이터베이스, 빅데이터 수업이나 유관 수업을 이수`한 학생
 - 지원자들 중 `최대 10명 이내` 합격자에게만 마감이후 `1주일 내 통보`
-- 아래 내용을 자유롭게 담아 이메일(<a href="mailto:thekimk@inu.ac.kr"><img src="https://img.shields.io/badge/INU Mail-005FF9?style=flat-square&logo=INU Mail&logoColor=white&link=mailto:thekimk@inu.ac.kr"/></a>)로 `10/31`까지 제출
+- 아래 내용을 자유롭게 담아 <a href="mailto:thekimk@inu.ac.kr"><img src="https://img.shields.io/badge/INU Mail-005FF9?style=flat-square&logo=INU Mail&logoColor=white&link=mailto:thekimk@inu.ac.kr"/></a>로 `10/31`까지 제출
 
 1) 본인이 생각하는 삶의 방향
 2) 관심분야 및 희망진로
