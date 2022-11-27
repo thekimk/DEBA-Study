@@ -1,6 +1,6 @@
 ## ✔️ 모집 공고
 
-> `데바(DEBA: Digital Economy & Business Analytics)` Lab 스터디 멤버 모집 (지도교수: `김경원 교수`)
+> 2022년 2학기 `데바(DEBA: Digital Economy & Business Analytics)` Lab 스터디 멤버 모집 (지도교수: `김경원 교수`)
 
 ---
 
@@ -15,13 +15,28 @@
 
 ## ✋ 스터디 소개
 저는 `핀테크`를 포함한 전반적인 `금융경제 산업 전반의 거래 시장과 온라인 광고 마케팅`을 주로 연구하지만,     
-여러분들은 스터디에서 아래 `3가지의 목표를 달성`하는 것을 목표로 합니다.     
-(1) 파이썬이라는 프로그래밍 도구를 통해 데이터를 직접 다방면으로 핸들링 하기
-(2) 아래의 비즈니스 문제 대상 데이터 중 관심있는 데이터를 직접 선택하여 분석하고
-비즈니스 활용 기획과 전략을 제시하기
-(3) 본인이 관심있는 다른 데이터를 사용하여
-향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비하기
+여러분들은 스터디에서 아래 `3가지의 목표를 달성`하는 것을 목표로 합니다. 
+1) `파이썬`이라는 프로그래밍 도구를 통해 `데이터를 직접 다방면으로 핸들링` 하기
+2) 아래의 `비즈니스 문제 대상 데이터` 중 관심있는 데이터를 직접 선택하여 분석하고 `비즈니스 활용 기획과 전략을 제시`하기
+3) 본인이 관심있는 다른 데이터를 사용하여 `향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비`하기
 
+## ✋ 12종 비즈니스문제 관련 데이터
+- `스포츠, 비즈니스, 교육, 문화, 인간, 금융, 여행, 마케팅, 의학, 이커머스, 서비스 등`
+
+| **비즈니스 분야** | **비즈니스 목적** | **파일명** | **종속변수 Y** | **설명 참고링크** |
+|---|---|---|---|---|
+|     Sports    |     러슬링 토너먼트의 선수 순위를 정확하게   예측하여 투기 승률을 향상    |     `Regression_WrestlingTournamentRank.csv`    |     `rank`    |     https://www.kaggle.com/datasets/julienjta/wrestling-world-tournament    |
+|     Business    |     중고차 가격을 정확하게 예측하여 저평가된   중고차의 특징을 예측하여 구매전략 지원    |     `Regression_UsedCarPrice.csv`    |     `price`    |     https://www.kaggle.com/datasets/vijayaadithyanvg/car-price-predictionused-cars    |
+|     Education    |     학생들의 환경에 따른 중등학업성취도(GradeScore)를 정확하게 예측하여 교육환경 특징 파악 및 교육방향 지원    |     `Regression_StudentPerformance.csv`    |     `GradeScore`    |     https://www.kaggle.com/datasets/ishandutta/student-performance-data-set    |
+|     Culture    |     인기음악을 정확하게 예측하여 향후 어떤   특징의 음악이 인기음악이 될지 예측하여 기획과 전략 지원    |     `Regression_SongPopularity.csv`    |     `song_popularity`    |     https://www.kaggle.com/datasets/yasserh/song-popularity-dataset    |
+|     Human    |     기업 임직원들의 직업 만족도를 정확하게   예측하여 만족도를 높이기 위한 특성으로 인사전략 지원    |     `Regression_JobSatisfaction.csv`    |     `satisfaction_level`    |     https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction    |
+|     Finance    |     보험료를 정확하게 예측하여 보험료가   낮더라도 사고 위험이 낮은 고객의 특징을 예측    |     `Regression_InsurancePremium.csv`    |     `charges`    |     https://www.kaggle.com/datasets/simranjain17/insurance    |
+|     Tour    |     고객들의 여행취소를 정확하게 예측하여   취소가 예상되는 고객을 찾고 기업의 매출손실 대비    |     `Classification_TravelCustomerChurn.csv`    |     `Target`    |     https://www.kaggle.com/datasets/tejashvi14/tour-travels-customer-churn-prediction    |
+|     Marketing    |     마케팅이 구매로 이어지는 관계를 정확하게   예측 및 특성을 확인하여 마케팅 효과를 높이고 매출 향상 지원    |     `Classification_MarketingEfficiency.csv`    |     `Response`    |     https://www.kaggle.com/datasets/rodsaldanha/arketing-campaign    |
+|     Human    |     기업 임직원들의 불만족을 정확하게 예측하여   퇴사 확률을 낮출 수 있는 인사전략 지원    |     `Classification_JobSatisfaction.csv`    |     `satisfaction_level`    |     https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction    |
+|     Medicine    |     심장질환 여부를 정확하게 예측하여 심장질환에   걸릴 가능성이 높은 고객의 특징을 예측    |     `Classification_HeartDisease.csv`    |     `TenYearCHD`    |     https://www.kaggle.com/datasets/dileep070/heart-disease-prediction-using-logistic-regression    |
+|     Ecommerce    |     이커머스 만족도를 정확하게 예측하여   만족도 향상을 위한 특성을 확인하고 고객 유입 전략 지원    |     `Classification_EcommerceSatisfaction.csv`    |     `Customer_rating`    |     https://www.kaggle.com/datasets/prachi13/customer-analytics    |
+|     Service    |     항공기를 이용하는 고객의 서비스 만족도를   정확하게 예측하여 특성을 확인하고 추가적인 서비스기획 지원    |     `Classification_AirlineSatisfaction.csv`    |     `satisfaction`    |     https://www.kaggle.com/datasets/sjleshrac/airlines-customer-satisfaction    |
 
 ### :book: 방향1: 데이터분석의 현실과 대응배경 이해
 - 인류의 역사에 맞추어 `데이터분석`은 항상 존재해 왔음
