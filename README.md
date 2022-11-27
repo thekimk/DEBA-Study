@@ -50,7 +50,7 @@
 - 지원자들 중 `최대 10명 이내` 합격자에게만 마감이후 `1주일 내 통보`
 - 아래 내용을 자유롭게 담아 <a href="mailto:thekimk@inu.ac.kr"><img src="https://img.shields.io/badge/INU Mail-005FF9?style=flat-square&logo=INU Mail&logoColor=white&link=mailto:thekimk@inu.ac.kr"/></a>로 `10/31`까지 제출
 
-> (1) 본인이 생각하는 삶의 방향     
-> (2) 관심분야 및 희망진로     
-> (3) 관련과목 수강경험이나 대외활동 경험 등     
+> (1) 본인이 `선호하는 삶의 방향`     
+> (2) `관심분야 및 희망진로`     
+> (3) 관련과목 `수강경험`이나 `대외활동 경험 등`     
 
