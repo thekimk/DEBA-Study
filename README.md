@@ -5,7 +5,7 @@
 #### :smirk: 지도교수: 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
 
 - **모집시기:** 
-- 전공제한은 없으나 `무역학부 우대`하며, 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스), 인공지능기반의사결정(구 빅데이터) 수업이나 유관 수업을 이수`한 학생
+- **지원자격:** 전공제한은 없으나 `무역학부 우대`하며, 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스), 인공지능기반의사결정(구 빅데이터) 수업이나 유관 수업을 이수`한 학생
 - 지원자들 중 `최대 10명 이내` 합격자에게만 마감이후 `1주일 내 통보`
 - 아래 내용을 자유롭게 담아 <a href="mailto:thekimk@inu.ac.kr"><img src="https://img.shields.io/badge/INU Mail-005FF9?style=flat-square&logo=INU Mail&logoColor=white&link=mailto:thekimk@inu.ac.kr"/></a>로 `2022년 10월 31일`까지 제출
 
@@ -24,11 +24,11 @@
 여러분들은 스터디에서 아래 `3가지의 목표를 달성`하는 것을 목표로 하기 위해 `2가지 트랙`으로 운영합니다.    
 `각자 원하는 트랙`으로 시작하면 되지만 `다른 멤버들의 배려를 위해 본인 수준에 맞게 선택`을 추천합니다.     
 
-- **DEBA 베이직(트랙1):** 
+- **DEBA 베이직(트랙1):** 지원자격에 따르면 베이직 트랙이 불필요하지만 `추가적인 복습이나 별도 스터디 필요가 있는 멤버` 추천
 >
 > (1) `파이썬`이라는 프로그래밍 도구를 통해 `데이터를 직접 다방면으로 핸들링` 하기     
 >
-- **DEBA 프로(트랙2):** 
+- **DEBA 프로(트랙2):** 실질적인 `데이터 분석을 시작하는 단계`로 베이직 트랙을 충분히 이수하고 `본격적인 데이터를 활용하고 싶은 멤버` 
 >
 > (2) 아래의 `비즈니스 문제 대상 데이터` 중 관심있는 데이터를 직접 선택하여 분석하고 `비즈니스 활용 기획과 전략을 제시`하기     
 > (3) 본인이 관심있는 다른 데이터를 사용하여 `향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비`하기     
