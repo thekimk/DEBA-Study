@@ -28,8 +28,8 @@
 >
 > (1) `파이썬`이라는 프로그래밍 도구를 통해 `데이터를 직접 다방면으로 핸들링` 하기   
 >
-> - **목표:** DEBA 프로 단계로의 점프
 > - [Tutorial-Python-Programming](https://github.com/thekimk/Tutorial-Python-Programming)
+> - **목표:** DEBA 프로 단계로의 점프
 >
 - **DEBA 프로(트랙2):** 실질적인 `데이터 분석을 시작하는 단계`로 베이직 트랙을 충분히 이수하고 `본격적인 데이터를 활용하고 싶은 멤버` 
 >
@@ -41,6 +41,10 @@
 > - [All-About-Machine-Learning](https://github.com/thekimk/All-About-Machine-Learning)
 > - [All-About-Time-Series-Analysis](https://github.com/thekimk/All-About-Time-Series-Analysis)
 > - [All-About-Deep-Learning](https://github.com/thekimk/All-About-Deep-Learning)
+> - **목표:** 각 멤버는 본인이 원하는 데이터 또는 아래 12종 비즈니스 문제 중 1개를 선택하여 강의내용을 활용하여 `비즈니스 활용 기획과 전략을 지도교수에게 발표하기`
+> - **기간:** 스터디 모집 후 `다음 기수 모집 전까지 1년 내`
+> - **발표시기:** 멤버마다 진도율이 다를 수 있는 것을 감안하여, `준비가 완료되면 언제든 스터디 때 발표`하며 미리 알려주면 `지도교수가 스터디 참여`
+> - **산출물:** 여러분들에게 `분석 성능 향상을 위한 피드백` + `향후 데이터사이언스 인생 방향 조언(기업 조교, 취업 추천, 경진대회나 공모전 등)`
 
 ## :bulb: 12종 비즈니스문제 관련 데이터
 - `스포츠, 비즈니스, 교육, 문화, 인간, 금융, 여행, 마케팅, 의학, 이커머스, 서비스 등`
