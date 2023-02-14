@@ -4,6 +4,7 @@
 
 #### :smirk: 지도교수: 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
 
+- **모집시기:** 
 - 전공제한은 없으나 `무역학부 우대`하며, 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스), 인공지능기반의사결정(구 빅데이터) 수업이나 유관 수업을 이수`한 학생
 - 지원자들 중 `최대 10명 이내` 합격자에게만 마감이후 `1주일 내 통보`
 - 아래 내용을 자유롭게 담아 <a href="mailto:thekimk@inu.ac.kr"><img src="https://img.shields.io/badge/INU Mail-005FF9?style=flat-square&logo=INU Mail&logoColor=white&link=mailto:thekimk@inu.ac.kr"/></a>로 `2022년 10월 31일`까지 제출
