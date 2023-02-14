@@ -28,7 +28,8 @@
 
 - **목표:** DEBA 프로 단계로의 점프
 - **방향:** `파이썬`이라는 프로그래밍 도구를 통해 `데이터를 직접 다방면으로 핸들링` 하기   
-- **자료:** [Tutorial-Python-Programming](https://github.com/thekimk/Tutorial-Python-Programming)
+- **자료:** 
+> - [Tutorial-Python-Programming](https://github.com/thekimk/Tutorial-Python-Programming)
 
 [트랙2] **DEBA 프로:** 실질적인 `데이터 분석을 시작하는 단계`로 베이직 트랙을 충분히 이수하고 `본격적인 데이터를 활용하고 싶은 멤버` 
 
