@@ -33,7 +33,9 @@
 - **DEBA 프로(트랙2):** 실질적인 `데이터 분석을 시작하는 단계`로 베이직 트랙을 충분히 이수하고 `본격적인 데이터를 활용하고 싶은 멤버` 
 >
 > (2) 아래의 `비즈니스 문제 대상 데이터` 중 관심있는 데이터를 직접 선택하여 분석하고 `비즈니스 활용 기획과 전략을 제시`하기     
-> (3) 본인이 관심있는 다른 데이터를 사용하여 `향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비`하기     
+> (3) 본인이 관심있는 다른 데이터를 사용하여 `향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비`하기   
+>
+> 스터디 자료: [Refinitiv-Workspace](https://github.com/thekimk/Refinitiv-Workspace), [Tutorial-Probability-Statistics-Algorithm-DataScience](https://github.com/thekimk/Tutorial-Probability-Statistics-Algorithm-DataScience), [All-About-Machine-Learning](https://github.com/thekimk/All-About-Machine-Learning), [All-About-Time-Series-Analysis](https://github.com/thekimk/All-About-Time-Series-Analysis), [All-About-Deep-Learning](https://github.com/thekimk/All-About-Deep-Learning)
 
 ## :bulb: 12종 비즈니스문제 관련 데이터
 - `스포츠, 비즈니스, 교육, 문화, 인간, 금융, 여행, 마케팅, 의학, 이커머스, 서비스 등`
