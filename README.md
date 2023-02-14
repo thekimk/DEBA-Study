@@ -37,7 +37,7 @@
 - **방향2:** 본인이 관심있는 다른 데이터를 사용하여 `향후 경진대회나 공모전 및 데이터사이언스 분야 면접이나 시험에 대비`하기   
 - **기간:** 스터디 모집 후 `다음 기수 모집 전까지 1년 내`
 - **발표시기:** 멤버마다 진도율이 다를 수 있는 것을 감안하여, `준비가 완료되면 언제든 스터디 때 발표`하며 미리 알려주면 `지도교수가 스터디 참여`
-- **산출물:** 여러분들에게 `분석 성능 향상을 위한 피드백` + `향후 데이터사이언스 인생 방향 조언(기업 조교, 취업 추천, 경진대회나 공모전 등)`
+- **산출물:** 여러분들에게 `분석 성능 향상을 위한 피드백` + `향후 데이터사이언스 인생 방향 조언(졸업논문, 기업 조교, 취업 추천, 경진대회나 공모전 등)`
 - **자료:**
 > - [Refinitiv-Workspace](https://github.com/thekimk/Refinitiv-Workspace)
 > - [Tutorial-Probability-Statistics-Algorithm-DataScience](https://github.com/thekimk/Tutorial-Probability-Statistics-Algorithm-DataScience)
