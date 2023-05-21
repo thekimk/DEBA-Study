@@ -5,7 +5,7 @@
 #### :smirk: 지도교수: 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
 
 - **모집시기:** `매년 1학기 4월 경`
-- **지원자격:** 전공제한은 없으나 `무역학부 우대`하며, 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스) 수업이나 유관 수업을 이수`한 학생
+- **지원자격:** 전공제한은 없으나 `무역학부 우대`하며, 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스) 수업이나 유관 수업을 반드시 이수`한 학생
 - **학과지원:** 소그룹 활동이 필요한 도서 구입이나 회의비, 현장 입장료 등의 `필요 경비를 100만원 내로 지원`(지원금은 매년 달라질 수 있음)
 - **학과혜택:** 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
 - **합격통보:** 지원자들 중 `최대 10명 이내` 합격자에게만 마감이후 `1주일 내 통보`
