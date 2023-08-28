@@ -145,10 +145,13 @@ def get_navernews(url):
                 content_articles.append([])
                 comment_articles.append([])
             else:
-                url_articles_naver[-1] = article.attrs['href']       
-                # 본문 불러오기
+                url_articles_naver[-1] = article.attrs['href']    
+                # 링킹
                 article_response = requests.get(url_articles_naver[-1], headers=headers, verify=False)
                 article_soup = BeautifulSoup(article_response.text, 'html.parser')
+                # 카테고리 불러오기
+                print(article_soup.select_one('#_LNB > ul > li.Nlist_item._LNB_ITEM.is_active > a > span'))
+                # 본문 불러오기
                 content = article_soup.select("div#dic_area")
                 if content == []:
                     content = article_soup.select("#articeBody")
