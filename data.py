@@ -118,7 +118,7 @@ def get_navernews_comments(url):
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
 def get_navernews(url):
     start = datetime.datetime.now()
-    time_articles, press_articles, title_articles, content_articles, comment_articles = [], [], [], [], []
+    time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles = [], [], [], [], [], []
     url_articles, url_articles_naver = [], []
     for pg in tqdm(url):
         response = requests.get(pg, headers=headers)
@@ -140,17 +140,24 @@ def get_navernews(url):
         # 기사URL 중 네이버뉴스 주소로 반영된 것은 업데이트
         article_elements = soup.select("div.group_news > ul.list_news > li div.news_area > div.news_info > div.info_group > a.info")
         for article in article_elements:
+            ## 네이버 URL이 없는 경우는 빈칸 저장
             if "news.naver.com" not in article.attrs['href']:
                 url_articles_naver.append(article.attrs['href'])
+                category_articles.append([])
                 content_articles.append([])
                 comment_articles.append([])
-            else:
-                url_articles_naver[-1] = article.attrs['href']    
+            ## 네이버 URL이 있는 경우 내용 저장
+            else:   
                 # 링킹
+                url_articles_naver[-1] = article.attrs['href'] 
                 article_response = requests.get(url_articles_naver[-1], headers=headers, verify=False)
                 article_soup = BeautifulSoup(article_response.text, 'html.parser')
                 # 카테고리 불러오기
-                print(article_soup.select_one('#_LNB > ul > li.Nlist_item._LNB_ITEM.is_active > a > span'))
+                category = article_soup.select_one('#_LNB > ul > li.Nlist_item._LNB_ITEM.is_active > a > span')
+                if category != None:
+                    category_articles[-1].append(str(category).split('menu">')[1].split('</span>')[0])
+                else:
+                    category_articles[-1].append([])
                 # 본문 불러오기
                 content = article_soup.select("div#dic_area")
                 if content == []:
@@ -181,6 +188,7 @@ def get_navernews(url):
     # 정리
     df_news = pd.DataFrame({'Date':time_articles,
                             'Press':press_articles,
+                            'Category':category_articles,
                             'Title':title_articles,
                             'Content':content_articles,
                             'Comment':comment_articles,
