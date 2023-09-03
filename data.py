@@ -41,7 +41,7 @@ headers = {
 }
 
 ### 페이지 설정에 따른 URL 추출
-def get_urls_navernews_bypage(search_query, start_pg, end_pg, sort=0):
+def get_urls_from_navernews_bypage(search_query, start_pg, end_pg, sort=0):
     start = datetime.datetime.now()
     if start_pg == end_pg:
         start_page = str((start_pg-1) * 10 + 1)
@@ -60,7 +60,7 @@ def get_urls_navernews_bypage(search_query, start_pg, end_pg, sort=0):
         return urls   
     
 ### 날짜 설정에 따른 URL 추출
-def get_urls_navernews_bydate(search_query, start_date, end_date, sort=0, maxpage=1000):
+def get_urls_from_navernews_bydate(search_query, start_date, end_date, sort=0, maxpage=1000):
     start = datetime.datetime.now()
     i, urls = 1, []
     while True:
@@ -75,7 +75,7 @@ def get_urls_navernews_bydate(search_query, start_date, end_date, sort=0, maxpag
             i = i + 1
 
 ### URL에 담긴 댓글 추출
-def get_navernews_comments(url):
+def get_comments_from_navernews(url):
     # setting
     url = url.split('?')[0]
     oid_1, oid_2 = url.split('/')[-1], url.split('/')[-2]
@@ -116,7 +116,7 @@ def get_navernews_comments(url):
     return comments
 
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
-def get_navernews(url):
+def get_data_from_navernews(url):
     start = datetime.datetime.now()
     time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles = [], [], [], [], [], []
     url_articles, url_articles_naver = [], []
@@ -169,7 +169,7 @@ def get_navernews(url):
                 content = content.replace('\n', ' ').replace('\t', ' ')
                 content_articles[-1] = content
                 # 댓글 불러오기
-                comment = get_navernews_comments(url_articles_naver[-1])
+                comment = get_comments_from_navernews(url_articles_naver[-1])
                 comment_articles[-1] = comment         
                 # 기사시간 업데이트
                 try:
