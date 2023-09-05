@@ -115,6 +115,24 @@ def get_comments_from_navernews(url):
 
     return comments
 
+### 시간표시 24H 기준으로 형식 변환
+def get_update_timeformat(time_origin):
+    try:
+        # 영문화
+        if '오전' in time_origin:
+            time_origin = time_origin.replace('오전', 'AM')
+        elif '오후' in time_origin:
+            time_origin = time_origin.replace('오후', 'PM')
+        # 형식 변환
+        time_final = datetime.datetime.strptime(time_origin, '%Y.%m.%d. %p %I:%M')
+        time_final = time_final.strftime('%Y-%m-%d %H:%M:%S')
+        
+        return time_final
+    
+    except ValueError:
+        
+        return time_origin  # 날짜 형식이 아닌 경우 그대로 반환
+
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
 def get_data_from_navernews(url):
     start = datetime.datetime.now()
@@ -159,7 +177,7 @@ def get_data_from_navernews(url):
                 else:
                     category_articles[-1].append([])
                 # 본문 불러오기
-                content = article_soup.select("div#dic_area")
+                content = article_soup.select("article#dic_area")    # "div#dic_area"에서 "article#dic_area"로 변경
                 if content == []:
                     content = article_soup.select("#articeBody")
                 ## 본문 전처리 정리
@@ -175,11 +193,11 @@ def get_data_from_navernews(url):
                 try:
                     time_html = article_soup.select_one("div#ct> div.media_end_head.go_trans > div.media_end_head_info.nv_notrans > div.media_end_head_info_datestamp > div > span")
                     time = time_html.attrs['data-date-time']
-                    time_articles[len(comment_articles)-1] = time
+                    time_articles[len(comment_articles)-1] = get_update_timeformat(time)
                 except AttributeError:
                     time = article_soup.select_one("#content > div.end_ct > div > div.article_info > span > em")
                     time = re.sub(pattern='<[^>]*>',repl='',string=str(time))
-                    time_articles[len(comment_articles)-1] = time
+                    time_articles[len(comment_articles)-1] = get_update_timeformat(time)
             
         # 마지막 페이지면 종료
         if len(news_elements) < 10: 
