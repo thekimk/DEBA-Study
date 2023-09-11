@@ -1,0 +1,70 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from tqdm import tqdm
+import os
+
+
+def get_category_from_link(link, headers):
+    """
+    Visit the given link and extract category information from the detailed news page.
+    """
+    response = requests.get(link, headers=headers)
+    response.encoding = 'utf-8'
+    soup = BeautifulSoup(response.content, "lxml")
+    
+    categories_found = []
+    for meta_property in ["article:section", "article:section1", "Classification"]:
+        meta_element = soup.find("meta", {"property": meta_property}) or soup.find("meta", {"name": meta_property})
+        if meta_element and meta_element.get("content"):
+            categories_found.append(meta_element["content"])
+
+    # If no categories are found, set it to '없음'
+    if not categories_found:
+        categories_found = ['없음']
+
+    return ", ".join(categories_found)
+
+def getGoogleNewsData(query, save_path):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+    }
+    response = requests.get(f"https://www.google.com/search?q={query}&num=100&gl=us&tbm=nws", headers=headers)
+    response.encoding = 'utf-8'
+    soup = BeautifulSoup(response.content, "lxml")
+    
+    news_results = []
+    
+    for el in tqdm(soup.select("div.SoaBEf"), desc="Crawling Google News", ncols=100):
+        link = el.find("a")["href"]
+        
+        # Get category info by visiting the detailed news page
+        category_info = get_category_from_link(link, headers)
+        
+        news_dict = {
+            "링크": link,
+            "제목": el.select_one("div.MBeuO").get_text(),
+            "본문요약": el.select_one(".GI74Re").get_text(),
+            "날짜": el.select_one(".LfVVr").get_text(),
+            "신문사": el.select_one(".NUnG9d span").get_text(),
+            "카테고리": category_info
+        }
+        news_results.append(news_dict)
+        
+    df = pd.DataFrame(news_results)
+    df.to_csv(os.path.join(save_path, "google_news_results.csv"), index=False, encoding='utf-8-sig')
+    print(f"Crawling is complete. The data is saved in {os.path.join(save_path, 'google_news_results.csv')}")
+    return df
+
+
+
+
+# 검색어 입력받기
+query = input("검색어")
+
+# 파일 저장 경로 지정 
+save_path = "C:\\장민재"
+
+# 크롤링 및 DataFrame 출력
+df = getGoogleNewsData(query, save_path)
+print(df.head())
