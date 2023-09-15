@@ -10,6 +10,7 @@ import numpy as np
 import random
 from tqdm import tqdm
 import datetime
+from time import sleep
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
@@ -21,9 +22,14 @@ import sys
 import csv, json
 
 
-
+###############################################
 ### Date and Author: 20230731, Kyungwon Kim ###
 ### 네이버뉴스를 크롤링할 url 생성 및 뉴스 추출 함수 만들기
+### 여럿 user-agent 목록
+### Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36
+### Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+### Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0
+### Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36
 headers = {
     'authority': 'apis.naver.com',
     'accept': '*/*',
@@ -37,7 +43,7 @@ headers = {
     'sec-fetch-dest': 'script',
     'sec-fetch-mode': 'no-cors',
     'sec-fetch-site': 'same-site',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.108 Whale/3.15.136.18 Safari/537.36',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
 }
 
 ### 페이지 설정에 따른 URL 추출
@@ -134,13 +140,21 @@ def get_update_timeformat(time_origin):
         return time_origin  # 날짜 형식이 아닌 경우 그대로 반환
 
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
-def get_data_from_navernews(url):
-    start = datetime.datetime.now()
+def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save_local=False):
+    # URL 불러오기
+    if type(start) == int:
+        url = get_urls_from_navernews_bypage(search_query, start, end, sort=0)
+    elif type(start) == str:
+        url = get_urls_from_navernews_bydate(search_query, start, end, sort=0, maxpage=maxpage)
+    
+    # 개별 URL에 따른 데이터 추출 
+    time_start = datetime.datetime.now()
     time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles = [], [], [], [], [], []
     url_articles, url_articles_naver = [], []
     for pg in tqdm(url):
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
+        sleep(random.uniform(2, 4)) # 요청 사이 무작위로 시간 간격을 두어(2~4초) 일정한 시간간격의 비정상적인 접근 방지
         
         # 페이지 내 기사시간, 언론사, 제목, 기사URL 불러오기
         news_elements = soup.select('div.news_wrap.api_ani_send')
@@ -212,8 +226,21 @@ def get_data_from_navernews(url):
                             'Comment':comment_articles,
                             'URL_Origin':url_articles,
                             'URL_Naver':url_articles_naver})
-    end = datetime.datetime.now()
-    print('News Info Extracting Time: ', end-start)
+    time_end = datetime.datetime.now()
+    print('News Info Extracting Time: ', time_end-time_start)
     print('Size of News Data: ', df_news.shape[0])
     
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, start, end)
+        df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
+    
     return df_news
+###############################################
+
+
+
+###############################################
