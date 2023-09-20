@@ -239,7 +239,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
         folder_location = os.path.join(os.getcwd(), 'Data', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, start, end)
+        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, df_news.Date.min()[:10], df_news.Date.max()[:10])
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
     
     return df_news
@@ -323,7 +323,7 @@ async def get_data_from_naverblogs(search_query, start, end, maxpage=1000, save_
         folder_location = os.path.join(os.getcwd(), 'Data', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        save_name = 'NaverBlogs_{}_{}-{}_KK.csv'.format(search_query, start, end)
+        save_name = 'NaverBlogs_{}_{}-{}_KK.csv'.format(search_query, df_blogs.Date.min()[:10], df_blogs.Date.max()[:10])
         df_blogs.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
 
     return df_blogs
