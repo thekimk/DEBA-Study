@@ -27,7 +27,6 @@ import re
 import sys
 
 
-###############################################
 ### Date and Author: 20230731, Kyungwon Kim ###
 ### 여럿 user-agent 목록
 ### Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36
@@ -52,12 +51,9 @@ headers = {
 
 ### 페이지 설정에 따른 URL 추출
 def get_urls_from_navernews_bypage(search_query, start_pg, end_pg, sort=0):
-    start = datetime.datetime.now()
     if start_pg == end_pg:
         start_page = str((start_pg-1) * 10 + 1)
         url = f"https://search.naver.com/search.naver?where=news&ie=utf8&sm=tab_pge&query={search_query}&sort={sort}&start={start_page}"
-        end = datetime.datetime.now()
-        print('URL Extracting Time: ', end-start)
         return url
     else:
         urls = []
@@ -65,24 +61,48 @@ def get_urls_from_navernews_bypage(search_query, start_pg, end_pg, sort=0):
             page = str((i-1) * 10 + 1)
             url = f"https://search.naver.com/search.naver?where=news&ie=utf8&sm=tab_pge&query={search_query}&sort={sort}&start={page}"
             urls.append(url)
-        end = datetime.datetime.now()
-        print('URL Extracting Time: ', end-start)
         return urls   
     
 ### 날짜 설정에 따른 URL 추출
 def get_urls_from_navernews_bydate(search_query, start_date, end_date, sort=0, maxpage=1000):
-    start = datetime.datetime.now()
     i, urls = 1, []
     while True:
         page = str((i-1) * 10 + 1)
         url = f"https://search.naver.com/search.naver?where=news&ie=utf8&sm=nws_hty&query={search_query}&sort={sort}&nso=so%3Ar%2Cp%3Afrom{start_date}to{end_date}&start={page}"
         urls.append(url)
         if i == maxpage+1:
-            end = datetime.datetime.now()
-            print('URL Extracting Time: ', end-start)
             return urls
         else:
             i = i + 1
+            
+### 유효 URL 추출
+def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000):
+    time_start = datetime.datetime.now()
+    # URL 불러오기
+    if type(start) == int:
+        url = get_urls_from_navernews_bypage(search_query, start, end, sort=sort)
+    elif type(start) == str:
+        url = get_urls_from_navernews_bydate(search_query, start, end, sort=sort, maxpage=maxpage)
+        
+    # 페이지수 counting에 따른 url 갯수 조정
+    for pg in tqdm([url[idx] for idx in range(0, maxpage+1, 10)]):
+        response = requests.get(pg, headers=headers)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        sleep(random.uniform(2, 4))
+        maxpage_numbers = []
+        for link in soup.select('.sc_page_inner > a'):
+            maxpage_number = int(link.text)
+            maxpage_numbers.append(maxpage_number)
+        if maxpage_numbers != []: 
+            maxpage_final = max(maxpage_numbers) 
+        else: 
+            break
+    url = url[:maxpage_final]    
+    time_end = datetime.datetime.now()
+    print('Effective URL Extracting Time: ', time_end-time_start)
+    print('Total Pages: ', len(url))
+    
+    return url
 
 ### URL에 담긴 댓글 추출
 def get_comments_from_navernews(url):
@@ -146,10 +166,7 @@ def get_update_timeformat(time_origin):
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
 def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save_local=False):
     # URL 불러오기
-    if type(start) == int:
-        url = get_urls_from_navernews_bypage(search_query, start, end, sort=0)
-    elif type(start) == str:
-        url = get_urls_from_navernews_bydate(search_query, start, end, sort=0, maxpage=maxpage)
+    url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage)  
     
     # 개별 URL에 따른 데이터 추출 
     time_start = datetime.datetime.now()
@@ -216,11 +233,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
                     time = article_soup.select_one("#content > div.end_ct > div > div.article_info > span > em")
                     time = re.sub(pattern='<[^>]*>',repl='',string=str(time))
                     time_articles[len(comment_articles)-1] = get_update_timeformat(time)
-            
-        # 마지막 페이지면 종료
-        if len(news_elements) < 10: 
-            break
-                  
+                           
     # 정리
     df_news = pd.DataFrame({'Date':time_articles,
                             'Press':press_articles,
@@ -239,92 +252,8 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
         folder_location = os.path.join(os.getcwd(), 'Data', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, df_news.Date.min()[:10], df_news.Date.max()[:10])
+        datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
+        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, datetime_info.min()[:10], datetime_info.max()[:10])
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
     
     return df_news
-###############################################
-
-
-
-###############################################
-def get_contents_from_naverblogs(url):
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    content = (soup.find('div', 'se-main-container') or
-               soup.select_one('#postViewArea') or
-               soup.select_one('div.se_component_wrap.sect_dsc.__se_component_area > div.se_component.se_paragraph.default > div > div > div > div > div > p'))
-
-    if content:
-        content_text = content.get_text(strip=True)
-        content_text = core.replace_emoji(content_text, replace="")
-        url_pattern = r"(http|https)?:\/\/[a-zA-Z0-9-\.]+\.[a-z]{2,}(\S*)?|www\.[a-zA-Z0-9-]+\.[a-z]{2,}(\S*)?|[a-zA-Z0-9-]+\.[a-z]{2,}(\S*)?|([a-zA-Z0-9-]+\.)?naver.com(\S*)?"
-        content_text = re.sub(url_pattern, "", content_text)
-        content_text = re.sub(r"\u200C|\u200b", "", content_text)
-        content_text = ' '.join(content_text.split())
-        return content_text
-    
-    return None
-
-def parse_blog_data(soup, result_data):
-    title_and_url_elems = soup.find_all("a", {"class": "api_txt_lines"})
-    desc_elems = soup.find_all("div", {"class": "api_txt_lines"})
-    date_elems = soup.find_all("span", {"class": "sub_time"})
-
-    for i in range(len(title_and_url_elems)):
-        title = title_and_url_elems[i].text
-        url = title_and_url_elems[i]['href']
-        desc = desc_elems[i].text
-        date = date_elems[i].text
-        result_data.append({'url': url, 'title': title, 'description': desc, 'date': date})
-        
-async def fetch_and_parse_blog_data(_url, data):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(_url) as response:
-            text = await response.text()
-            soup = BeautifulSoup(text.replace("\\", ""), "html.parser")
-            parse_blog_data(soup, data)
-
-async def get_data_from_naverblogs(search_query, start, end, maxpage=1000, save_local=False):
-    df_blogs = []
-    urls = [f'https://s.search.naver.com/p/blog/search.naver?where=blog&sm=tab_pge&api_type=1&query={search_query}&rev=44&start={i * 30}&dup_remove=1&post_blogurl=&post_blogurl_without=&nso=so:dd,p:from{end}to{start}&nlu_query=r_category:29+27&dkey=0&source_query=&nx_search_query={search_query}&spq=0&_callback=viewMoreContents'
-            for i in range(1, maxpage+1)]
-    
-    # 개별 URL에 따른 데이터 추출 
-    time_start = datetime.datetime.now()
-    await asyncio.gather(*(fetch_and_parse_blog_data(urls[i], df_blogs) for i in range(len(urls))))
-    
-    # 정리
-    df_blogs = pd.DataFrame(df_blogs)
-    df_blogs.columns = ['URL', 'Title', 'Content_Short', 'Date']
-    df_blogs = df_blogs[['Date', 'Title', 'Content_Short', 'URL']]
-    
-    # 본문 내용 추가                
-    contents = []
-    for idx in tqdm(range(df_blogs.shape[0])):
-        url = df_blogs.iloc[idx]['URL']
-        if url.startswith("https://blog.naver.com/"):
-            frameaddr = "https://blog.naver.com/" + BeautifulSoup(requests.get(url).text, 'html.parser').find('iframe', id="mainFrame")['src']
-            content_text = get_contents_from_naverblogs(frameaddr)
-            contents.append(content_text)
-        else:
-            contents.append([])
-    
-    # 정리
-    df_blogs = pd.concat([df_blogs, pd.DataFrame(contents, columns=['Content'])], axis=1)
-    df_blogs = df_blogs[['Date', 'Title', 'Content_Short', 'Content', 'URL']]
-    time_end = datetime.datetime.now()
-    print('Blogs Info Extracting Time: ', time_end-time_start)
-    print('Size of Blogs Data: ', df_blogs.shape[0])
-    
-    # 저장
-    if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
-        if not os.path.exists(folder_location):
-            os.makedirs(folder_location)
-        save_name = 'NaverBlogs_{}_{}-{}_KK.csv'.format(search_query, df_blogs.Date.min()[:10], df_blogs.Date.max()[:10])
-        df_blogs.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
-
-    return df_blogs
-###############################################
