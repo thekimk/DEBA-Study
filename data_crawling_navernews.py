@@ -182,7 +182,10 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
         for element in news_elements:
             time = element.select_one('span.info').text.strip()
             time_articles.append(time)
-            press = element.select_one('a.info.press').text.strip()
+            try: 
+                press = element.select_one('a.info.press').text.strip()
+            except:
+                press = ' '
             press_articles.append(press)
             title = element.select_one('a.news_tit').text.strip()
             title = re.sub(pattern='<[^>]*>', repl='', string=str(title))
