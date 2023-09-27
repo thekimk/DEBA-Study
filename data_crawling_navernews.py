@@ -251,7 +251,7 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        folder_location = os.path.join(os.getcwd(), 'Data', search_query, '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
@@ -331,13 +331,10 @@ def get_data_from_navernews(search_query, start, end, sort=0,
         # 각 월별 데이터 수집
         df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
                            maxpage=maxpage, maxpage_count=maxpage_count, save_local=save_local)
-        time_end = datetime.datetime.now()
         
         # 모든 데이터 결합
         if df.shape[0] != 0:
             df_news = pd.concat([df_news, df], axis=0)
-        ## 중복 기사 삭제
-        df_news.drop_duplicates(inplace=True, ignore_index=True)
             
     # 저장
     if save_local:
