@@ -77,7 +77,6 @@ def get_urls_from_navernews_bydate(search_query, start_date, end_date, sort=0, m
             
 ### 유효 URL 추출
 def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=True):
-    time_start = datetime.datetime.now()
     # URL 불러오기
     if type(start) == int:
         url = get_urls_from_navernews_bypage(search_query, start, end, sort=sort)
@@ -98,10 +97,8 @@ def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
                 maxpage_final = max(maxpage_numbers) 
             else: 
                 break
-        url = url[:maxpage_final]    
-    time_end = datetime.datetime.now()
-    print('Effective URL Extracting Time: ', time_end-time_start)
-    print('Total Pages: ', len(url))
+        url = url[:maxpage_final]  
+        print('Total Pages: ', len(url))
     
     return url
 
@@ -165,7 +162,7 @@ def get_update_timeformat(time_origin):
         return time_origin  # 날짜 형식이 아닌 경우 그대로 반환
 
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
-def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, save_local=False):
+def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, save_local=False):
     # URL 불러오기
     url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage, maxpage_count=maxpage_count)  
     
@@ -173,7 +170,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
     time_start = datetime.datetime.now()
     time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles = [], [], [], [], [], []
     url_articles, url_articles_naver = [], []
-    for pg in tqdm(url):
+    for pg in url:
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         sleep(random.uniform(2, 4)) # 요청 사이 무작위로 시간 간격을 두어(2~4초) 일정한 시간간격의 비정상적인 접근 방지
@@ -239,7 +236,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
                     time_articles[len(comment_articles)-1] = get_update_timeformat(time)
                            
     # 정리
-    display(time_articles.shape, press_articles.shape, astegory_articles.shape, title_articles.shape, content_articles.shape, comment_articles)
+#     display(time_articles.shape, press_articles.shape, astegory_articles.shape, title_articles.shape, content_articles.shape, comment_articles)
     df_news = pd.DataFrame({'Date':time_articles,
                             'Press':press_articles,
                             'Category':category_articles,
@@ -249,8 +246,8 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
                             'URL_Origin':url_articles,
                             'URL_Naver':url_articles_naver})
     time_end = datetime.datetime.now()
-    print('News Info Extracting Time: ', time_end-time_start)
-    print('Size of News Data: ', df_news.shape[0])
+#     print('News Info Extracting Time: ', time_end-time_start)
+#     print('Size of News Data: ', df_news.shape[0])
     
     # 저장
     if save_local:
@@ -260,5 +257,97 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
         save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, datetime_info.min()[:10], datetime_info.max()[:10])
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
+    
+    return df_news
+
+### 입력 날짜 범위를 월별로 나누어서 시작과 종료 문자 생성
+def date_generator(start, end):
+    date_list = []
+    year_list = list(range(int(start[:4]), int(end[:4])+1))
+    # 연도가 시작과 종료가 같은 경우
+    if len(year_list) == 1:
+        year = year_list[0]
+        month_list = list(range(int(start[4:6]), int(end[4:6])+1))
+        for idx, month in enumerate(month_list):
+            if idx == 0 and month == int(start[4:6]):
+                day_start, day_end = start[6:], '31'
+            elif idx == len(month_list)-1 and month == int(end[4:6]):
+                day_start, day_end = '01', end[6:]
+            else:
+                day_start, day_end = '01', '31'
+                
+            # 정리
+            if len(str(month)) == 1:
+                start_date = str(year) + '0' + str(month) + day_start
+                end_date = str(year) + '0' + str(month) + day_end
+            else:
+                start_date = str(year) + str(month) + day_start
+                end_date = str(year) + str(month) + day_end
+            
+            date_list.append([start_date, end_date])
+                
+    # 연도의 시작과 종료가 다른 경우
+    else:
+        for idx, year in enumerate(year_list):
+            # month
+            if idx == 0:
+                month_list = list(range(int(start[4:6]), 12+1))
+            elif idx == len(year_list)-1:
+                month_list = list(range(1, int(end[4:6])+1))
+            else:
+                month_list = list(range(1, 12+1))
+
+            # day
+            for month in month_list:
+                if idx == 0 and month == int(start[4:6]):
+                    day_start, day_end = start[6:], '31'
+                elif idx == len(year_list)-1 and month == int(end[4:6]):
+                    day_start, day_end = '01', end[6:]
+                else:
+                    day_start, day_end = '01', '31'
+
+                # 정리
+                if len(str(month)) == 1:
+                    start_date = str(year) + '0' + str(month) + day_start
+                    end_date = str(year) + '0' + str(month) + day_end
+                else:
+                    start_date = str(year) + str(month) + day_start
+                    end_date = str(year) + str(month) + day_end
+
+            date_list.append([start_date, end_date])
+        
+    return date_list
+
+# 각 월별 뉴스정보 추출 후 모두 결합
+def get_data_from_navernews(search_query, start, end, sort=0,
+                            maxpage=1000, maxpage_count=False, save_local=False):
+    # 날짜 생성
+    time_start = datetime.datetime.now()
+    date_list = date_generator(start, end)
+    
+    # 데이터 수집
+    df_news = pd.DataFrame()
+    for period in tqdm(date_list):
+        # 각 월별 데이터 수집
+        df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
+                           maxpage=maxpage, maxpage_count=maxpage_count, save_local=save_local)
+        time_end = datetime.datetime.now()
+        
+        # 모든 데이터 결합
+        if df.shape[0] != 0:
+            df_news = pd.concat([df_news, df], axis=0)
+        ## 중복 기사 삭제
+        df_news.drop_duplicates(inplace=True, ignore_index=True)
+            
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
+        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, datetime_info.min()[:10], datetime_info.max()[:10])
+        df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
+    time_end = datetime.datetime.now()
+    print('News Info Extracting Time: ', time_end-time_start)
     
     return df_news
