@@ -314,7 +314,7 @@ def date_generator(start, end):
                     start_date = str(year) + str(month) + day_start
                     end_date = str(year) + str(month) + day_end
 
-            date_list.append([start_date, end_date])
+                date_list.append([start_date, end_date])
         
     return date_list
 
@@ -324,6 +324,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
     # 날짜 생성
     time_start = datetime.datetime.now()
     date_list = date_generator(start, end)
+    display(date_list)
     
     # 데이터 수집
     df_news = pd.DataFrame()
