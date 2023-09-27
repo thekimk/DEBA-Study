@@ -236,7 +236,8 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
                     time_articles[len(comment_articles)-1] = get_update_timeformat(time)
                            
     # 정리
-#     display(time_articles.shape, press_articles.shape, astegory_articles.shape, title_articles.shape, content_articles.shape, comment_articles)
+    display(time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles)
+    display(len(time_articles), len(press_articles), len(category_articles), len(title_articles), len(content_articles), len(comment_articles))
     df_news = pd.DataFrame({'Date':time_articles,
                             'Press':press_articles,
                             'Category':category_articles,
@@ -255,7 +256,7 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
-        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, datetime_info.min()[:10], datetime_info.max()[:10])
+        save_name = 'NaverNews_{}-{}_KK.csv'.format(datetime_info.min()[:10], datetime_info.max()[:10])
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
     
     return df_news
