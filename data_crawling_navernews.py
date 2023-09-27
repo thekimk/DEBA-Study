@@ -76,7 +76,7 @@ def get_urls_from_navernews_bydate(search_query, start_date, end_date, sort=0, m
             i = i + 1
             
 ### 유효 URL 추출
-def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000):
+def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=True):
     time_start = datetime.datetime.now()
     # URL 불러오기
     if type(start) == int:
@@ -85,19 +85,20 @@ def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000):
         url = get_urls_from_navernews_bydate(search_query, start, end, sort=sort, maxpage=maxpage)
         
     # 페이지수 counting에 따른 url 갯수 조정
-    for pg in tqdm([url[idx] for idx in range(0, maxpage+1, 10)]):
-        response = requests.get(pg, headers=headers)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        sleep(random.uniform(2, 4))
-        maxpage_numbers = []
-        for link in soup.select('.sc_page_inner > a'):
-            maxpage_number = int(link.text)
-            maxpage_numbers.append(maxpage_number)
-        if maxpage_numbers != []: 
-            maxpage_final = max(maxpage_numbers) 
-        else: 
-            break
-    url = url[:maxpage_final]    
+    if maxpage_count:
+        for pg in tqdm([url[idx] for idx in range(0, maxpage+1, 10)]):
+            response = requests.get(pg, headers=headers)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            sleep(random.uniform(2, 4))
+            maxpage_numbers = []
+            for link in soup.select('.sc_page_inner > a'):
+                maxpage_number = int(link.text)
+                maxpage_numbers.append(maxpage_number)
+            if maxpage_numbers != []: 
+                maxpage_final = max(maxpage_numbers) 
+            else: 
+                break
+        url = url[:maxpage_final]    
     time_end = datetime.datetime.now()
     print('Effective URL Extracting Time: ', time_end-time_start)
     print('Total Pages: ', len(url))
@@ -164,9 +165,9 @@ def get_update_timeformat(time_origin):
         return time_origin  # 날짜 형식이 아닌 경우 그대로 반환
 
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
-def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save_local=False):
+def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, save_local=False):
     # URL 불러오기
-    url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage)  
+    url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage, maxpage_count=maxpage_count)  
     
     # 개별 URL에 따른 데이터 추출 
     time_start = datetime.datetime.now()
@@ -185,7 +186,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
             try: 
                 press = element.select_one('a.info.press').text.strip()
             except:
-                press = ' '
+                press = 'None'
             press_articles.append(press)
             title = element.select_one('a.news_tit').text.strip()
             title = re.sub(pattern='<[^>]*>', repl='', string=str(title))
@@ -238,6 +239,7 @@ def get_data_from_navernews(search_query, start, end, sort=0, maxpage=1000, save
                     time_articles[len(comment_articles)-1] = get_update_timeformat(time)
                            
     # 정리
+    display(time_articles.shape, press_articles.shape, astegory_articles.shape, title_articles.shape, content_articles.shape, comment_articles)
     df_news = pd.DataFrame({'Date':time_articles,
                             'Press':press_articles,
                             'Category':category_articles,
