@@ -331,7 +331,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
             
     # 저장
     if save_local:
-        if save_location == None:
+        if folder_location == None:
             folder_location = os.path.join(os.getcwd(), 'Data', '') 
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
@@ -366,7 +366,7 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
            
     # 저장
     if save_local:
-        if save_location == None:
+        if folder_location == None:
             folder_location = os.path.join(os.getcwd(), 'Data', '')         
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
