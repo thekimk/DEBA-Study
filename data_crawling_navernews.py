@@ -323,6 +323,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
         df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
                            maxpage=maxpage, maxpage_count=maxpage_count, 
                            save_local=save_local, folder_location=folder_location)
+        sleep(random.uniform(3,10))
         
         # 모든 데이터 결합
         if df.shape[0] != 0:
@@ -358,6 +359,7 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
         df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
                            maxpage=maxpage, maxpage_count=maxpage_count, 
                            save_local=save_local, folder_location=folder_location)
+        sleep(random.uniform(3,10))
         
         # 모든 데이터 결합
         if df.shape[0] != 0:
