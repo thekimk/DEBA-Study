@@ -357,7 +357,7 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
            
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        folder_location = os.path.join(os.getcwd(), 'Data', 'Naver', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
