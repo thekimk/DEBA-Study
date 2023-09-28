@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import random
 from tqdm import tqdm
+import ray
 import datetime
 from time import sleep
 import matplotlib.pyplot as plt
@@ -238,7 +239,10 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
-        save_name = 'NaverNews_{}-{}_KK.csv'.format(datetime_info.min()[:10], datetime_info.max()[:10])
+        try:
+            save_name = 'NaverNews_{}-{}_KK.csv'.format(datetime_info.min()[:10], datetime_info.max()[:10])
+        except:
+            save_name = 'NaverNews_{}-{}_KK.csv'.format(start, end)
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
     
     return df_news
@@ -319,6 +323,38 @@ def get_data_from_navernews(search_query, start, end, sort=0,
         if df.shape[0] != 0:
             df_news = pd.concat([df_news, df], axis=0)
             
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
+        save_name = 'NaverNews_{}_{}-{}_KK.csv'.format(search_query, datetime_info.min()[:10], datetime_info.max()[:10])
+        df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
+    time_end = datetime.datetime.now()
+    print('News Info Extracting Time: ', time_end-time_start)
+    
+    return df_news
+
+# 병렬처리
+@ray.remote
+def get_data_from_navernewsParallel(search_query, start, end, sort=0,
+                                    maxpage=1000, maxpage_count=False, save_local=False):
+    # 날짜 생성
+    time_start = datetime.datetime.now()
+    date_list = date_generator(start, end)
+    
+    # 데이터 수집
+    df_news = pd.DataFrame()
+    for period in tqdm(date_list):
+        # 각 월별 데이터 수집
+        df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
+                           maxpage=maxpage, maxpage_count=maxpage_count, save_local=save_local)
+        
+        # 모든 데이터 결합
+        if df.shape[0] != 0:
+            df_news = pd.concat([df_news, df], axis=0)
+           
     # 저장
     if save_local:
         folder_location = os.path.join(os.getcwd(), 'Data', '')
