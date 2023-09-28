@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 #크롤링
+from fake_useragent import UserAgent
 import csv, json
 from bs4 import BeautifulSoup
 import requests
@@ -30,10 +31,7 @@ import sys
 
 ### Date and Author: 20230731, Kyungwon Kim ###
 ### 여럿 user-agent 목록
-### Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36
-### Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
-### Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:46.0) Gecko/20100101 Firefox/46.0
-### Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.101 Safari/537.36
+
 headers = {
     'authority': 'apis.naver.com',
     'accept': '*/*',
@@ -47,7 +45,8 @@ headers = {
     'sec-fetch-dest': 'script',
     'sec-fetch-mode': 'no-cors',
     'sec-fetch-site': 'same-site',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+    #'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+    'user-agent': UserAgent().random,
 }
 
 ### 페이지 설정에 따른 URL 추출
@@ -174,7 +173,7 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
     for pg in url:
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        sleep(random.uniform(2, 4)) # 요청 사이 무작위로 시간 간격을 두어(2~4초) 일정한 시간간격의 비정상적인 접근 방지
+        sleep(random.uniform(3,10)) # 요청 사이 무작위로 시간 간격을 두어(3~10초) 일정한 시간간격의 비정상적인 접근 방지
         
         # 테스트
         news_elements = soup.select('div.news_wrap.api_ani_send')
@@ -328,7 +327,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
         # 모든 데이터 결합
         if df.shape[0] != 0:
             df_news = pd.concat([df_news, df], axis=0)
-            
+
     # 저장
     if save_local:
         if folder_location == None:
