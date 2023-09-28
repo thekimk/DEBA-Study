@@ -163,7 +163,8 @@ def get_update_timeformat(time_origin):
         return time_origin  # 날짜 형식이 아닌 경우 그대로 반환
 
 ### URL에 담긴 댓글을 포함한 뉴스정보 추출
-def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, save_local=False):
+def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, 
+                  save_local=False, folder_location=None):
     # URL 불러오기
     url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage, maxpage_count=maxpage_count)  
     
@@ -235,7 +236,10 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', search_query, '')
+        if folder_location == None:
+            folder_location = os.path.join(os.getcwd(), 'Data', search_query, '')
+        else:
+            folder_location = os.path.join(folder_location, search_query, '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
@@ -307,7 +311,8 @@ def date_generator(start, end):
 
 # 각 월별 뉴스정보 추출 후 모두 결합
 def get_data_from_navernews(search_query, start, end, sort=0,
-                            maxpage=1000, maxpage_count=False, save_local=False):
+                            maxpage=1000, maxpage_count=False, save_local=False,
+                            folder_location=None):
     # 날짜 생성
     time_start = datetime.datetime.now()
     date_list = date_generator(start, end)
@@ -317,7 +322,8 @@ def get_data_from_navernews(search_query, start, end, sort=0,
     for period in tqdm(date_list):
         # 각 월별 데이터 수집
         df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
-                           maxpage=maxpage, maxpage_count=maxpage_count, save_local=save_local)
+                           maxpage=maxpage, maxpage_count=maxpage_count, 
+                           save_local=save_local, folder_location=folder_location)
         
         # 모든 데이터 결합
         if df.shape[0] != 0:
@@ -325,7 +331,8 @@ def get_data_from_navernews(search_query, start, end, sort=0,
             
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if save_location == None:
+            folder_location = os.path.join(os.getcwd(), 'Data', '') 
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
@@ -339,7 +346,8 @@ def get_data_from_navernews(search_query, start, end, sort=0,
 # 병렬처리
 @ray.remote
 def get_data_from_navernewsParallel(search_query, start, end, sort=0,
-                                    maxpage=1000, maxpage_count=False, save_local=False):
+                                    maxpage=1000, maxpage_count=False, save_local=False,
+                                    folder_location=None):
     # 날짜 생성
     time_start = datetime.datetime.now()
     date_list = date_generator(start, end)
@@ -349,7 +357,8 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
     for period in tqdm(date_list):
         # 각 월별 데이터 수집
         df = get_navernews(search_query=search_query, start=period[0], end=period[1], sort=sort, 
-                           maxpage=maxpage, maxpage_count=maxpage_count, save_local=save_local)
+                           maxpage=maxpage, maxpage_count=maxpage_count, 
+                           save_local=save_local, folder_location=folder_location)
         
         # 모든 데이터 결합
         if df.shape[0] != 0:
@@ -357,7 +366,8 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
            
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if save_location == None:
+            folder_location = os.path.join(os.getcwd(), 'Data', '')         
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
