@@ -22,6 +22,7 @@ from soynlp.tokenizer import LTokenizer
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import Word2Vec, LdaModel, CoherenceModel
 
+
 def text_preprocessor(text, del_bracket_content=False):
     # 한글 맞춤법과 띄어쓰기 체크 (PyKoSpacing, Py-Hanspell)
     # html 태그 제거하기
@@ -46,7 +47,9 @@ def text_preprocessor(text, del_bracket_content=False):
     text_new = ' '.join([repeat_normalize(word, num_repeats=2) for word in text_new.split(' ')])
     # 영어 및 한글 stopwords 제거하기
     stop_words_eng = set(stopwords.words('english'))
-    stop_words_kor = ['아', '휴', '아이구', '아이쿠', '아이고', '어', '나', '우리', '저희', '따라', '의해', '을', '를', '에', '의', '가', '으로', 
+    stop_words_kor = pd.read_csv("https://raw.githubusercontent.com/yoonkt200/FastCampusDataset/master/korean_stopwords.txt").values.tolist()
+    stop_words_kor = sum(stopwords, [])
+    stop_words_kk = ['아', '휴', '아이구', '아이쿠', '아이고', '어', '나', '우리', '저희', '따라', '의해', '을', '를', '에', '의', '가', '으로', 
  '로', '에게', '뿐이다', '의거하여', '근거하여', '입각하여', '기준으로', '예하면', '예를 들면', '예를 들자면', '저', '소인', 
  '소생', '저희', '지말고', '하지마', '하지마라', '다른', '물론', '또한', '그리고', '비길수 없다', '해서는 안된다', '뿐만 아니라', 
  '만이 아니다', '만은 아니다', '막론하고', '관계없이', '그치지 않다', '그러나', '그런데', '하지만', '든간에', '논하지 않다',
@@ -102,6 +105,7 @@ def text_preprocessor(text, del_bracket_content=False):
  '그만이다', '할 따름이다', '쿵', '탕탕', '쾅쾅', '둥둥', '봐', '봐라', '아이야', '아니', '와아', '응', '아이', '참나', '년',
  '월', '일', '령', '영', '일', '이', '삼', '사', '오', '육', '륙', '칠', '팔', '구', '이천육', '이천칠', '이천팔', '이천구',
  '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '령', '영']
+    stop_words_kor = stop_words_kor + stop_words_kk
     text_new = ' '.join([word for word in text_new.split(' ') if word not in stop_words_eng])
     text_new = ' '.join([word for word in text_new.split(' ') if word not in stop_words_kor])
     text_new = ' '.join([word for word in text_new.split(' ') if word not in sw_eng])
@@ -187,20 +191,33 @@ def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
     return df_adjacent
 
 
-def preprocessing_tfidf(df_series, num_showkeyword=100):
+def preprocessing_tfidf(df_series, del_lowfreq=True):
     # 빈도 학습
     tfidfier = TfidfVectorizer()
     tfidfier.fit(df_series.to_list())
-    df_wordfreq = pd.DataFrame.from_dict([tfidfier.vocabulary_]).T.reset_index()
-    df_wordfreq.columns = ['word', 'score']
-    df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False).iloc[:num_showkeyword,:]
-    
-    # 문장 벡터
+#     ## 빈도 정리
+#     df_wordfreq = pd.DataFrame.from_dict([tfidfier.vocabulary_]).T.reset_index()
+#     df_wordfreq.columns = ['word', 'freq']
+#     df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
+    ## TF-IDF 점수 정리
+    df_wordscore = pd.DataFrame(tfidfier.transform(df_series.to_list()).sum(axis=0), 
+                                columns=tfidfier.get_feature_names()).T.reset_index()
+    df_wordscore.columns = ['word', 'score']
+    df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False)
+    ## 문장 벡터 정리
     df_sentvec = tfidfier.transform(df_series.to_list()).toarray()
     df_sentvec = pd.DataFrame(df_sentvec, index=['sentence' + str(i+1) for i in range(df_series.shape[0])], 
                               columns=tfidfier.get_feature_names())
     
-    return df_wordfreq, df_sentvec
+    # 저빈도 삭제
+    if del_lowfreq:
+        del_criteria = df_sentvec.sum(axis=0).mean()
+        del_columns = df_sentvec.columns[df_sentvec.sum(axis=0) < del_criteria]
+        df_sentvec = df_sentvec[[col for col in df_sentvec.columns if col not in del_columns]]
+#         df_wordfreq = df_wordfreq[df_wordfreq.word.apply(lambda x: False if x in del_columns else True)]
+        df_wordscore = df_wordscore[df_wordscore.word.apply(lambda x: False if x in del_columns else True)]
+          
+    return df_wordscore, df_sentvec
 
 
 def preprocessing_word2vec(df_series):
