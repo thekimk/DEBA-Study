@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import math
 
@@ -47,9 +48,7 @@ def text_preprocessor(text, del_bracket_content=False):
     text_new = ' '.join([repeat_normalize(word, num_repeats=2) for word in text_new.split(' ')])
     # 영어 및 한글 stopwords 제거하기
     stop_words_eng = set(stopwords.words('english'))
-    stop_words_kor = pd.read_csv("https://raw.githubusercontent.com/yoonkt200/FastCampusDataset/master/korean_stopwords.txt").values.tolist()
-    stop_words_kor = sum(stop_words_kor, [])
-    stop_words_kk = ['아', '휴', '아이구', '아이쿠', '아이고', '어', '나', '우리', '저희', '따라', '의해', '을', '를', '에', '의', '가', '으로', 
+    stop_words_kor = ['아', '휴', '아이구', '아이쿠', '아이고', '어', '나', '우리', '저희', '따라', '의해', '을', '를', '에', '의', '가', '으로', 
  '로', '에게', '뿐이다', '의거하여', '근거하여', '입각하여', '기준으로', '예하면', '예를 들면', '예를 들자면', '저', '소인', 
  '소생', '저희', '지말고', '하지마', '하지마라', '다른', '물론', '또한', '그리고', '비길수 없다', '해서는 안된다', '뿐만 아니라', 
  '만이 아니다', '만은 아니다', '막론하고', '관계없이', '그치지 않다', '그러나', '그런데', '하지만', '든간에', '논하지 않다',
@@ -105,7 +104,6 @@ def text_preprocessor(text, del_bracket_content=False):
  '그만이다', '할 따름이다', '쿵', '탕탕', '쾅쾅', '둥둥', '봐', '봐라', '아이야', '아니', '와아', '응', '아이', '참나', '년',
  '월', '일', '령', '영', '일', '이', '삼', '사', '오', '육', '륙', '칠', '팔', '구', '이천육', '이천칠', '이천팔', '이천구',
  '하나', '둘', '셋', '넷', '다섯', '여섯', '일곱', '여덟', '아홉', '령', '영']
-    stop_words_kor = stop_words_kor + stop_words_kk
     text_new = ' '.join([word for word in text_new.split(' ') if word not in stop_words_eng])
     text_new = ' '.join([word for word in text_new.split(' ') if word not in stop_words_kor])
     text_new = ' '.join([word for word in text_new.split(' ') if word not in sw_eng])
@@ -218,6 +216,41 @@ def preprocessing_tfidf(df_series, del_lowfreq=True):
         df_wordscore = df_wordscore[df_wordscore.word.apply(lambda x: False if x in del_columns else True)]
           
     return df_wordscore, df_sentvec
+
+
+def preprocessing_wordfreq_to_vectorcorr(df_wordfreq, df_series):
+    # wordfreq to dict
+    dict_wordfreq = {row[0]:row[1] for row in df_wordfreq.values}
+    dict_wordfreq = dict(sorted(dict_wordfreq.items()))
+    
+    # 텍스트 벡터 생성 함수
+    def word2vec_preprocessor(dict_wordfreq, text):
+        text_new = []
+        for key in list(dict_wordfreq.keys()):
+            if key in text.split(' '):
+                text_new.append(float(dict_wordfreq[key]))
+            else:
+                text_new.append(0)
+
+        return text_new
+
+    # series to dataframe vector
+    df_wordvec = df_series.apply(lambda x: word2vec_preprocessor(dict_wordfreq, x))
+    df_wordvec = pd.DataFrame([row for row in df_wordvec.values], columns=list(dict_wordfreq.keys()))
+    ## vector가 0인 word 제거
+    colnames = df_wordvec.columns[df_wordvec.sum(axis=0) != 0]
+    df_wordvec = df_wordvec[colnames].copy()
+    rownames = df_wordvec.index[df_wordvec.sum(axis=1) != 0]
+    df_wordvec = df_wordvec.iloc[rownames,:].reset_index().iloc[:,1:].T
+    
+    # word correlation
+    wordcorr = np.corrcoef(df_wordvec.values)
+    df_wordcorrpair = pd.DataFrame([(colnames[i], colnames[j], wordcorr[i,j]) 
+                                     for i in range(wordcorr.shape[1]) for j in range(wordcorr.shape[1]) if i != j])
+    df_wordcorrpair.columns = ['word_left', 'word_right', 'correlation']
+    df_wordcorr = pd.DataFrame(wordcorr, index=colnames, columns=colnames)
+    
+    return df_wordvec, df_wordcorr, df_wordcorrpair
 
 
 def preprocessing_word2vec(df_series):
