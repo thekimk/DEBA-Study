@@ -48,7 +48,7 @@ def text_preprocessor(text, del_bracket_content=False):
     # 영어 및 한글 stopwords 제거하기
     stop_words_eng = set(stopwords.words('english'))
     stop_words_kor = pd.read_csv("https://raw.githubusercontent.com/yoonkt200/FastCampusDataset/master/korean_stopwords.txt").values.tolist()
-    stop_words_kor = sum(stopwords, [])
+    stop_words_kor = sum(stop_words_kor, [])
     stop_words_kk = ['아', '휴', '아이구', '아이쿠', '아이고', '어', '나', '우리', '저희', '따라', '의해', '을', '를', '에', '의', '가', '으로', 
  '로', '에게', '뿐이다', '의거하여', '근거하여', '입각하여', '기준으로', '예하면', '예를 들면', '예를 들자면', '저', '소인', 
  '소생', '저희', '지말고', '하지마', '하지마라', '다른', '물론', '또한', '그리고', '비길수 없다', '해서는 안된다', '뿐만 아니라', 
