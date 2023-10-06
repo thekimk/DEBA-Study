@@ -775,6 +775,7 @@ def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot'):
     fig.show()
     
     
+# plot_tsne_wordvec(word_vec_w2v, dim_reduction=3, num_showkeyword=1000)
 def plot_tsne_wordvec(df_wordvec, dim_reduction=3, num_showkeyword=100):
     # array 변환
     if df_wordvec.shape[1] == 1:
@@ -813,3 +814,72 @@ def plot_tsne_wordvec(df_wordvec, dim_reduction=3, num_showkeyword=100):
     fig.update_traces(textposition='bottom right')
     fig.update_layout(width = 1000, height = 1000)
     fig.show()
+    
+    
+# https://graphsandnetworks.com/community-detection-using-networkx/
+def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, edge_label=False):
+    # 빈 그래프 생성
+    G = nx.Graph()   # undirected graph
+    
+    # 관계값 필터 & node+edge 값 반영
+    display('Descriptive statistics of pairweight: ', df_pairweight.describe().T)
+    if filter_criteria == None and np.mean(df_pairweight.iloc[:,-1]) >= 0:
+        filter_criteria = np.mean(df_pairweight.iloc[:,-1])*2
+    elif filter_criteria == None and np.mean(df_pairweight.iloc[:,-1]) < 0:
+        filter_criteria = abs(np.mean(df_pairweight.iloc[:,-1]))*2
+    df_pair = df_pairweight[df_pairweight.iloc[:,-1] > filter_criteria]    # weight 필터
+    if df_pairweight.shape[1] == 3:
+        G.add_edges_from([(each[-3], each[-2], {'weight': each[-1]}) for each in df_pair.values])    # edge & attributes 반영
+        word_filter = df_pair.iloc[:,:2].stack().tolist()    # unique word 추출
+    elif df_pairweight.shape[1] == 4:
+        G.add_edges_from([(each[-3], each[-2], {'weight': each[-1], 'group': each[-4]}) for each in df_pair.values])    # edge & attributes 반영
+        word_filter = df_pair.iloc[:,1:3].stack().tolist()    # unique word 추출
+    df_freq = df_freq[df_freq.word.apply(lambda x: True if x in word_filter else False)]    # word-score에서 unique word 필터  
+    G.add_nodes_from([(each[-2], {'score': each[-1]}) for each in df_freq.values])    # node & attributes 반영
+#     display(G.nodes(data=True), G.edges(data=True))    # 입력 확인
+
+    # degree에 따른 중심 그래프 생성
+    k_core1 = np.quantile([val for key, val in G.degree()], 0.5)
+    G_core1 = nx.k_core(G, k=k_core1)
+
+    # 레이아웃 반복
+    if plot:
+#         pos = nx.bipartite_layout(G)    # 양분그리기는 별도 라벨 필요
+        for idx, layout in enumerate([nx.kamada_kawai_layout(G, weight=None), 
+                                      nx.circular_layout(G), 
+                                      nx.fruchterman_reingold_layout(G)]):
+            ## 시각화
+            plt.figure(figsize=(16,10))
+            plt.style.use('dark_background')
+            node_size = list(nx.get_node_attributes(G, 'score').values())
+            nx.draw_networkx(G, with_labels=True, alpha=0.3, 
+                             node_size=node_size, node_color='yellow', 
+                             edge_color='red', font_family=FONT_NAME, pos=layout)
+            nx.draw_networkx_labels(G, font_size=9, font_color='white', font_weight='bold', alpha=0.4, 
+                                    font_family=FONT_NAME, pos=layout)
+            node_size = list(nx.get_node_attributes(G_core1, 'score').values())
+            node_size = [val*3 for val in node_size]
+            nx.draw_networkx(G_core1, with_labels=True, alpha=0.9, 
+                             node_size=node_size, node_color='red', 
+                             edge_color='red', font_family=FONT_NAME, pos=layout)
+            nx.draw_networkx_labels(G_core1, font_size=12, font_color='white', font_weight='bold', alpha=1,
+                                    font_family=FONT_NAME, pos=layout)
+            if edge_label:
+                edge_labels = nx.get_edge_attributes(G, 'weight')
+                nx.draw_networkx_edge_labels(G, edge_labels=edge_labels, pos=layout)
+            plt.show()
+
+    # 통계량 추출
+    degree_centrality = sorted(nx.degree_centrality(G).items(), key=lambda x:x[1], reverse=True)
+    betweenness_centrality = sorted(nx.betweenness_centrality(G).items(), key=lambda x:x[1], reverse=True)
+    closeness_centrality = sorted(nx.closeness_centrality(G).items(), key=lambda x:x[1], reverse=True)
+    eigenvector_centrality = sorted(nx.eigenvector_centrality(G).items(), key=lambda x:x[1], reverse=True)
+    ## 정리
+    centrality = pd.concat([pd.DataFrame(degree_centrality), pd.DataFrame(betweenness_centrality), 
+                            pd.DataFrame(closeness_centrality), pd.DataFrame(eigenvector_centrality)], axis=1)
+    centrality.columns = ['word', 'degree', 'word', 'betweenness', 'word', 'closeness', 'word', 'eigenvector']
+    
+    return centrality
+
+
+
