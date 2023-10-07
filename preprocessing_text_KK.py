@@ -253,6 +253,49 @@ def preprocessing_wordfreq_to_vectorcorr(df_wordfreq, df_series):
     return df_wordvec, df_wordcorr, df_wordcorrpair
 
 
+# gm = preprocessing_gephi()
+# gm.wordfreq_to_gephiinput(word_corrpair.iloc[:,1:], '.\Data\word_corrpair.graphml')
+class preprocessing_gephi:
+    def wordfreq_to_gephiinput(self, pair_file, graphml_file):
+        out = open(graphml_file, 'w', encoding = 'utf-8')
+        entity = []
+        e_dict = {}
+        count = []
+        for i in range(len(pair_file)):
+            e1 = pair_file.iloc[i,0]
+            e2 = pair_file.iloc[i,1]
+            #frq = ((word_dict[e1], word_dict[e2]),  pair.split('\t')[2])
+            frq = ((e1, e2), pair_file.iloc[i,2])
+            if frq not in count: count.append(frq)   # ((a, b), frq)
+            if e1 not in entity: entity.append(e1)
+            if e2 not in entity: entity.append(e2)
+        print('# terms: %s'% len(entity))
+        #create e_dict {entity: id} from entity
+        for i, w in enumerate(entity):
+            e_dict[w] = i + 1 # {word: id}
+        out.write(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlnshttp://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">" +
+            "<key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"double\"/>" +
+            "<key id=\"d0\" for=\"node\" attr.name=\"label\" attr.type=\"string\"/>" +
+            "<graph id=\"Entity\" edgedefault=\"undirected\">" + "\n")
+        # nodes
+        for i in entity:
+            out.write("<node id=\"" + str(e_dict[i]) +"\">" + "\n")
+            out.write("<data key=\"d0\">" + i + "</data>" + "\n")
+            out.write("</node>")
+        # edges
+        for y in range(len(count)):
+            out.write("<edge source=\"" + str(e_dict[count[y][0][0]]) + "\" target=\"" + str(e_dict[count[y][0][1]]) + "\">" + "\n")
+            out.write("<data key=\"d1\">" + str(count[y][1]) + "</data>" + "\n")
+            #out.write("<edge source=\"" + str(count[y][0][0]) + "\" target=\"" + str(count[y][0][1]) +"\">"+"\n")
+            #out.write("<data key=\"d1\">" + str(count[y][1]) +"</data>"+"\n")
+            out.write("</edge>")
+        out.write("</graph> </graphml>")
+        print('now you can see %s' % graphml_file)
+        #pairs.close()
+        out.close()
+
+
 def preprocessing_word2vec(df_series):
     # Word2Vec으로 데이터 훈련시키기
     # sentences: 문장 토큰화된 데이터
