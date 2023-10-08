@@ -1,6 +1,13 @@
 from import_KK import *
 
 
+### Date and Author: 20231008, Kyungwon Kim ###
+# Expand of Jupyter Viewer
+def plot_jupyter_expander(width_percentage='100%'):
+    from IPython.core.display import display, HTML
+    display(HTML("<style>.container { width:{} !important; }</style>").format(width_percentage))
+
+
 ### Date and Author: 20200820, Kyungwon Kim ###
 ### scaling of df
 # feature_num_scaling(preprocessing.MinMaxScaler(), raw_stock[numeric_features])
@@ -590,7 +597,7 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
     else:
         mask = None
     if type(df_wordfreq) == pd.DataFrame:
-        df_wordfreq = {row[0]: row[1] for _, row in df_wordfreq.iterrows()}
+        df_wordfreq = {row[-2]: row[-1] for _, row in df_wordfreq.iterrows()}
     
     # 시각화
     word_clouder = WordCloud(background_color=background_color,    # 배경색
@@ -687,7 +694,7 @@ def plot_bar_wordfreq(df_wordfreq, num_showkeyword=100, num_subfigure=5, title='
             axs[0][col].set_title(title)  
     
     
-def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap'):
+def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plot_studio=False):
     # word, score(freq)만 포함인 경우
     if df_wordfreq.shape[1] == 2:
         df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
@@ -714,11 +721,18 @@ def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap'):
                         )
         fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
         fig.show()
+        
+    # chart_studio
+    if plot_studio:
+        chart_studio.plotly.plot(fig, filename=title+'_Treemap', auto_open=False)
     
     
 def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30):
     # 색상 설정
     pal = list(sns.color_palette(palette='Reds_r', n_colors=num_showkeyword).as_hex())
+    
+    # 정렬
+    df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
 
     # 시각화
     fig = px.pie(df_wordfreq[0:num_showkeyword], 
@@ -729,9 +743,9 @@ def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30):
     fig.update_layout(width = 800, height = 600,
                       margin = dict(t=0, l=0, r=0, b=0))
     fig.show()
+   
     
-    
-def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot'):
+def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False):
     # 라이브러리 및 하위 함수
     import plotly.graph_objects as go
     def get_colordict(palette,number,start):
@@ -773,6 +787,10 @@ def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot'):
     fig.update_layout(width=800, height=800,
                       margin = dict(t=0, l=0, r=0, b=0))
     fig.show()
+    
+    # chart_studio
+    if plot_studio:
+        chart_studio.plotly.plot(fig, filename=title+'_SunBurst', auto_open=False)
     
     
 # plot_tsne_wordvec(word_vec_w2v, dim_reduction=3, num_showkeyword=1000)
