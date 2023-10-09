@@ -843,9 +843,9 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
     # 입력값 필터 & node+edge 값 반영
     display('Descriptive statistics of pairweight: ', df_pairweight.describe().T)
     if filter_criteria == None and np.mean(df_pairweight.iloc[:,-1]) >= 0:
-        filter_criteria = np.mean(df_pairweight.iloc[:,-1])*2
+        filter_criteria = np.median(df_pairweight.iloc[:,-1])*2.8
     elif filter_criteria == None and np.mean(df_pairweight.iloc[:,-1]) < 0:
-        filter_criteria = abs(np.mean(df_pairweight.iloc[:,-1]))*2
+        filter_criteria = abs(np.median(df_pairweight.iloc[:,-1]))*2.8
     df_pair = df_pairweight[df_pairweight.iloc[:,-1] > filter_criteria]    # weight 필터
     if df_pairweight.shape[1] == 3:
         G.add_edges_from([(each[-3], each[-2], {'weight': each[-1]}) 
@@ -932,6 +932,8 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
                 nx.draw_networkx_edge_labels(G, edge_labels=edge_labels, pos=layout)
             plt.show()
         plt.style.use('default')
+        plt.rc('font', family=FONT_NAME)
+        plt.rc('axes', unicode_minus=False)
     
     return G, centrality
 
