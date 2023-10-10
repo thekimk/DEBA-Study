@@ -5,7 +5,7 @@ from import_KK import *
 # Expand of Jupyter Viewer
 def plot_jupyter_expander(width_percentage='100%'):
     from IPython.core.display import display, HTML
-    display(HTML("<style>.container { width:{} !important; }</style>").format(width_percentage))
+    display(HTML("<style>.container { width:{100%} !important; }</style>"))
 
 
 ### Date and Author: 20200820, Kyungwon Kim ###
@@ -637,7 +637,7 @@ def plot_bar_wordfreq(df_wordfreq, num_showkeyword=100, num_subfigure=5, title='
         df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
         ## 데이터분리 인덱싱
         subindex = [[i[0],i[-1]+1] for i in np.array_split(range(num_showkeyword), num_subfigure)]
-        fig, axs = plt.subplots(1, num_subfigure, figsize=(16,8), facecolor='white', squeeze=False)
+        fig, axs = plt.subplots(1, num_subfigure, figsize=(25,8), facecolor='white', squeeze=False)
         for col, idx in zip(range(0,num_subfigure), subindex):
             ## 데이터 및 시각화세팅
             df_sub = df_wordfreq[idx[0]:idx[-1]]
@@ -672,7 +672,7 @@ def plot_bar_wordfreq(df_wordfreq, num_showkeyword=100, num_subfigure=5, title='
         num_subfigure = len(df_wordfreq.iloc[:,0].unique())
         df_subs = [df_wordfreq[df_wordfreq.iloc[:,0] == i].iloc[:num_showkeyword,:] 
                    for i in df_wordfreq.iloc[:,0].unique()]
-        fig, axs = plt.subplots(1, num_subfigure, figsize=(16,8), facecolor='white', squeeze=False)
+        fig, axs = plt.subplots(1, num_subfigure, figsize=(25,8), facecolor='white', squeeze=False)
         for col, df_sub in zip(range(0,num_subfigure), df_subs):
             ## 데이터 및 시각화세팅
             x = list(df_sub.iloc[:,2])
@@ -763,8 +763,8 @@ def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False
     # 정보 합치기 및 축정보 분리
     temp = pd.concat([df_wordfreq, df_adding], axis=0)
     sb_words = [str(i[-2])+'_'+str(i[-1]) if i[-2] in df_wordfreq.word.unique() else str(i[-2]) for i in temp.values]
-    sb_score = list(temp.score)
-    sb_category = list(temp.year)
+    sb_score = list(temp[temp.columns[-1]])
+    sb_category = list(temp[temp.columns[0]])
 
     # 색상 생성
     ## color dict for words

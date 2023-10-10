@@ -30,17 +30,18 @@ def text_preprocessor(text, del_bracket_content=False):
     # 한글 맞춤법과 띄어쓰기 체크 (PyKoSpacing, Py-Hanspell)
     # html 태그 제거하기
     text_new = re.sub(r'<[^>]+>', '', text)
-    # 괄호 제거하기
-    text_new = re.sub(r'\(*\)*', '', text_new)
-    text_new = re.sub(r'\[*\]*', '', text_new)
-    text_new = re.sub(r'\<*\>*', '', text_new)
-    text_new = re.sub(r'\{*\}*', '', text_new)
     # 괄호와 내부문자 제거하기
     if del_bracket_content:
         text_new = re.sub(r'\([^)]*\)', '', text_new)
         text_new = re.sub(r'\[[^)]*\]', '', text_new)
         text_new = re.sub(r'\<[^)]*\>', '', text_new)
         text_new = re.sub(r'\{[^)]*\}', '', text_new)
+    else:
+        # 괄호 제거하기
+        text_new = re.sub(r'\(*\)*', '', text_new)
+        text_new = re.sub(r'\[*\]*', '', text_new)
+        text_new = re.sub(r'\<*\>*', '', text_new)
+        text_new = re.sub(r'\{*\}*', '', text_new)
     # 따옴표 제거하기
     text_new = text_new.replace('"', '')
     text_new = text_new.replace("'", '')
@@ -376,20 +377,23 @@ def preprocessing_textmining(df, colname_target, colname_category=None,
             wordadj_freq['category'] = str(category)
             wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
             wordadj_freq_soynlp = pd.concat([wordadj_freq_soynlp, wordadj_freq], axis=0, ignore_index=True)
+            
+            try:
+                # TF-IDF 요약
+                word_freq, sent_mat = preprocessing_tfidf(df_sub[colname_target])
+                ## 카테고리 추가
+                word_freq['category'] = str(category)
+                word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
+                word_freq_tfidf = pd.concat([word_freq_tfidf, word_freq], axis=0, ignore_index=True)    
 
-            # TF-IDF 요약
-            word_freq, sent_mat = preprocessing_tfidf(df_sub[colname_target])
-            ## 카테고리 추가
-            word_freq['category'] = str(category)
-            word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
-            word_freq_tfidf = pd.concat([word_freq_tfidf, word_freq], axis=0, ignore_index=True)    
-
-            # TF-IDF 인접어반영 요약
-            wordadj_freq = preprocessing_adjwordcount(word_freq[['word']], df_sub[colname_target], num_showkeyword=5)
-            ## 카테고리 추가
-            wordadj_freq['category'] = str(category)
-            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
-            wordadj_freq_tfidf = pd.concat([wordadj_freq_tfidf, wordadj_freq], axis=0, ignore_index=True)
+                # TF-IDF 인접어반영 요약
+                wordadj_freq = preprocessing_adjwordcount(word_freq[['word']], df_sub[colname_target], num_showkeyword=5)
+                ## 카테고리 추가
+                wordadj_freq['category'] = str(category)
+                wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+                wordadj_freq_tfidf = pd.concat([wordadj_freq_tfidf, wordadj_freq], axis=0, ignore_index=True)
+            except:
+                pass
 
     # 저장
     if save_local:
@@ -400,12 +404,14 @@ def preprocessing_textmining(df, colname_target, colname_category=None,
         word_freq_soynlp.to_csv(save_name, index=False, encoding='utf-8-sig')
         save_name = os.path.join(folder_location, save_name_list[1])
         wordadj_freq_soynlp.to_csv(save_name, index=False, encoding='utf-8-sig')
-        save_name = os.path.join(folder_location, save_name_list[2])
-        word_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
-        save_name = os.path.join(folder_location, save_name_list[3])
-        wordadj_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
-        
-    return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
+        try:
+            save_name = os.path.join(folder_location, save_name_list[2])
+            word_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
+            save_name = os.path.join(folder_location, save_name_list[3])
+            wordadj_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
+            return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
+        except:
+            return word_freq_soynlp, wordadj_freq_soynlp
 
 
 
