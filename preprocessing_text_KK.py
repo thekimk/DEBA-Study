@@ -229,41 +229,6 @@ def preprocessing_tfidf(df_series, del_lowfreq=True):
     return df_wordscore, df_sentvec
 
 
-def preprocessing_wordfreq_to_vectorcorr(df_wordfreq, df_series):
-    # wordfreq to dict
-    dict_wordfreq = {row[0]:row[1] for row in df_wordfreq.values}
-    dict_wordfreq = dict(sorted(dict_wordfreq.items()))
-    
-    # 텍스트 벡터 생성 함수
-    def word2vec_preprocessor(dict_wordfreq, text):
-        text_new = []
-        for key in list(dict_wordfreq.keys()):
-            if key in text.split(' '):
-                text_new.append(float(dict_wordfreq[key]))
-            else:
-                text_new.append(0)
-
-        return text_new
-
-    # series to dataframe vector
-    df_wordvec = df_series.apply(lambda x: word2vec_preprocessor(dict_wordfreq, x))
-    df_wordvec = pd.DataFrame([row for row in df_wordvec.values], columns=list(dict_wordfreq.keys()))
-    ## vector가 0인 word 제거
-    colnames = df_wordvec.columns[df_wordvec.sum(axis=0) != 0]
-    df_wordvec = df_wordvec[colnames].copy()
-    rownames = df_wordvec.index[df_wordvec.sum(axis=1) != 0]
-    df_wordvec = df_wordvec.iloc[rownames,:].reset_index().iloc[:,1:].T
-    
-    # word correlation
-    wordcorr = np.corrcoef(df_wordvec.values)
-    df_wordcorrpair = pd.DataFrame([(colnames[i], colnames[j], wordcorr[i,j]) 
-                                     for i in range(wordcorr.shape[1]) for j in range(wordcorr.shape[1]) if i != j])
-    df_wordcorrpair.columns = ['word_left', 'word_right', 'correlation']
-    df_wordcorr = pd.DataFrame(wordcorr, index=colnames, columns=colnames)
-    
-    return df_wordvec, df_wordcorr, df_wordcorrpair
-
-
 # gm = preprocessing_gephi()
 # gm.wordfreq_to_gephiinput(word_corrpair.iloc[:,1:], '.\Data\word_corrpair.graphml')
 class preprocessing_gephi:
@@ -307,40 +272,11 @@ class preprocessing_gephi:
         out.close()
 
 
-def preprocessing_word2vec(df_series):
-    # Word2Vec으로 데이터 훈련시키기
-    # sentences: 문장 토큰화된 데이터
-    # vector_size: 임베딩 할 벡터의 차원
-    # window: 현재값과 예측값 사이의 최대 거리
-    # min_count: 최소 빈도수 제한
-    # worker: 학습을 위한 thread의 수
-    # sg: {0: CBOW, 1: skip-gram}
-    # 문장 별 단어 분리
-    df_split = [row.split(' ') for row in df_series]
-
-    # 학습
-    embedding = Word2Vec(sentences=df_split, vector_size=10, 
-                         window=5, min_count=0, workers=8, sg=0, sample=1e-3)
-
-    # 단어 벡터 추출
-    df_wordvec = pd.DataFrame(pd.Series({word:vec for word, vec in zip(embedding.wv.index_to_key, embedding.wv.vectors)}), 
-                              columns=['word vector'])
-
-    # 문장 벡터 추출
-    sentvec = []
-    for sentence in df_split:
-        wvec = []
-        for word in sentence:
-            wvec.append(list(embedding.wv[word]))
-        sentvec.append(wvec)
-    df_sentvec = pd.DataFrame(pd.Series(sentvec), columns=['sentence vector'])
-    
-    return df_wordvec, df_sentvec
-
-
-def preprocessing_textmining(df, colname_target, colname_category=None, 
-                             save_local=True, 
-                             save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv']):
+def preprocessing_wordfreq(df, colname_target, colname_category=None, 
+                           save_local=True, 
+                           save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv']):
+    word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
+    word_freq_tfidf, wordadj_freq_tfidf = pd.DataFrame(), pd.DataFrame()
     if colname_category == None:
         # 문서 요약
         word_freq_soynlp = preprocessing_nounextract(df[colname_target])
@@ -348,18 +284,18 @@ def preprocessing_textmining(df, colname_target, colname_category=None,
         # 인접어반영 요약
         wordadj_freq_soynlp = preprocessing_adjwordcount(word_freq_soynlp[['word']], 
                                                          df[colname_target], num_showkeyword=5)
+        
+        try:
+            # TF-IDF 요약
+            word_freq_tfidf, sent_mat = preprocessing_tfidf(df[colname_target])
 
-        # TF-IDF 요약
-        word_freq_tfidf, sent_mat = preprocessing_tfidf(df[colname_target])
-
-        # TF-IDF 인접어반영 요약
-        wordadj_freq_tfidf = preprocessing_adjwordcount(word_freq_tfidf[['word']], 
-                                                   df[colname_target], num_showkeyword=5)
+            # TF-IDF 인접어반영 요약
+            wordadj_freq_tfidf = preprocessing_adjwordcount(word_freq_tfidf[['word']], 
+                                                       df[colname_target], num_showkeyword=5)
+        except:
+            pass
         
     elif type(colname_category) == str:
-        word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
-        word_freq_tfidf, wordadj_freq_tfidf = pd.DataFrame(), pd.DataFrame()
-        word_vec_w2v = pd.DataFrame()
         for category in tqdm(sorted(df[colname_category].unique())):
             # 데이터 분리
             df_sub = df[df[colname_category] == category]
@@ -394,6 +330,8 @@ def preprocessing_textmining(df, colname_target, colname_category=None,
                 wordadj_freq_tfidf = pd.concat([wordadj_freq_tfidf, wordadj_freq], axis=0, ignore_index=True)
             except:
                 pass
+            
+            # unique value groupby???
 
     # 저장
     if save_local:
@@ -412,6 +350,117 @@ def preprocessing_textmining(df, colname_target, colname_category=None,
             return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
         except:
             return word_freq_soynlp, wordadj_freq_soynlp
+        
+        
+def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
+    # wordfreq to dict
+    dict_wordfreq = {row[0]:row[1] for row in df_wordfreq.values}
+    dict_wordfreq = dict(sorted(dict_wordfreq.items()))
+    
+    # 텍스트 벡터 생성 함수
+    def word2vec_preprocessor(dict_wordfreq, text):
+        text_new = []
+        for key in list(dict_wordfreq.keys()):
+            if key in text.split(' '):
+                text_new.append(float(dict_wordfreq[key]))
+            else:
+                text_new.append(0)
+
+        return text_new
+
+    # series to dataframe vector
+    df_wordvec = df_series.apply(lambda x: word2vec_preprocessor(dict_wordfreq, x))
+    df_wordvec = pd.DataFrame([row for row in df_wordvec.values], columns=list(dict_wordfreq.keys()))
+    ## vector가 0의 비율이 많은 word 제거
+    colnames_topweight = pd.Series((df_wordvec == 0).sum(axis=0) / df_wordvec.shape[0]).sort_values(ascending=True)
+    colnames_topweight = colnames_topweight.sort_values(ascending=True)
+    colnames = colnames_topweight.index[:num_showkeyword]
+    df_wordvec = df_wordvec[colnames].T.copy()
+#     ## vector가 0인 word 제거
+#     colnames = df_wordvec.columns[df_wordvec.sum(axis=0) != 0]
+#     df_wordvec = df_wordvec[colnames].copy()
+#     rownames = df_wordvec.index[df_wordvec.sum(axis=1) != 0]
+#     df_wordvec = df_wordvec.iloc[rownames,:].reset_index().iloc[:,1:].T
+    
+    # word correlation
+    wordcorr = np.corrcoef(df_wordvec.values)
+    df_wordcorrpair = pd.DataFrame([(colnames[i], colnames[j], wordcorr[i,j]) 
+                                     for i in range(wordcorr.shape[1]) for j in range(wordcorr.shape[1]) if i != j])
+    df_wordcorrpair.columns = ['source', 'target', 'correlation']
+    df_wordcorr = pd.DataFrame(wordcorr, index=colnames, columns=colnames)
+    
+    # 정리
+    df_wordcorr.dropna(axis=0, inplace=True)
+    df_wordcorrpair.dropna(axis=0, inplace=True)
+    
+    return df_wordvec, df_wordcorr, df_wordcorrpair
+
+
+def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_category=None, num_showkeyword=100, 
+                                   save_local=True, save_name_list='word_corrpair.csv'):
+    if colname_category == None:
+        # 단어 벡터화 및 상관관계
+        _, _, word_corrpair_total = freq2vectorcorr_preprocessor(df_wordfreq.iloc[:,-2:], 
+                                                                 df[colname_target], num_showkeyword=num_showkeyword)
+    elif type(colname_category) == str:
+        word_corrpair_total = pd.DataFrame()
+        for category in tqdm(sorted(df_wordfreq[df_wordfreq.columns[0]].unique())):
+            # 데이터 분리
+            wf_sub = df_wordfreq[df_wordfreq[df_wordfreq.columns[0]] == category]
+            df_sub = df[df[colname_category] == category]
+            
+            # 단어 벡터화 및 상관관계
+            _, _, word_corrpair = freq2vectorcorr_preprocessor(wf_sub.iloc[:,-2:], 
+                                                               df_sub[colname_target], num_showkeyword=num_showkeyword)
+            ## 카테고리 추가
+            word_corrpair['category'] = str(category)
+            word_corrpair = word_corrpair[['category']+list(word_corrpair.columns[:-1])]
+            word_corrpair_total = pd.concat([word_corrpair_total, word_corrpair], axis=0, ignore_index=True)
+            
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name_list)
+        word_corrpair_total.to_csv(save_name, index=False, encoding='utf-8-sig')
+
+    return word_corrpair_total
+     
+    
+    
+    
+
+
+def preprocessing_word2vec(df_series):
+    # Word2Vec으로 데이터 훈련시키기
+    # sentences: 문장 토큰화된 데이터
+    # vector_size: 임베딩 할 벡터의 차원
+    # window: 현재값과 예측값 사이의 최대 거리
+    # min_count: 최소 빈도수 제한
+    # worker: 학습을 위한 thread의 수
+    # sg: {0: CBOW, 1: skip-gram}
+    # 문장 별 단어 분리
+    df_split = [row.split(' ') for row in df_series]
+
+    # 학습
+    embedding = Word2Vec(sentences=df_split, vector_size=10, 
+                         window=5, min_count=0, workers=8, sg=0, sample=1e-3)
+
+    # 단어 벡터 추출
+    df_wordvec = pd.DataFrame(pd.Series({word:vec for word, vec in zip(embedding.wv.index_to_key, embedding.wv.vectors)}), 
+                              columns=['word vector'])
+
+    # 문장 벡터 추출
+    sentvec = []
+    for sentence in df_split:
+        wvec = []
+        for word in sentence:
+            wvec.append(list(embedding.wv[word]))
+        sentvec.append(wvec)
+    df_sentvec = pd.DataFrame(pd.Series(sentvec), columns=['sentence vector'])
+    
+    return df_wordvec, df_sentvec
 
 
 
