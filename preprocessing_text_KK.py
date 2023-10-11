@@ -397,7 +397,7 @@ def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
 
 
 def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_category=None, num_showkeyword=100, 
-                                   save_local=True, save_name_list='word_corrpair.csv'):
+                                   save_local=True, save_name='word_corrpair.csv'):
     if colname_category == None:
         # 단어 벡터화 및 상관관계
         _, _, word_corrpair_total = freq2vectorcorr_preprocessor(df_wordfreq.iloc[:,-2:], 
@@ -422,7 +422,7 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
         folder_location = os.path.join(os.getcwd(), 'Data', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        save_name = os.path.join(folder_location, save_name_list)
+        save_name = os.path.join(folder_location, save_name)
         word_corrpair_total.to_csv(save_name, index=False, encoding='utf-8-sig')
 
     return word_corrpair_total

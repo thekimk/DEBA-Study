@@ -863,7 +863,7 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
     betweenness_centrality = sorted(nx.betweenness_centrality(G).items(), key=lambda x:x[1], reverse=True)
     closeness_centrality = sorted(nx.closeness_centrality(G).items(), key=lambda x:x[1], reverse=True)
     eigenvector_centrality = sorted(nx.eigenvector_centrality(G).items(), key=lambda x:x[1], reverse=True)
-    pagerank = sorted(nx.pagerank(G).items(), key=lambda x:x[1], reverse=True)
+    pagerank = sorted(nx.pagerank(G, tol=1.0e-1).items(), key=lambda x:x[1], reverse=True)
     ## node attributes 반영
     for i in range(len(pagerank)):
         G.add_node(degree_centrality[i][0], degree_centrality=degree_centrality[i][1])
@@ -908,9 +908,10 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
         edge_weight_core1 = rescale([float(G[u][v]['weight']) for u,v in G.edges],2.5,5)
         ## 레이어 종류 별 시각화
 #         pos = nx.bipartite_layout(G)    # 양분그리기는 별도 라벨 필요
-        for idx, layout in enumerate([nx.kamada_kawai_layout(G, weight=None), 
-                                      nx.circular_layout(G), 
-                                      nx.fruchterman_reingold_layout(G)]):
+#         for idx, layout in enumerate([nx.kamada_kawai_layout(G, weight=None), 
+#                                       nx.circular_layout(G), 
+#                                       nx.fruchterman_reingold_layout(G)]):
+        for idx, layout in enumerate([nx.kamada_kawai_layout(G, weight=None)]):
             plt.figure(figsize=(16,10))
             plt.style.use('dark_background')
             nx.draw_networkx(G, with_labels=True, alpha=0.2, 
