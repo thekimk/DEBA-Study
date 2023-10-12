@@ -26,7 +26,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from gensim.models import Word2Vec, LdaModel, CoherenceModel
 
 
-def text_preprocessor(text, del_bracket_content=False):
+def text_preprocessor(text, del_number=False, del_bracket_content=False):
     # 한글 맞춤법과 띄어쓰기 체크 (PyKoSpacing, Py-Hanspell)
     # html 태그 제거하기
     text_new = re.sub(r'<[^>]+>', '', text)
@@ -50,7 +50,8 @@ def text_preprocessor(text, del_bracket_content=False):
     # 한글 자음과 모음 제거하기
     text_new = re.sub('([ㄱ-ㅎㅏ-ㅣ]+)', '', text_new)
     # 숫자 제거하기
-    text_new = re.sub(r'\d+', '', text_new)
+    if del_number:
+        text_new = re.sub(r'\d+', '', text_new)
     # 문장구두점 및 양쪽공백 제거하기
     translator = str.maketrans('', '', string.punctuation)
     text_new = text_new.strip().translate(translator)

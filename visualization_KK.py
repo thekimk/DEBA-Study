@@ -621,7 +621,8 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
     plt.show()
         
     
-def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subfigure=5, title='Bar Plot'):
+def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subfigure=5, title='Bar Plot',
+                      save_local=True, save_name='barplot.png'):
     # 하위함수 및 세팅
     def get_colordict(palette, number, start):
         pal = list(sns.color_palette(palette=palette, n_colors=number).as_hex())
@@ -664,6 +665,15 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
             font=dict(size=12)
         )
         fig.show()
+        ## 저장
+        if save_local:
+            folder_location = os.path.join(os.getcwd(), 'Result', '')
+            if not os.path.exists(folder_location):
+                os.makedirs(folder_location)
+            save_name = os.path.join(folder_location, save_name)
+            save_name_plotly = save_name.split('.')[0]+'.html'
+            fig.write_html(save_name_plotly)
+            
         ## 데이터분리
         num_subfigure = len(df_wordfreq.iloc[:,0].unique())
         df_subs = [df_wordfreq[df_wordfreq.iloc[:,0] == i].iloc[:num_showkeyword,:] 
@@ -689,8 +699,17 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
             title = df_sub.iloc[:,0].unique()[0]
             axs[0][col].set_title(title)  
     
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        plt.savefig(save_name, dpi=300)
     
-def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plot_studio=False):
+    
+def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plot_studio=False, 
+                          save_local=True, save_name='treemap.html'):
     # word, score(freq)만 포함인 경우
     if df_wordfreq.shape[1] == 2:
         df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
@@ -721,9 +740,18 @@ def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plo
     # chart_studio
     if plot_studio:
         chart_studio.plotly.plot(fig, filename=title+'_Treemap', auto_open=False)
+        
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        fig.write_html(save_name)
     
     
-def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30):
+def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30,
+                        save_local=True, save_name='donut.html'):
     # 색상 설정
     pal = list(sns.color_palette(palette='Reds_r', n_colors=num_showkeyword).as_hex())
     
@@ -739,9 +767,18 @@ def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30):
     fig.update_layout(width = 800, height = 600,
                       margin = dict(t=0, l=0, r=0, b=0))
     fig.show()
+    
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        fig.write_html(save_name)
    
     
-def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False):
+def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False, 
+                           save_local=True, save_name='sunburst.html'):
     # 라이브러리 및 하위 함수
     import plotly.graph_objects as go
     def get_colordict(palette,number,start):
@@ -787,6 +824,14 @@ def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False
     # chart_studio
     if plot_studio:
         chart_studio.plotly.plot(fig, filename=title+'_SunBurst', auto_open=False)
+        
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        fig.write_html(save_name)
     
     
 # plot_tsne_wordvec(word_vec_w2v, dim_reduction=3, num_showkeyword=1000)
