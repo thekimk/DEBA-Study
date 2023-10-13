@@ -65,7 +65,8 @@ def plot_histogram(data_target, figsize=(10,5), fig_ncol=2):
 
 ### Date and Author: 20190716, Kyungwon Kim ###
 ### Timeplot Visualization
-def plot_timeseries(data_target, figsize=(10,5), fig_ncol=2):
+def plot_timeseries(data_target, figsize=(10,5), fig_ncol=2,
+                    save_local=True, save_name_initial='PlotTimeSeries.png'):
     # Bold Expression
     start = '\033[1m'
     end = '\033[0m'
@@ -112,6 +113,11 @@ def plot_timeseries(data_target, figsize=(10,5), fig_ncol=2):
                 plt.ylabel("Value", fontsize=figsize[0]*fig_ncol, fontname='Arial', fontweight='bold', 
                            fontstyle = 'italic', horizontalalignment='center')
     plt.tight_layout()
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
     plt.show()
     
 
@@ -132,7 +138,7 @@ def plot_timeseries_ver2(raw, save_local=False):
             folder_location = os.path.join(os.getcwd(), 'Result', '')
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
-            plt.savefig(folder_location+sub+'.pdf', dpi=600, bbox_inches='tight')
+            plt.savefig(folder_location+sub+'.png', dpi=600, bbox_inches='tight')
         plt.show()
         
         
@@ -140,7 +146,7 @@ def plot_timeseries_ver2(raw, save_local=False):
 ### Group Plots of DataFrame Origin Values of time-series
 def plot_timeseries_dforigin(df, scaled=False, fontsize=20, ylabel='',
                              legend_colnum = 3, legend_anchor = (1.02,-0.1),
-                             save_local=True, save_name_initial='PlotTime'):
+                             save_local=True, save_name_initial='PlotTime.png'):
     # scaling
     if scaled:
         df = feature_num_scaling_df(preprocessing.MinMaxScaler(), df)
@@ -161,18 +167,17 @@ def plot_timeseries_dforigin(df, scaled=False, fontsize=20, ylabel='',
         folder_location = os.path.join(os.getcwd(), 'Result', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(os.path.join(folder_location, save_name_initial+'.pdf'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
     plt.show()
 
     
 ### Date and Author: 20220220, Kyungwon Kim ###
 ### Plots of Average and Standard Error of time-series DF
 def plot_timeseries_dfmeanstd(df, scaled=False, fontsize=20, ylabel='Average',
-                              save_local=True, save_name_initial='PlotTimeMeanStd'):
+                              save_local=True, save_name_initial='PlotTimeMeanStd.png'):
     # scaling
     if scaled:
         df = feature_num_scaling_df(preprocessing.MinMaxScaler(), df)
-        save_name_initial = save_name_initial + 'Scaled'
         
     # calculate mean and std error
     def df_meanstd(df):
@@ -196,7 +201,7 @@ def plot_timeseries_dfmeanstd(df, scaled=False, fontsize=20, ylabel='Average',
         folder_location = os.path.join(os.getcwd(), 'Result', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(os.path.join(folder_location, save_name_initial+'.pdf'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
     plt.show()
     
     
@@ -206,7 +211,7 @@ def plot_timeseries_df(df, fontsize=20, ylabel='Average',
                        legend_colnum = 3, legend_anchor = (1.02,-0.1),
                        save_local=True, save_name_initial='PlotTime'):
     # Origin Plot
-    save_name_first = save_name_initial + 'Origin'
+    save_name_first = save_name_initial + 'Origin.png'
     scaled = False
     plot_timeseries_dforigin(df, scaled=scaled, fontsize=fontsize, ylabel='',
                              legend_colnum=legend_colnum, legend_anchor=legend_anchor,
@@ -219,7 +224,7 @@ def plot_timeseries_df(df, fontsize=20, ylabel='Average',
                              save_local=save_local, save_name_initial=save_name_first)
     
     # MeanStd Plot
-    save_name_second = save_name_initial + 'OriginMeanStd'
+    save_name_second = save_name_initial + 'OriginMeanStd.png'
     scaled = False
     plot_timeseries_dfmeanstd(df, scaled=scaled, fontsize=fontsize, ylabel=ylabel,
                               save_local=save_local, save_name_initial=save_name_second)
@@ -582,7 +587,8 @@ def plot_classfrequency(df, Y_colname, label_list=['0', '1']):
 def plot_wordcloud(df_wordfreq, title='Word Frequency',
                    background_color='white', max_font_size=200,
                    stopwords=None,
-                   mask_location=None, mask_colorgen=True, max_words=100):
+                   mask_location=None, mask_colorgen=True, max_words=100,
+                   save_local=True, save_name='wordcloud.png'):
     # 세팅
     if mask_location != None:
         icon = Image.open(mask_location)
@@ -619,6 +625,14 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
     plt.title(title, size=20)    # 제목과 사이즈
     plt.axis('off')    # 그래프 축을 제거
     plt.show()
+    
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        word_clouder.to_file(save_name)
         
     
 def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subfigure=5, title='Bar Plot',
@@ -705,7 +719,7 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
-        plt.savefig(save_name, dpi=300)
+        fig.savefig(save_name, dpi=300)
     
     
 def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plot_studio=False, 
@@ -877,7 +891,8 @@ def plot_tsne_wordvec(df_wordvec, dim_reduction=3, num_showkeyword=100):
 
 # measure change: https://chaelist.github.io/docs/network_analysis/social_network/
 # https://graphsandnetworks.com/community-detection-using-networkx/
-def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_size='score', edge_label=False):
+def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_size='score', edge_label=False,
+                  save_local=True, save_name='networkx.png'):
     # 빈 그래프 생성
     G = nx.Graph()   # undirected graph
     
@@ -972,7 +987,17 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
             if edge_label:
                 edge_labels = nx.get_edge_attributes(G, 'weight')
                 nx.draw_networkx_edge_labels(G, edge_labels=edge_labels, pos=layout)
-            plt.show()
+            
+        ## 저장
+        if save_local:
+            folder_location = os.path.join(os.getcwd(), 'Result', '')
+            if not os.path.exists(folder_location):
+                os.makedirs(folder_location)
+            save_name = os.path.join(folder_location, save_name)
+            plt.savefig(save_name)    
+        plt.show()
+            
+        # 롤백
         plt.style.use('default')
         plt.rc('font', family=FONT_NAME)
         plt.rc('axes', unicode_minus=False)
