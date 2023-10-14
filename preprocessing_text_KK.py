@@ -52,6 +52,8 @@ def text_preprocessor(text, del_number=False, del_bracket_content=False):
     # 숫자 제거하기
     if del_number:
         text_new = re.sub(r'\d+', '', text_new)
+    # 숫자를 문자로 인식하기
+    text_new = ' '.join([str(word) for word in text_new.split(' ')])
     # 문장구두점 및 양쪽공백 제거하기
     translator = str.maketrans('', '', string.punctuation)
     text_new = text_new.strip().translate(translator)
