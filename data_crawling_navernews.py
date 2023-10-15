@@ -344,6 +344,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
     return df_news
 
 # 병렬처리
+## 매우 빠르게 실행은 가능하나 네이버에서 차단됨
 @ray.remote
 def get_data_from_navernewsParallel(search_query, start, end, sort=0,
                                     maxpage=1000, maxpage_count=False, save_local=False,
