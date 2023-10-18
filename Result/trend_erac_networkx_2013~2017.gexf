@@ -1,0 +1,1145 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2023-10-18">
+    <creator>NetworkX 3.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="score" type="long" />
+      <attribute id="1" title="degree_centrality" type="double" />
+      <attribute id="2" title="pagerank" type="double" />
+      <attribute id="3" title="closeness_centrality" type="double" />
+      <attribute id="4" title="betweenness_centrality" type="double" />
+      <attribute id="5" title="eigenvector_centrality" type="double" />
+    </attributes>
+    <nodes>
+      <node id="한국" label="한국">
+        <attvalues>
+          <attvalue for="0" value="2277" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="2" value="0.016468679481796512" />
+          <attvalue for="3" value="0.18599033816425123" />
+          <attvalue for="4" value="0.02657652592717529" />
+          <attvalue for="5" value="0.01702245169489282" />
+        </attvalues>
+      </node>
+      <node id="일본" label="일본">
+        <attvalues>
+          <attvalue for="0" value="703" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.16775599128540306" />
+          <attvalue for="4" value="0.010667903525046379" />
+          <attvalue for="5" value="0.009706529114864243" />
+          <attvalue for="2" value="0.007072120634740456" />
+        </attvalues>
+      </node>
+      <node id="경제" label="경제">
+        <attvalues>
+          <attvalue for="0" value="1482" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="4" value="0.050620823780996936" />
+          <attvalue for="2" value="0.014234434893716981" />
+          <attvalue for="3" value="0.18370824812542605" />
+          <attvalue for="5" value="0.01418231169299956" />
+        </attvalues>
+      </node>
+      <node id="고령화" label="고령화">
+        <attvalues>
+          <attvalue for="0" value="1010" />
+          <attvalue for="4" value="0.14081235537636272" />
+          <attvalue for="2" value="0.019681799972878663" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="3" value="0.18832983927323552" />
+          <attvalue for="5" value="0.021205915148180318" />
+        </attvalues>
+      </node>
+      <node id="세계" label="세계">
+        <attvalues>
+          <attvalue for="0" value="699" />
+          <attvalue for="3" value="0.19700292397660818" />
+          <attvalue for="4" value="0.04081718917835183" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="5" value="0.03318775355056816" />
+          <attvalue for="2" value="0.00801504622692715" />
+        </attvalues>
+      </node>
+      <node id="2016" label="2016">
+        <attvalues>
+          <attvalue for="0" value="386" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.17409560723514214" />
+          <attvalue for="2" value="0.010350516702531095" />
+          <attvalue for="5" value="0.013635037582771027" />
+          <attvalue for="4" value="0.006308795764578077" />
+        </attvalues>
+      </node>
+      <node id="치매" label="치매">
+        <attvalues>
+          <attvalue for="0" value="1770" />
+          <attvalue for="2" value="0.029975501412536625" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="4" value="0.04638218923933209" />
+          <attvalue for="5" value="0.00021201388437343515" />
+          <attvalue for="3" value="0.11606373815676141" />
+        </attvalues>
+      </node>
+      <node id="환자" label="환자">
+        <attvalues>
+          <attvalue for="0" value="880" />
+          <attvalue for="4" value="0.06019377447948876" />
+          <attvalue for="2" value="0.01568257651814336" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="5" value="0.001026527712264511" />
+          <attvalue for="3" value="0.13428001993024416" />
+        </attvalues>
+      </node>
+      <node id="위험" label="위험">
+        <attvalues>
+          <attvalue for="0" value="560" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="5" value="3.928712725535251e-05" />
+          <attvalue for="3" value="0.10116366366366367" />
+          <attvalue for="2" value="0.0044523253404928345" />
+        </attvalues>
+      </node>
+      <node id="예방" label="예방">
+        <attvalues>
+          <attvalue for="0" value="938" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.007375806651512101" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="5" value="3.928712725535251e-05" />
+          <attvalue for="3" value="0.10116366366366367" />
+        </attvalues>
+      </node>
+      <node id="사랑" label="사랑">
+        <attvalues>
+          <attvalue for="0" value="890" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="5" value="3.928712725535251e-05" />
+          <attvalue for="3" value="0.10116366366366367" />
+          <attvalue for="2" value="0.0036821161682364613" />
+        </attvalues>
+      </node>
+      <node id="시대" label="시대">
+        <attvalues>
+          <attvalue for="0" value="1635" />
+          <attvalue for="4" value="0.14850765571872196" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="3" value="0.2169887278582931" />
+          <attvalue for="2" value="0.020910394192438533" />
+          <attvalue for="5" value="0.07954654863965473" />
+        </attvalues>
+      </node>
+      <node id="100세" label="100세">
+        <attvalues>
+          <attvalue for="0" value="1204" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="2" value="0.024543850735643576" />
+          <attvalue for="3" value="0.20301318267419963" />
+          <attvalue for="4" value="0.0672425872705985" />
+          <attvalue for="5" value="0.04508329582393511" />
+        </attvalues>
+      </node>
+      <node id="재테크" label="재테크">
+        <attvalues>
+          <attvalue for="0" value="588" />
+          <attvalue for="3" value="0.22514619883040937" />
+          <attvalue for="4" value="0.10520403053870989" />
+          <attvalue for="5" value="0.21547673919535829" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="2" value="0.009387591584847043" />
+        </attvalues>
+      </node>
+      <node id="개최" label="개최">
+        <attvalues>
+          <attvalue for="0" value="406" />
+          <attvalue for="3" value="0.17614379084967322" />
+          <attvalue for="5" value="0.016132900049520806" />
+          <attvalue for="4" value="0.010997732426303856" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="2" value="0.007193900231507788" />
+        </attvalues>
+      </node>
+      <node id="인생" label="인생">
+        <attvalues>
+          <attvalue for="0" value="485" />
+          <attvalue for="3" value="0.19072894550601557" />
+          <attvalue for="5" value="0.04004657970981828" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.004705393534490528" />
+        </attvalues>
+      </node>
+      <node id="준비" label="준비">
+        <attvalues>
+          <attvalue for="0" value="697" />
+          <attvalue for="3" value="0.21465551573078454" />
+          <attvalue for="5" value="0.09162786436101955" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="4" value="0.04860551505573149" />
+          <attvalue for="2" value="0.009554027176976562" />
+        </attvalues>
+      </node>
+      <node id="노후" label="노후">
+        <attvalues>
+          <attvalue for="0" value="2047" />
+          <attvalue for="1" value="0.10101010101010102" />
+          <attvalue for="4" value="0.18637489234182467" />
+          <attvalue for="3" value="0.23671497584541065" />
+          <attvalue for="2" value="0.029898012048912303" />
+          <attvalue for="5" value="0.33014575388841083" />
+        </attvalues>
+      </node>
+      <node id="아파트" label="아파트">
+        <attvalues>
+          <attvalue for="0" value="813" />
+          <attvalue for="3" value="0.2009694258016406" />
+          <attvalue for="4" value="0.061239441336025414" />
+          <attvalue for="5" value="0.06894821336414207" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="2" value="0.01000858602034508" />
+        </attvalues>
+      </node>
+      <node id="지원" label="지원">
+        <attvalues>
+          <attvalue for="0" value="850" />
+          <attvalue for="3" value="0.2065134099616858" />
+          <attvalue for="5" value="0.10315361178891608" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="4" value="0.0368101786169013" />
+          <attvalue for="2" value="0.0111840092283911" />
+        </attvalues>
+      </node>
+      <node id="최대" label="최대">
+        <attvalues>
+          <attvalue for="0" value="723" />
+          <attvalue for="3" value="0.21937321937321938" />
+          <attvalue for="5" value="0.14801958880872768" />
+          <attvalue for="4" value="0.06262641792035369" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="2" value="0.008504274485059807" />
+        </attvalues>
+      </node>
+      <node id="보험" label="보험">
+        <attvalues>
+          <attvalue for="0" value="991" />
+          <attvalue for="5" value="0.34402855325894505" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="3" value="0.19765309864319766" />
+          <attvalue for="2" value="0.013116476344819963" />
+          <attvalue for="4" value="0.01524403893351473" />
+        </attvalues>
+      </node>
+      <node id="미세먼지" label="미세먼지">
+        <attvalues>
+          <attvalue for="0" value="588" />
+          <attvalue for="4" value="0.09603177971525312" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="2" value="0.021541096812106475" />
+          <attvalue for="3" value="0.2058037418862161" />
+          <attvalue for="5" value="0.0864717104793862" />
+        </attvalues>
+      </node>
+      <node id="연금" label="연금">
+        <attvalues>
+          <attvalue for="0" value="937" />
+          <attvalue for="5" value="0.35799447232227805" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="3" value="0.20232732732732733" />
+          <attvalue for="4" value="0.0341615915245367" />
+          <attvalue for="2" value="0.008731155969915553" />
+        </attvalues>
+      </node>
+      <node id="걱정" label="걱정">
+        <attvalues>
+          <attvalue for="0" value="510" />
+          <attvalue for="5" value="0.061132533559683726" />
+          <attvalue for="3" value="0.18203309692671396" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="2" value="0.003475178830156009" />
+        </attvalues>
+      </node>
+      <node id="대비" label="대비">
+        <attvalues>
+          <attvalue for="0" value="563" />
+          <attvalue for="5" value="0.30610109184709516" />
+          <attvalue for="3" value="0.2065134099616858" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="2" value="0.009431463388210647" />
+          <attvalue for="4" value="0.005298781369209539" />
+        </attvalues>
+      </node>
+      <node id="출시" label="출시">
+        <attvalues>
+          <attvalue for="0" value="1180" />
+          <attvalue for="5" value="0.12534288330469173" />
+          <attvalue for="3" value="0.16682141751779636" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.004633883741846175" />
+        </attvalues>
+      </node>
+      <node id="보장" label="보장">
+        <attvalues>
+          <attvalue for="0" value="685" />
+          <attvalue for="1" value="0.08080808080808081" />
+          <attvalue for="5" value="0.332894185830089" />
+          <attvalue for="2" value="0.022734707002529806" />
+          <attvalue for="3" value="0.19507781397032212" />
+          <attvalue for="4" value="0.0499561305128987" />
+        </attvalues>
+      </node>
+      <node id="사설" label="사설">
+        <attvalues>
+          <attvalue for="0" value="1202" />
+          <attvalue for="2" value="0.01136" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="국민연금" label="국민연금">
+        <attvalues>
+          <attvalue for="0" value="583" />
+          <attvalue for="2" value="0.01136" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="분양" label="분양">
+        <attvalues>
+          <attvalue for="0" value="1274" />
+          <attvalue for="2" value="0.011973894025679771" />
+          <attvalue for="3" value="0.16870109546165885" />
+          <attvalue for="5" value="0.021570816790473814" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="4" value="0.003848003848003848" />
+        </attvalues>
+      </node>
+      <node id="오피스텔" label="오피스텔">
+        <attvalues>
+          <attvalue for="0" value="486" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="5" value="0.04754597131691031" />
+          <attvalue for="2" value="0.012809360442512982" />
+          <attvalue for="3" value="0.165438919582566" />
+          <attvalue for="4" value="0.008620021536097058" />
+        </attvalues>
+      </node>
+      <node id="투자" label="투자">
+        <attvalues>
+          <attvalue for="0" value="837" />
+          <attvalue for="5" value="0.05498901394310798" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.1631849833484711" />
+          <attvalue for="4" value="0.008350384624530645" />
+          <attvalue for="2" value="0.009130864949639099" />
+        </attvalues>
+      </node>
+      <node id="부동산" label="부동산">
+        <attvalues>
+          <attvalue for="0" value="772" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="4" value="0.03046803136839151" />
+          <attvalue for="5" value="0.03469508427483373" />
+          <attvalue for="2" value="0.010700829175109899" />
+          <attvalue for="3" value="0.1597037037037037" />
+        </attvalues>
+      </node>
+      <node id="펀드" label="펀드">
+        <attvalues>
+          <attvalue for="0" value="527" />
+          <attvalue for="5" value="0.21473369702144082" />
+          <attvalue for="1" value="0.06060606060606061" />
+          <attvalue for="4" value="0.064419779893242" />
+          <attvalue for="2" value="0.014847406470620867" />
+          <attvalue for="3" value="0.18656974731741088" />
+        </attvalues>
+      </node>
+      <node id="일자리" label="일자리">
+        <attvalues>
+          <attvalue for="0" value="889" />
+          <attvalue for="4" value="0.07136080021234081" />
+          <attvalue for="2" value="0.018200101067210893" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="3" value="0.18203309692671396" />
+          <attvalue for="5" value="0.012555154920772603" />
+        </attvalues>
+      </node>
+      <node id="여성" label="여성">
+        <attvalues>
+          <attvalue for="0" value="1147" />
+          <attvalue for="4" value="0.07727023469320389" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="2" value="0.01137658695460026" />
+          <attvalue for="3" value="0.16682141751779636" />
+          <attvalue for="5" value="0.003319669188652211" />
+        </attvalues>
+      </node>
+      <node id="정부" label="정부">
+        <attvalues>
+          <attvalue for="0" value="697" />
+          <attvalue for="4" value="0.05651061771509952" />
+          <attvalue for="3" value="0.18773946360153257" />
+          <attvalue for="2" value="0.013172451794942776" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="5" value="0.039213457475130255" />
+        </attvalues>
+      </node>
+      <node id="올해" label="올해">
+        <attvalues>
+          <attvalue for="0" value="593" />
+          <attvalue for="3" value="0.1798465131798465" />
+          <attvalue for="4" value="0.028596489100690778" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="5" value="0.012738260912069204" />
+          <attvalue for="2" value="0.009661075589742154" />
+        </attvalues>
+      </node>
+      <node id="정책" label="정책">
+        <attvalues>
+          <attvalue for="0" value="398" />
+          <attvalue for="3" value="0.16452991452991453" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="5" value="0.009586483113263345" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.005442156385181445" />
+        </attvalues>
+      </node>
+      <node id="청년" label="청년">
+        <attvalues>
+          <attvalue for="0" value="468" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="3" value="0.15555555555555556" />
+          <attvalue for="2" value="0.007891106219749798" />
+          <attvalue for="5" value="0.0029399831695073168" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="재건축" label="재건축">
+        <attvalues>
+          <attvalue for="0" value="491" />
+          <attvalue for="2" value="0.019985579990693947" />
+          <attvalue for="4" value="0.07117562360113927" />
+          <attvalue for="3" value="0.18038821954484605" />
+          <attvalue for="1" value="0.04040404040404041" />
+          <attvalue for="5" value="0.020638110078745726" />
+        </attvalues>
+      </node>
+      <node id="내년" label="내년">
+        <attvalues>
+          <attvalue for="0" value="780" />
+          <attvalue for="2" value="0.01816397534677336" />
+          <attvalue for="4" value="0.04498499736594975" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.16407914764079148" />
+          <attvalue for="5" value="0.0030295161844028037" />
+        </attvalues>
+      </node>
+      <node id="가장" label="가장">
+        <attvalues>
+          <attvalue for="0" value="729" />
+          <attvalue for="2" value="0.012314822435448325" />
+          <attvalue for="3" value="0.17160140082776187" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="4" value="0.013905494857875811" />
+          <attvalue for="5" value="0.011145773657035889" />
+        </attvalues>
+      </node>
+      <node id="행복" label="행복">
+        <attvalues>
+          <attvalue for="0" value="956" />
+          <attvalue for="3" value="0.16142557651991615" />
+          <attvalue for="5" value="0.008348902035383993" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.0034816054527018695" />
+        </attvalues>
+      </node>
+      <node id="급증" label="급증">
+        <attvalues>
+          <attvalue for="0" value="466" />
+          <attvalue for="4" value="0.10101010101010101" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="2" value="0.010167823489816076" />
+          <attvalue for="3" value="0.15760233918128655" />
+          <attvalue for="5" value="0.004306970380391463" />
+        </attvalues>
+      </node>
+      <node id="사회" label="사회">
+        <attvalues>
+          <attvalue for="0" value="697" />
+          <attvalue for="5" value="0.003927289790224476" />
+          <attvalue for="3" value="0.15200225606316978" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.0040659653860812325" />
+        </attvalues>
+      </node>
+      <node id="확대" label="확대">
+        <attvalues>
+          <attvalue for="0" value="709" />
+          <attvalue for="5" value="0.03969907785549102" />
+          <attvalue for="3" value="0.1711111111111111" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="2" value="0.009495098701487672" />
+          <attvalue for="4" value="0.001768822006917245" />
+        </attvalues>
+      </node>
+      <node id="증가" label="증가">
+        <attvalues>
+          <attvalue for="0" value="544" />
+          <attvalue for="2" value="0.014669501458472909" />
+          <attvalue for="4" value="0.01566687280972995" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="5" value="0.0010230080751628835" />
+          <attvalue for="3" value="0.13338282603316012" />
+        </attvalues>
+      </node>
+      <node id="재취업" label="재취업">
+        <attvalues>
+          <attvalue for="0" value="478" />
+          <attvalue for="4" value="0.07945440802583659" />
+          <attvalue for="2" value="0.012228113308616442" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.15123456790123457" />
+          <attvalue for="5" value="0.0008156822785386068" />
+        </attvalues>
+      </node>
+      <node id="남성" label="남성">
+        <attvalues>
+          <attvalue for="0" value="404" />
+          <attvalue for="2" value="0.014037279847902906" />
+          <attvalue for="4" value="0.03629148629148629" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.15885646920129678" />
+          <attvalue for="5" value="0.0016137336994106611" />
+        </attvalues>
+      </node>
+      <node id="상품" label="상품">
+        <attvalues>
+          <attvalue for="0" value="460" />
+          <attvalue for="5" value="0.40546593012881843" />
+          <attvalue for="1" value="0.09090909090909091" />
+          <attvalue for="2" value="0.02667245995739919" />
+          <attvalue for="4" value="0.07943062572005058" />
+          <attvalue for="3" value="0.1983075791022811" />
+        </attvalues>
+      </node>
+      <node id="50대" label="50대">
+        <attvalues>
+          <attvalue for="0" value="457" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="4" value="0.00524405048214572" />
+          <attvalue for="3" value="0.1527777777777778" />
+          <attvalue for="5" value="0.002363174792635754" />
+          <attvalue for="2" value="0.00556704257083203" />
+        </attvalues>
+      </node>
+      <node id="자산" label="자산">
+        <attvalues>
+          <attvalue for="0" value="410" />
+          <attvalue for="2" value="0.02647727534090864" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="5" value="0.06420244096266553" />
+          <attvalue for="4" value="0.041894702259757374" />
+          <attvalue for="3" value="0.16822721598002496" />
+        </attvalues>
+      </node>
+      <node id="한경" label="한경">
+        <attvalues>
+          <attvalue for="0" value="1033" />
+          <attvalue for="3" value="0.18599033816425123" />
+          <attvalue for="5" value="0.042424559254550194" />
+          <attvalue for="4" value="0.010393864135360732" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="2" value="0.008658292167250914" />
+        </attvalues>
+      </node>
+      <node id="회장" label="회장">
+        <attvalues>
+          <attvalue for="0" value="709" />
+          <attvalue for="2" value="0.00644248709896215" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.09722222222222222" />
+          <attvalue for="5" value="5.775357185998411e-06" />
+        </attvalues>
+      </node>
+      <node id="사람" label="사람">
+        <attvalues>
+          <attvalue for="0" value="681" />
+          <attvalue for="2" value="0.014354347814246982" />
+          <attvalue for="4" value="0.01566687280972995" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="3" value="0.11090534979423869" />
+          <attvalue for="5" value="3.116546229253213e-05" />
+        </attvalues>
+      </node>
+      <node id="특별" label="특별">
+        <attvalues>
+          <attvalue for="0" value="395" />
+          <attvalue for="3" value="0.16013071895424835" />
+          <attvalue for="2" value="0.00896173851732701" />
+          <attvalue for="5" value="0.007573591484581224" />
+          <attvalue for="4" value="0.005177626606198035" />
+          <attvalue for="1" value="0.020202020202020204" />
+        </attvalues>
+      </node>
+      <node id="실시" label="실시">
+        <attvalues>
+          <attvalue for="0" value="500" />
+          <attvalue for="2" value="0.012908928130712014" />
+          <attvalue for="3" value="0.17160140082776187" />
+          <attvalue for="5" value="0.024765810099214657" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="4" value="0.009819281247852675" />
+        </attvalues>
+      </node>
+      <node id="해결" label="해결">
+        <attvalues>
+          <attvalue for="0" value="405" />
+          <attvalue for="2" value="0.012076798497742992" />
+          <attvalue for="4" value="0.01566687280972995" />
+          <attvalue for="5" value="0.016580642293777793" />
+          <attvalue for="3" value="0.16407914764079148" />
+          <attvalue for="1" value="0.020202020202020204" />
+        </attvalues>
+      </node>
+      <node id="오늘" label="오늘">
+        <attvalues>
+          <attvalue for="0" value="1063" />
+          <attvalue for="2" value="0.012739856425019661" />
+          <attvalue for="4" value="0.01566687280972995" />
+          <attvalue for="5" value="0.016580642293777793" />
+          <attvalue for="3" value="0.16407914764079148" />
+          <attvalue for="1" value="0.020202020202020204" />
+        </attvalues>
+      </node>
+      <node id="성장" label="성장">
+        <attvalues>
+          <attvalue for="0" value="520" />
+          <attvalue for="3" value="0.13580246913580246" />
+          <attvalue for="5" value="0.0005611519965968182" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.004145134803534021" />
+        </attvalues>
+      </node>
+      <node id="대표" label="대표">
+        <attvalues>
+          <attvalue for="0" value="619" />
+          <attvalue for="5" value="0.011887909060078798" />
+          <attvalue for="3" value="0.13863168724279834" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.004366315059374115" />
+        </attvalues>
+      </node>
+      <node id="주목" label="주목">
+        <attvalues>
+          <attvalue for="0" value="705" />
+          <attvalue for="5" value="0.14552251709891809" />
+          <attvalue for="3" value="0.1798465131798465" />
+          <attvalue for="4" value="0.011076559706920943" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="2" value="0.006864227612317702" />
+        </attvalues>
+      </node>
+      <node id="금융" label="금융">
+        <attvalues>
+          <attvalue for="0" value="1097" />
+          <attvalue for="5" value="0.07352836599175369" />
+          <attvalue for="3" value="0.16728739913097454" />
+          <attvalue for="4" value="0.008223078028272835" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="2" value="0.00597699893314382" />
+        </attvalues>
+      </node>
+      <node id="수익" label="수익">
+        <attvalues>
+          <attvalue for="0" value="448" />
+          <attvalue for="5" value="0.1979157126269312" />
+          <attvalue for="2" value="0.016385656678838838" />
+          <attvalue for="1" value="0.05050505050505051" />
+          <attvalue for="3" value="0.1766633890527696" />
+          <attvalue for="4" value="0.026703216158998476" />
+        </attvalues>
+      </node>
+      <node id="노화" label="노화">
+        <attvalues>
+          <attvalue for="0" value="738" />
+          <attvalue for="2" value="0.011359999999999999" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="다이어트" label="다이어트">
+        <attvalues>
+          <attvalue for="0" value="405" />
+          <attvalue for="2" value="0.011359999999999999" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="국민" label="국민">
+        <attvalues>
+          <attvalue for="0" value="695" />
+          <attvalue for="5" value="0.00018951376545865603" />
+          <attvalue for="3" value="0.11407407407407408" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="2" value="0.004520534753086072" />
+        </attvalues>
+      </node>
+      <node id="가능" label="가능">
+        <attvalues>
+          <attvalue for="0" value="747" />
+          <attvalue for="5" value="0.003821488370959137" />
+          <attvalue for="3" value="0.14678649237472766" />
+          <attvalue for="2" value="0.004963093711435275" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="매경" label="매경">
+        <attvalues>
+          <attvalue for="0" value="563" />
+          <attvalue for="4" value="0.04178196531137706" />
+          <attvalue for="3" value="0.15843621399176955" />
+          <attvalue for="5" value="0.003992216308520608" />
+          <attvalue for="1" value="0.020202020202020204" />
+          <attvalue for="2" value="0.007119462387862189" />
+        </attvalues>
+      </node>
+      <node id="교육" label="교육">
+        <attvalues>
+          <attvalue for="0" value="572" />
+          <attvalue for="2" value="0.018287029240435727" />
+          <attvalue for="4" value="0.043850267379679134" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.14536138079827401" />
+          <attvalue for="5" value="0.0009219363927785599" />
+        </attvalues>
+      </node>
+      <node id="성공" label="성공">
+        <attvalues>
+          <attvalue for="0" value="499" />
+          <attvalue for="2" value="0.01821637461059506" />
+          <attvalue for="4" value="0.046176046176046176" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.1285169289461135" />
+          <attvalue for="5" value="0.00016244167363410627" />
+        </attvalues>
+      </node>
+      <node id="논란" label="논란">
+        <attvalues>
+          <attvalue for="0" value="454" />
+          <attvalue for="2" value="0.005690644051334717" />
+          <attvalue for="3" value="0.1104961049610496" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="3.009485586054408e-05" />
+        </attvalues>
+      </node>
+      <node id="의료" label="의료">
+        <attvalues>
+          <attvalue for="0" value="461" />
+          <attvalue for="2" value="0.006311083896847099" />
+          <attvalue for="3" value="0.12272313296903462" />
+          <attvalue for="5" value="0.0001707279375614711" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="퇴직연금" label="퇴직연금">
+        <attvalues>
+          <attvalue for="0" value="389" />
+          <attvalue for="5" value="0.07912064409790386" />
+          <attvalue for="2" value="0.01408989509405379" />
+          <attvalue for="4" value="0.01566687280972995" />
+          <attvalue for="1" value="0.030303030303030304" />
+          <attvalue for="3" value="0.15596064814814817" />
+        </attvalues>
+      </node>
+      <node id="도입" label="도입">
+        <attvalues>
+          <attvalue for="0" value="435" />
+          <attvalue for="5" value="0.014650247026648366" />
+          <attvalue for="2" value="0.006023629321318521" />
+          <attvalue for="3" value="0.13019323671497585" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="추천" label="추천">
+        <attvalues>
+          <attvalue for="0" value="390" />
+          <attvalue for="5" value="0.07507829763083516" />
+          <attvalue for="3" value="0.15843621399176955" />
+          <attvalue for="2" value="0.004618297471665081" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="미래" label="미래">
+        <attvalues>
+          <attvalue for="0" value="595" />
+          <attvalue for="2" value="0.01136" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="세대" label="세대">
+        <attvalues>
+          <attvalue for="0" value="489" />
+          <attvalue for="2" value="0.01136" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.010101010101010102" />
+          <attvalue for="5" value="4.474348033288703e-19" />
+        </attvalues>
+      </node>
+      <node id="관리" label="관리">
+        <attvalues>
+          <attvalue for="0" value="596" />
+          <attvalue for="5" value="0.011887909060078798" />
+          <attvalue for="3" value="0.13863168724279834" />
+          <attvalue for="2" value="0.004564291314303038" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="스마트" label="스마트">
+        <attvalues>
+          <attvalue for="0" value="468" />
+          <attvalue for="2" value="0.007968617830378312" />
+          <attvalue for="5" value="0.003070299317001875" />
+          <attvalue for="3" value="0.13580246913580246" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="현대" label="현대">
+        <attvalues>
+          <attvalue for="0" value="519" />
+          <attvalue for="5" value="0.03664693613978556" />
+          <attvalue for="3" value="0.14431057563587685" />
+          <attvalue for="2" value="0.004627455308488059" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="시작" label="시작">
+        <attvalues>
+          <attvalue for="0" value="439" />
+          <attvalue for="5" value="0.003070299317001875" />
+          <attvalue for="3" value="0.13580246913580246" />
+          <attvalue for="2" value="0.0061215075758931465" />
+          <attvalue for="1" value="0.010101010101010102" />
+          <attvalue for="4" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="칼럼" label="칼럼">
+        <attvalues>
+          <attvalue for="0" value="861" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="글로" label="글로">
+        <attvalues>
+          <attvalue for="0" value="787" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="기억" label="기억">
+        <attvalues>
+          <attvalue for="0" value="583" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="공개" label="공개">
+        <attvalues>
+          <attvalue for="0" value="571" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="화제" label="화제">
+        <attvalues>
+          <attvalue for="0" value="571" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="영화" label="영화">
+        <attvalues>
+          <attvalue for="0" value="570" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="부동" label="부동">
+        <attvalues>
+          <attvalue for="0" value="520" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="세상" label="세상">
+        <attvalues>
+          <attvalue for="0" value="518" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="기자" label="기자">
+        <attvalues>
+          <attvalue for="0" value="512" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="뉴스" label="뉴스">
+        <attvalues>
+          <attvalue for="0" value="471" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="나이" label="나이">
+        <attvalues>
+          <attvalue for="0" value="441" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="눈물" label="눈물">
+        <attvalues>
+          <attvalue for="0" value="429" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="교수" label="교수">
+        <attvalues>
+          <attvalue for="0" value="428" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="개선" label="개선">
+        <attvalues>
+          <attvalue for="0" value="415" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="선물" label="선물">
+        <attvalues>
+          <attvalue for="0" value="399" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+      <node id="안전" label="안전">
+        <attvalues>
+          <attvalue for="0" value="398" />
+          <attvalue for="1" value="0.0" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="3" value="0.0" />
+          <attvalue for="5" value="1.302206665652543e-29" />
+          <attvalue for="2" value="0.0028600000000000006" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="한국" target="일본" id="0" weight="0.0576299710542788" />
+      <edge source="한국" target="경제" id="1" weight="0.0984327046772689" />
+      <edge source="한국" target="고령화" id="2" weight="0.0521300039008053" />
+      <edge source="한국" target="세계" id="3" weight="0.0743288627738463" />
+      <edge source="한국" target="2016" id="4" weight="0.0250268105226063" />
+      <edge source="일본" target="경제" id="5" weight="0.0386186159911219" />
+      <edge source="일본" target="고령화" id="6" weight="0.0603340371384031" />
+      <edge source="경제" target="세계" id="7" weight="0.0369907803236916" />
+      <edge source="경제" target="내년" id="8" weight="0.0432388561619158" />
+      <edge source="경제" target="2016" id="9" weight="0.0349669899861984" />
+      <edge source="고령화" target="시대" id="10" weight="0.1957310658976569" />
+      <edge source="고령화" target="급증" id="11" weight="0.0256996283046851" />
+      <edge source="고령화" target="사회" id="12" weight="0.0552047686376049" />
+      <edge source="세계" target="최대" id="13" weight="0.0341493027150264" />
+      <edge source="2016" target="한경" id="14" weight="0.0665228209718281" />
+      <edge source="치매" target="환자" id="15" weight="0.0611163836517701" />
+      <edge source="치매" target="위험" id="16" weight="0.0619952555194717" />
+      <edge source="치매" target="예방" id="17" weight="0.1758174539572257" />
+      <edge source="치매" target="사랑" id="18" weight="0.032008095720397" />
+      <edge source="환자" target="급증" id="19" weight="0.1798633738445131" />
+      <edge source="환자" target="증가" id="20" weight="0.0805855825329492" />
+      <edge source="시대" target="100세" id="21" weight="0.3009384534042169" />
+      <edge source="시대" target="재테크" id="22" weight="0.0304752902170318" />
+      <edge source="시대" target="개최" id="23" weight="0.0320811984849547" />
+      <edge source="시대" target="인생" id="24" weight="0.0279289655799684" />
+      <edge source="시대" target="준비" id="25" weight="0.031187122793521" />
+      <edge source="100세" target="가장" id="26" weight="0.0416074175514542" />
+      <edge source="100세" target="인생" id="27" weight="0.0338615237260403" />
+      <edge source="100세" target="올해" id="28" weight="0.0579631309438467" />
+      <edge source="100세" target="준비" id="29" weight="0.0355333542710497" />
+      <edge source="100세" target="행복" id="30" weight="0.0370754234553623" />
+      <edge source="재테크" target="노후" id="31" weight="0.05568993001942" />
+      <edge source="재테크" target="한경" id="32" weight="0.034080236587362" />
+      <edge source="재테크" target="상품" id="33" weight="0.0306827400390454" />
+      <edge source="재테크" target="대비" id="34" weight="0.0670472010054807" />
+      <edge source="개최" target="특별" id="35" weight="0.0341595143425038" />
+      <edge source="인생" target="준비" id="36" weight="0.0316005178924172" />
+      <edge source="준비" target="노후" id="37" weight="0.2022159053641976" />
+      <edge source="노후" target="아파트" id="38" weight="0.0284472682934367" />
+      <edge source="노후" target="지원" id="39" weight="0.0303001178817565" />
+      <edge source="노후" target="최대" id="40" weight="0.0262154339257787" />
+      <edge source="노후" target="보험" id="41" weight="0.0313611914439115" />
+      <edge source="노후" target="미세먼지" id="42" weight="0.0395245078596501" />
+      <edge source="노후" target="연금" id="43" weight="0.0382336477614166" />
+      <edge source="노후" target="걱정" id="44" weight="0.0445325727045368" />
+      <edge source="노후" target="대비" id="45" weight="0.1187913461469769" />
+      <edge source="아파트" target="분양" id="46" weight="0.10093498770931" />
+      <edge source="아파트" target="재건축" id="47" weight="0.0599519313578788" />
+      <edge source="지원" target="최대" id="48" weight="0.0535274318707927" />
+      <edge source="지원" target="정부" id="49" weight="0.0546309117366993" />
+      <edge source="지원" target="확대" id="50" weight="0.0546737818295432" />
+      <edge source="최대" target="보장" id="51" weight="0.0426485658669026" />
+      <edge source="보험" target="출시" id="52" weight="0.0294975321846559" />
+      <edge source="보험" target="연금" id="53" weight="0.0800377526351824" />
+      <edge source="보험" target="보장" id="54" weight="0.0867971204911516" />
+      <edge source="보험" target="상품" id="55" weight="0.0711713002608401" />
+      <edge source="보험" target="대비" id="56" weight="0.028179628619645" />
+      <edge source="미세먼지" target="정부" id="57" weight="0.0580366760779244" />
+      <edge source="미세먼지" target="확대" id="58" weight="0.0605264370757425" />
+      <edge source="미세먼지" target="실시" id="59" weight="0.0959481622120098" />
+      <edge source="미세먼지" target="해결" id="60" weight="0.0284370849286543" />
+      <edge source="미세먼지" target="오늘" id="61" weight="0.054742154833174" />
+      <edge source="연금" target="보장" id="62" weight="0.0269771399837683" />
+      <edge source="연금" target="상품" id="63" weight="0.0504586020956925" />
+      <edge source="연금" target="펀드" id="64" weight="0.0324502130347086" />
+      <edge source="연금" target="대비" id="65" weight="0.0255077938695187" />
+      <edge source="대비" target="상품" id="66" weight="0.0472875646082602" />
+      <edge source="출시" target="보장" id="67" weight="0.0461448486340552" />
+      <edge source="보장" target="주목" id="68" weight="0.0291794040089089" />
+      <edge source="보장" target="금융" id="69" weight="0.0640147775328614" />
+      <edge source="보장" target="상품" id="70" weight="0.0641833775978446" />
+      <edge source="보장" target="수익" id="71" weight="0.0294694563808142" />
+      <edge source="사설" target="국민연금" id="72" weight="0.0393444975932018" />
+      <edge source="분양" target="오피스텔" id="73" weight="0.1201194430711335" />
+      <edge source="오피스텔" target="투자" id="74" weight="0.0297544248380468" />
+      <edge source="오피스텔" target="부동산" id="75" weight="0.0298055733235808" />
+      <edge source="오피스텔" target="주목" id="76" weight="0.0431279310960971" />
+      <edge source="투자" target="부동산" id="77" weight="0.0575811991112351" />
+      <edge source="투자" target="펀드" id="78" weight="0.058166570024852" />
+      <edge source="부동산" target="재건축" id="79" weight="0.0270155863455163" />
+      <edge source="부동산" target="자산" id="80" weight="0.0439018825156374" />
+      <edge source="펀드" target="퇴직연금" id="81" weight="0.0376525537833892" />
+      <edge source="펀드" target="상품" id="82" weight="0.0333264159395558" />
+      <edge source="펀드" target="수익" id="83" weight="0.0475491972777736" />
+      <edge source="펀드" target="자산" id="84" weight="0.0327440902462865" />
+      <edge source="일자리" target="여성" id="85" weight="0.0369137688496105" />
+      <edge source="일자리" target="정부" id="86" weight="0.0438783218800864" />
+      <edge source="일자리" target="올해" id="87" weight="0.0263699302084374" />
+      <edge source="일자리" target="정책" id="88" weight="0.0271833835453229" />
+      <edge source="일자리" target="청년" id="89" weight="0.1066848927867949" />
+      <edge source="여성" target="재취업" id="90" weight="0.0774733742754384" />
+      <edge source="여성" target="남성" id="91" weight="0.0379928277424132" />
+      <edge source="여성" target="청년" id="92" weight="0.0267377197638232" />
+      <edge source="정부" target="정책" id="93" weight="0.0369602968657149" />
+      <edge source="올해" target="가장" id="94" weight="0.0932580441592065" />
+      <edge source="재건축" target="가능" id="95" weight="0.0438638388341466" />
+      <edge source="재건축" target="매경" id="96" weight="0.0464515805293931" />
+      <edge source="내년" target="성장" id="97" weight="0.0271475136614713" />
+      <edge source="내년" target="남성" id="98" weight="0.109169786844342" />
+      <edge source="가장" target="50대" id="99" weight="0.0269309986890426" />
+      <edge source="급증" target="증가" id="100" weight="0.0331165612870082" />
+      <edge source="확대" target="실시" id="101" weight="0.063594307000479" />
+      <edge source="증가" target="국민" id="102" weight="0.0276054273977958" />
+      <edge source="재취업" target="교육" id="103" weight="0.0617677982201119" />
+      <edge source="재취업" target="성공" id="104" weight="0.0411467287831322" />
+      <edge source="남성" target="50대" id="105" weight="0.0263834709363967" />
+      <edge source="상품" target="주목" id="106" weight="0.1117287800619571" />
+      <edge source="상품" target="수익" id="107" weight="0.0285842542494008" />
+      <edge source="상품" target="추천" id="108" weight="0.1140839147080174" />
+      <edge source="자산" target="대표" id="109" weight="0.0323426194063546" />
+      <edge source="자산" target="금융" id="110" weight="0.0369244545414052" />
+      <edge source="자산" target="관리" id="111" weight="0.0365934370721636" />
+      <edge source="회장" target="사람" id="112" weight="0.0335545624003732" />
+      <edge source="사람" target="성공" id="113" weight="0.0460587823303863" />
+      <edge source="특별" target="실시" id="114" weight="0.0404265305551017" />
+      <edge source="해결" target="스마트" id="115" weight="0.042836280856755" />
+      <edge source="오늘" target="시작" id="116" weight="0.0340826975118807" />
+      <edge source="수익" target="퇴직연금" id="117" weight="0.0278946313365119" />
+      <edge source="수익" target="현대" id="118" weight="0.0350463227827155" />
+      <edge source="노화" target="다이어트" id="119" weight="0.0267592621537864" />
+      <edge source="매경" target="교육" id="120" weight="0.0416129776501444" />
+      <edge source="교육" target="의료" id="121" weight="0.0706638263659411" />
+      <edge source="성공" target="논란" id="122" weight="0.0435407061246876" />
+      <edge source="퇴직연금" target="도입" id="123" weight="0.0388591815039447" />
+      <edge source="미래" target="세대" id="124" weight="0.0301950722415937" />
+    </edges>
+  </graph>
+</gexf>

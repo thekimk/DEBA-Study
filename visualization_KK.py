@@ -994,6 +994,7 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
             save_name = os.path.join(folder_location, save_name)
+            nx.write_gexf(G, os.path.join(folder_location, save_name).split('.')[0]+'.gexf', encoding='utf-8')
             plt.savefig(save_name)    
         plt.show()
             
