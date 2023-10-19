@@ -19,6 +19,25 @@ def feature_num_scaling_df(scaler, df):
     return df_scaled
 
 
+### Date and Author: 20231020, Kyungwon Kim ###
+### Bar Visualization
+def plot_bar(df, summation=False, title='Bar Plot'):
+    fig = go.Figure()
+    for col in df.columns:
+        fig.add_trace(go.Bar(x=df.index, y=df[col], 
+                             name=col))        
+    if summation:
+        df_sum = pd.DataFrame(df.sum(axis=1), columns=['Overall'])
+        fig.add_trace(go.Line(x=df_sum.index, y=df_sum[df_sum.columns[0]], 
+                              name=df_sum.columns[0]))
+    fig.update_layout(
+        width = 1000, height = 600,
+        title=dict(text=title),
+        font=dict(size=12),
+        barmode='relative')
+    fig.show()
+
+
 ### Date and Author: 20190716, Kyungwon Kim ###
 ### Histgram Visualization
 def plot_histogram(data_target, figsize=(10,5), fig_ncol=2):
