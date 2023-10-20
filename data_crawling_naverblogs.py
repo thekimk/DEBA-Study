@@ -9,12 +9,14 @@ import pandas as pd
 import numpy as np
 import random
 from tqdm import tqdm
+import ray
 import datetime
 from time import sleep
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 
 #크롤링
+from fake_useragent import UserAgent
 import csv, json
 from bs4 import BeautifulSoup
 import requests
