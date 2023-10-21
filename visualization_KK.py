@@ -19,6 +19,34 @@ def feature_num_scaling_df(scaler, df):
     return df_scaled
 
 
+### Date and Author: 20231020, Kyungwon Kim ###
+### Bar Visualization
+def plot_bar(df, summation=False, barmode='relative', title='Bar Plot'):
+    axis_max = abs(df).max().max() * 1.1
+    fig = go.Figure()
+    for col in df.columns:
+        fig.add_trace(go.Bar(x=df.index, y=df[col], 
+                             name=col))        
+    if summation:
+        df_sum = pd.DataFrame(df.sum(axis=1), columns=['Overall'])
+        fig.add_trace(go.Scatter(x=df_sum.index, y=df_sum[df_sum.columns[0]], 
+                                 name=df_sum.columns[0], mode='lines+markers',
+                                 marker=dict(size=8, color='white')))
+    fig.update_layout(
+        barmode=barmode,
+        width = 1000, height = 600,
+        plot_bgcolor='grey',
+        title=dict(text=title, x=0.1, y=0.9), 
+        title_font_size=25,
+        title_font_color='black',
+        font=dict(size=20),
+        legend_font_size=14,
+        legend=dict(bgcolor='grey'),
+        legend_font_color='white',
+        yaxis_range=[-axis_max, axis_max])
+    fig.show()
+
+
 ### Date and Author: 20190716, Kyungwon Kim ###
 ### Histgram Visualization
 def plot_histogram(data_target, figsize=(10,5), fig_ncol=2):
@@ -994,6 +1022,7 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
             save_name = os.path.join(folder_location, save_name)
+            nx.write_gexf(G, os.path.join(folder_location, save_name).split('.')[0]+'.gexf', encoding='utf-8')
             plt.savefig(save_name)    
         plt.show()
             
