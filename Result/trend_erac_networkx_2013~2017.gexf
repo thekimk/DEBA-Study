@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
-  <meta lastmodifieddate="2023-10-22">
+  <meta lastmodifieddate="2023-10-23">
     <creator>NetworkX 3.1</creator>
   </meta>
   <graph defaultedgetype="undirected" mode="static" name="">
@@ -30,13 +30,13 @@
           <attvalue for="3" value="0.005686112828969971" />
           <attvalue for="4" value="0.018314057145075568" />
           <attvalue for="5" value="0.22264309764309764" />
-          <attvalue for="1" value="0.006165817506466834" />
+          <attvalue for="1" value="0.006165817506466822" />
         </attvalues>
       </node>
       <node id="100세" label="100세">
         <attvalues>
           <attvalue for="0" value="466" />
-          <attvalue for="1" value="0.03512205508665001" />
+          <attvalue for="1" value="0.03512205508664997" />
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="3" value="0.07710298216637115" />
           <attvalue for="5" value="0.29481017067223964" />
@@ -47,7 +47,7 @@
         <attvalues>
           <attvalue for="0" value="251" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.0113209069481445" />
+          <attvalue for="1" value="0.011320906948144489" />
           <attvalue for="4" value="0.06437493082453427" />
           <attvalue for="5" value="0.2544492544492545" />
           <attvalue for="3" value="0.007418450785797724" />
@@ -60,14 +60,14 @@
           <attvalue for="4" value="0.03132925927940626" />
           <attvalue for="3" value="0.010179574542592478" />
           <attvalue for="2" value="0.020202020202020204" />
-          <attvalue for="1" value="0.005600568533541702" />
+          <attvalue for="1" value="0.005600568533541727" />
         </attvalues>
       </node>
       <node id="관절" label="관절">
         <attvalues>
           <attvalue for="0" value="164" />
           <attvalue for="2" value="0.08080808080808081" />
-          <attvalue for="1" value="0.018307488235017683" />
+          <attvalue for="1" value="0.01830748823501769" />
           <attvalue for="5" value="0.3010385545596813" />
           <attvalue for="4" value="0.18420228549023265" />
           <attvalue for="3" value="0.03968081553115566" />
@@ -80,13 +80,13 @@
           <attvalue for="5" value="0.23814749162938578" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.0037019156540177714" />
+          <attvalue for="1" value="0.003701915654017767" />
         </attvalues>
       </node>
       <node id="미세" label="미세">
         <attvalues>
           <attvalue for="0" value="140" />
-          <attvalue for="1" value="0.012131228970071458" />
+          <attvalue for="1" value="0.012131228970071455" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="4" value="0.06151626899364458" />
           <attvalue for="3" value="0.020376834507941498" />
@@ -100,7 +100,7 @@
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="5" value="0.30976430976430974" />
           <attvalue for="4" value="0.1915582475850941" />
-          <attvalue for="1" value="0.016658164618426795" />
+          <attvalue for="1" value="0.016658164618426747" />
         </attvalues>
       </node>
       <node id="가족" label="가족">
@@ -110,7 +110,7 @@
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="5" value="0.30976430976430974" />
           <attvalue for="3" value="0.051237240221470276" />
-          <attvalue for="1" value="0.012576659690242827" />
+          <attvalue for="1" value="0.012576659690242818" />
         </attvalues>
       </node>
       <node id="환자" label="환자">
@@ -130,7 +130,7 @@
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="5" value="0.297891810086932" />
           <attvalue for="3" value="0.037639948006367316" />
-          <attvalue for="1" value="0.01220407995443758" />
+          <attvalue for="1" value="0.012204079954437565" />
         </attvalues>
       </node>
       <node id="보장" label="보장">
@@ -140,13 +140,13 @@
           <attvalue for="5" value="0.3326651731320992" />
           <attvalue for="4" value="0.30145816295339445" />
           <attvalue for="3" value="0.11346168318957435" />
-          <attvalue for="1" value="0.024252206536103507" />
+          <attvalue for="1" value="0.0242522065361035" />
         </attvalues>
       </node>
       <node id="예방" label="예방">
         <attvalues>
           <attvalue for="0" value="421" />
-          <attvalue for="1" value="0.0189514753145853" />
+          <attvalue for="1" value="0.018951475314585308" />
           <attvalue for="3" value="0.03140398505271728" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="4" value="0.041595863677113536" />
@@ -160,13 +160,13 @@
           <attvalue for="5" value="0.29685746352413017" />
           <attvalue for="4" value="0.10573798161273518" />
           <attvalue for="2" value="0.05050505050505051" />
-          <attvalue for="1" value="0.009154850416269188" />
+          <attvalue for="1" value="0.0091548504162692" />
         </attvalues>
       </node>
       <node id="우유" label="우유">
         <attvalues>
           <attvalue for="0" value="136" />
-          <attvalue for="1" value="0.009389055980988048" />
+          <attvalue for="1" value="0.009389055980988057" />
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="4" value="0.04064606517375025" />
           <attvalue for="3" value="0.012644966293698516" />
@@ -180,13 +180,13 @@
           <attvalue for="4" value="0.1530548667930838" />
           <attvalue for="3" value="0.03847115915761554" />
           <attvalue for="5" value="0.27314680349824116" />
-          <attvalue for="1" value="0.010786431131635948" />
+          <attvalue for="1" value="0.010786431131635932" />
         </attvalues>
       </node>
       <node id="한국" label="한국">
         <attvalues>
           <attvalue for="0" value="717" />
-          <attvalue for="1" value="0.022864356088185385" />
+          <attvalue for="1" value="0.022864356088185402" />
           <attvalue for="3" value="0.08214714892977105" />
           <attvalue for="2" value="0.07070707070707072" />
           <attvalue for="5" value="0.26387330091033795" />
@@ -200,7 +200,7 @@
           <attvalue for="5" value="0.27141253807920473" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="4" value="0.04471082802179616" />
-          <attvalue for="1" value="0.005980282101153582" />
+          <attvalue for="1" value="0.00598028210115358" />
         </attvalues>
       </node>
       <node id="경제" label="경제">
@@ -209,7 +209,7 @@
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="5" value="0.26306138306138305" />
           <attvalue for="4" value="0.03170571089832225" />
-          <attvalue for="1" value="0.007730293709191701" />
+          <attvalue for="1" value="0.007730293709191691" />
           <attvalue for="3" value="0.009141082525436266" />
         </attvalues>
       </node>
@@ -220,14 +220,14 @@
           <attvalue for="5" value="0.24853182992717873" />
           <attvalue for="3" value="0.010343979298833966" />
           <attvalue for="4" value="0.021776818151012203" />
-          <attvalue for="1" value="0.006702453306543542" />
+          <attvalue for="1" value="0.006702453306543563" />
         </attvalues>
       </node>
       <node id="고령화" label="고령화">
         <attvalues>
           <attvalue for="0" value="239" />
           <attvalue for="3" value="0.058110385800552784" />
-          <attvalue for="1" value="0.016133476567425843" />
+          <attvalue for="1" value="0.01613347656742581" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="5" value="0.2749033745818312" />
           <attvalue for="4" value="0.04980917596643391" />
@@ -237,7 +237,7 @@
         <attvalues>
           <attvalue for="0" value="219" />
           <attvalue for="3" value="0.019090220574450627" />
-          <attvalue for="1" value="0.007558860383068974" />
+          <attvalue for="1" value="0.007558860383068973" />
           <attvalue for="5" value="0.2361738936324572" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="4" value="0.010838798625013767" />
@@ -259,7 +259,7 @@
           <attvalue for="3" value="0.05855088788762257" />
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="5" value="0.24427128427128425" />
-          <attvalue for="1" value="0.008005906795579876" />
+          <attvalue for="1" value="0.00800590679557988" />
           <attvalue for="4" value="0.016760820918458246" />
         </attvalues>
       </node>
@@ -270,7 +270,7 @@
           <attvalue for="5" value="0.31089072543617996" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.028021395677549046" />
-          <attvalue for="1" value="0.006318388889362644" />
+          <attvalue for="1" value="0.006318388889362645" />
         </attvalues>
       </node>
       <node id="수술" label="수술">
@@ -280,7 +280,7 @@
           <attvalue for="3" value="0.05842228129643094" />
           <attvalue for="4" value="0.1770417674967331" />
           <attvalue for="5" value="0.29685746352413017" />
-          <attvalue for="1" value="0.011489249514282549" />
+          <attvalue for="1" value="0.011489249514282571" />
         </attvalues>
       </node>
       <node id="개선" label="개선">
@@ -290,7 +290,7 @@
           <attvalue for="4" value="0.060798493057546255" />
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="3" value="0.014296826881860902" />
-          <attvalue for="1" value="0.005128467499507174" />
+          <attvalue for="1" value="0.005128467499507176" />
         </attvalues>
       </node>
       <node id="생활" label="생활">
@@ -300,7 +300,7 @@
           <attvalue for="4" value="0.19121462673722017" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.03333178680272062" />
-          <attvalue for="1" value="0.008841607473065538" />
+          <attvalue for="1" value="0.008841607473065546" />
         </attvalues>
       </node>
       <node id="미세먼지" label="미세먼지">
@@ -309,7 +309,7 @@
           <attvalue for="3" value="0.11962161530034132" />
           <attvalue for="5" value="0.32507585359296387" />
           <attvalue for="2" value="0.09090909090909091" />
-          <attvalue for="1" value="0.021595036248261278" />
+          <attvalue for="1" value="0.021595036248261316" />
           <attvalue for="4" value="0.1811137931241076" />
         </attvalues>
       </node>
@@ -317,7 +317,7 @@
         <attvalues>
           <attvalue for="0" value="185" />
           <attvalue for="5" value="0.25071832696466123" />
-          <attvalue for="1" value="0.0088007444538028" />
+          <attvalue for="1" value="0.00880074445380278" />
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="4" value="0.03213960074174469" />
           <attvalue for="3" value="0.0033015611246903754" />
@@ -337,7 +337,7 @@
         <attvalues>
           <attvalue for="0" value="209" />
           <attvalue for="3" value="0.07816905145291045" />
-          <attvalue for="1" value="0.017174843924506716" />
+          <attvalue for="1" value="0.017174843924506706" />
           <attvalue for="2" value="0.07070707070707072" />
           <attvalue for="5" value="0.2907991479420051" />
           <attvalue for="4" value="0.07063014275637726" />
@@ -346,7 +346,7 @@
       <node id="시대" label="시대">
         <attvalues>
           <attvalue for="0" value="502" />
-          <attvalue for="1" value="0.027231585125176497" />
+          <attvalue for="1" value="0.027231585125176518" />
           <attvalue for="3" value="0.11140750125753218" />
           <attvalue for="5" value="0.30425248930587007" />
           <attvalue for="2" value="0.08080808080808081" />
@@ -360,7 +360,7 @@
           <attvalue for="4" value="0.28127751397405126" />
           <attvalue for="5" value="0.31901100557816975" />
           <attvalue for="3" value="0.08406134510030613" />
-          <attvalue for="1" value="0.016903189717166124" />
+          <attvalue for="1" value="0.0169031897171661" />
         </attvalues>
       </node>
       <node id="트렌드" label="트렌드">
@@ -369,7 +369,7 @@
           <attvalue for="5" value="0.27939525978741664" />
           <attvalue for="4" value="0.10475725814134432" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.010793853130403281" />
+          <attvalue for="1" value="0.010793853130403278" />
           <attvalue for="3" value="0.01425839214954861" />
         </attvalues>
       </node>
@@ -380,7 +380,7 @@
           <attvalue for="4" value="0.17013603510610362" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.021779024360966237" />
-          <attvalue for="1" value="0.008084794395862986" />
+          <attvalue for="1" value="0.008084794395862979" />
         </attvalues>
       </node>
       <node id="주목" label="주목">
@@ -390,7 +390,7 @@
           <attvalue for="5" value="0.2298251330509395" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.002528532290039168" />
+          <attvalue for="1" value="0.0025285322900391706" />
         </attvalues>
       </node>
       <node id="반퇴" label="반퇴">
@@ -409,7 +409,7 @@
           <attvalue for="4" value="0.20331441051852872" />
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="5" value="0.28403637705963286" />
-          <attvalue for="1" value="0.011530018889898372" />
+          <attvalue for="1" value="0.01153001888989835" />
           <attvalue for="3" value="0.024524443123701" />
         </attvalues>
       </node>
@@ -419,7 +419,7 @@
           <attvalue for="4" value="0.17621173444868077" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="5" value="0.274022274022274" />
-          <attvalue for="1" value="0.009393481928718814" />
+          <attvalue for="1" value="0.009393481928718824" />
           <attvalue for="3" value="0.013712994271126613" />
         </attvalues>
       </node>
@@ -428,7 +428,7 @@
           <attvalue for="0" value="139" />
           <attvalue for="4" value="0.1949717687079988" />
           <attvalue for="2" value="0.07070707070707072" />
-          <attvalue for="1" value="0.016047366596640064" />
+          <attvalue for="1" value="0.016047366596640075" />
           <attvalue for="5" value="0.27579015966112735" />
           <attvalue for="3" value="0.009929596045860736" />
         </attvalues>
@@ -438,7 +438,7 @@
           <attvalue for="0" value="217" />
           <attvalue for="4" value="0.1573228418535537" />
           <attvalue for="2" value="0.05050505050505051" />
-          <attvalue for="1" value="0.009753271746405558" />
+          <attvalue for="1" value="0.00975327174640555" />
           <attvalue for="5" value="0.25986306837370665" />
           <attvalue for="3" value="0.0016598755467030052" />
         </attvalues>
@@ -450,7 +450,7 @@
           <attvalue for="4" value="0.16327154948943934" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.03770014457243894" />
-          <attvalue for="1" value="0.011356937832938695" />
+          <attvalue for="1" value="0.011356937832938733" />
         </attvalues>
       </node>
       <node id="수도권" label="수도권">
@@ -459,7 +459,7 @@
           <attvalue for="4" value="0.10969039044864785" />
           <attvalue for="5" value="0.27227690921958436" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.009225677524659998" />
+          <attvalue for="1" value="0.00922567752466001" />
           <attvalue for="3" value="0.005232397301042941" />
         </attvalues>
       </node>
@@ -468,7 +468,7 @@
           <attvalue for="0" value="146" />
           <attvalue for="3" value="0.08288189798703094" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.009496916844828876" />
+          <attvalue for="1" value="0.009496916844828857" />
           <attvalue for="4" value="0.03855735131575273" />
           <attvalue for="5" value="0.24638313975489767" />
         </attvalues>
@@ -480,14 +480,14 @@
           <attvalue for="5" value="0.2070095629417663" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.002999333779740135" />
+          <attvalue for="1" value="0.002999333779740137" />
         </attvalues>
       </node>
       <node id="일자리" label="일자리">
         <attvalues>
           <attvalue for="0" value="313" />
           <attvalue for="3" value="0.03710575139146567" />
-          <attvalue for="1" value="0.0121825302596838" />
+          <attvalue for="1" value="0.012182530259683808" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="4" value="0.0010821550096203607" />
           <attvalue for="5" value="0.16473015316945952" />
@@ -497,7 +497,7 @@
         <attvalues>
           <attvalue for="0" value="175" />
           <attvalue for="3" value="0.05504019789734075" />
-          <attvalue for="1" value="0.01099185399899983" />
+          <attvalue for="1" value="0.010991853998999827" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="5" value="0.19790497568275345" />
           <attvalue for="4" value="0.006459546960091548" />
@@ -506,7 +506,7 @@
       <node id="희망" label="희망">
         <attvalues>
           <attvalue for="0" value="203" />
-          <attvalue for="1" value="0.012211964079438824" />
+          <attvalue for="1" value="0.012211964079438822" />
           <attvalue for="3" value="0.018759018759018756" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="5" value="0.1406166932482722" />
@@ -516,7 +516,7 @@
       <node id="여성" label="여성">
         <attvalues>
           <attvalue for="0" value="523" />
-          <attvalue for="1" value="0.026360777120061647" />
+          <attvalue for="1" value="0.026360777120061678" />
           <attvalue for="2" value="0.08080808080808081" />
           <attvalue for="3" value="0.057707137453581483" />
           <attvalue for="4" value="0.09144291325128859" />
@@ -530,7 +530,7 @@
           <attvalue for="5" value="0.27668268444967475" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.026916260404201028" />
-          <attvalue for="1" value="0.009271119790674649" />
+          <attvalue for="1" value="0.009271119790674635" />
         </attvalues>
       </node>
       <node id="사회" label="사회">
@@ -540,13 +540,13 @@
           <attvalue for="5" value="0.23682811494445843" />
           <attvalue for="3" value="0.004930556113301937" />
           <attvalue for="2" value="0.020202020202020204" />
-          <attvalue for="1" value="0.003936180223667592" />
+          <attvalue for="1" value="0.003936180223667587" />
         </attvalues>
       </node>
       <node id="재취업" label="재취업">
         <attvalues>
           <attvalue for="0" value="174" />
-          <attvalue for="1" value="0.007013285795436113" />
+          <attvalue for="1" value="0.007013285795436103" />
           <attvalue for="5" value="0.22617711506600394" />
           <attvalue for="4" value="0.019642743212034467" />
           <attvalue for="3" value="0.005199631560175778" />
@@ -560,7 +560,7 @@
           <attvalue for="3" value="0.020931430625308178" />
           <attvalue for="4" value="0.05954014650489699" />
           <attvalue for="2" value="0.030303030303030304" />
-          <attvalue for="1" value="0.006545781080822114" />
+          <attvalue for="1" value="0.0065457810808221325" />
         </attvalues>
       </node>
       <node id="해결" label="해결">
@@ -570,7 +570,7 @@
           <attvalue for="3" value="0.024626437203740848" />
           <attvalue for="4" value="0.0635248508652432" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.007071856648117112" />
+          <attvalue for="1" value="0.007071856648117113" />
         </attvalues>
       </node>
       <node id="안전" label="안전">
@@ -580,7 +580,7 @@
           <attvalue for="4" value="0.014900679210065887" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.0027988985670343875" />
+          <attvalue for="1" value="0.0027988985670343884" />
         </attvalues>
       </node>
       <node id="할머니" label="할머니">
@@ -590,7 +590,7 @@
           <attvalue for="4" value="0.05440949098355543" />
           <attvalue for="3" value="0.016795160278462687" />
           <attvalue for="2" value="0.030303030303030304" />
-          <attvalue for="1" value="0.006291971397973492" />
+          <attvalue for="1" value="0.00629197139797349" />
         </attvalues>
       </node>
       <node id="올해" label="올해">
@@ -600,7 +600,7 @@
           <attvalue for="5" value="0.2243961929001299" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.0033339524612293107" />
+          <attvalue for="1" value="0.0033339524612293232" />
         </attvalues>
       </node>
       <node id="기자" label="기자">
@@ -610,13 +610,13 @@
           <attvalue for="5" value="0.2243961929001299" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
-          <attvalue for="1" value="0.002551821907149968" />
+          <attvalue for="1" value="0.0025518219071499672" />
         </attvalues>
       </node>
       <node id="지원" label="지원">
         <attvalues>
           <attvalue for="0" value="253" />
-          <attvalue for="1" value="0.011018018392827537" />
+          <attvalue for="1" value="0.01101801839282754" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="5" value="0.262254446303526" />
           <attvalue for="4" value="0.05897214518877693" />
@@ -629,7 +629,7 @@
           <attvalue for="5" value="0.274022274022274" />
           <attvalue for="4" value="0.09864402767577328" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.009434255831739098" />
+          <attvalue for="1" value="0.009434255831739107" />
           <attvalue for="3" value="0.01307725063136318" />
         </attvalues>
       </node>
@@ -640,13 +640,13 @@
           <attvalue for="2" value="0.07070707070707072" />
           <attvalue for="3" value="0.051355416383245686" />
           <attvalue for="4" value="0.1524268414160404" />
-          <attvalue for="1" value="0.01538037438303586" />
+          <attvalue for="1" value="0.015380374383035854" />
         </attvalues>
       </node>
       <node id="정부" label="정부">
         <attvalues>
           <attvalue for="0" value="229" />
-          <attvalue for="1" value="0.01270288961749814" />
+          <attvalue for="1" value="0.012702889617498141" />
           <attvalue for="3" value="0.020335182580080532" />
           <attvalue for="5" value="0.25219749113554424" />
           <attvalue for="4" value="0.04019023363407005" />
@@ -660,14 +660,14 @@
           <attvalue for="5" value="0.2878617828112777" />
           <attvalue for="2" value="0.06060606060606061" />
           <attvalue for="3" value="0.014655727812808828" />
-          <attvalue for="1" value="0.008625669258427743" />
+          <attvalue for="1" value="0.008625669258427735" />
         </attvalues>
       </node>
       <node id="척추" label="척추">
         <attvalues>
           <attvalue for="0" value="136" />
           <attvalue for="4" value="0.10251281903121058" />
-          <attvalue for="1" value="0.010714912027453498" />
+          <attvalue for="1" value="0.010714912027453501" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="5" value="0.2567415900749234" />
           <attvalue for="3" value="0.004180001095585512" />
@@ -679,7 +679,7 @@
           <attvalue for="4" value="0.14058271465383693" />
           <attvalue for="5" value="0.27314680349824116" />
           <attvalue for="2" value="0.04040404040404041" />
-          <attvalue for="1" value="0.0068845085402174915" />
+          <attvalue for="1" value="0.0068845085402175045" />
           <attvalue for="3" value="0.0005996294184296659" />
         </attvalues>
       </node>
@@ -688,7 +688,7 @@
           <attvalue for="0" value="214" />
           <attvalue for="5" value="0.2937970773022319" />
           <attvalue for="3" value="0.04209295594576979" />
-          <attvalue for="1" value="0.013886603526723709" />
+          <attvalue for="1" value="0.013886603526723712" />
           <attvalue for="4" value="0.11117047229960529" />
           <attvalue for="2" value="0.05050505050505051" />
         </attvalues>
@@ -708,7 +708,7 @@
           <attvalue for="0" value="601" />
           <attvalue for="4" value="0.053432420627567784" />
           <attvalue for="5" value="0.2536942121511854" />
-          <attvalue for="1" value="0.008089196155043063" />
+          <attvalue for="1" value="0.008089196155043074" />
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="3" value="0.008378976437108781" />
         </attvalues>
@@ -718,7 +718,7 @@
           <attvalue for="0" value="305" />
           <attvalue for="5" value="0.2663394065263224" />
           <attvalue for="4" value="0.06660801526333236" />
-          <attvalue for="1" value="0.009720084865311729" />
+          <attvalue for="1" value="0.009720084865311725" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="3" value="0.01616477672445514" />
         </attvalues>
@@ -730,7 +730,7 @@
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
           <attvalue for="5" value="0.19212348201112245" />
-          <attvalue for="1" value="0.002523642379048771" />
+          <attvalue for="1" value="0.0025236423790487715" />
         </attvalues>
       </node>
       <node id="최고" label="최고">
@@ -738,7 +738,7 @@
           <attvalue for="0" value="166" />
           <attvalue for="3" value="0.04016846492109324" />
           <attvalue for="2" value="0.05050505050505051" />
-          <attvalue for="1" value="0.010964417080106701" />
+          <attvalue for="1" value="0.010964417080106675" />
           <attvalue for="5" value="0.2559729026794895" />
           <attvalue for="4" value="0.03709740007698824" />
         </attvalues>
@@ -760,13 +760,13 @@
           <attvalue for="2" value="0.030303030303030304" />
           <attvalue for="5" value="0.22558034167532848" />
           <attvalue for="4" value="0.014980409506825939" />
-          <attvalue for="1" value="0.006032486836004759" />
+          <attvalue for="1" value="0.006032486836004775" />
         </attvalues>
       </node>
       <node id="화제" label="화제">
         <attvalues>
           <attvalue for="0" value="326" />
-          <attvalue for="1" value="0.015385463909638748" />
+          <attvalue for="1" value="0.015385463909638753" />
           <attvalue for="3" value="0.023937983956536835" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="4" value="0.016275181553647537" />
@@ -778,7 +778,7 @@
           <attvalue for="0" value="216" />
           <attvalue for="5" value="0.198825463941743" />
           <attvalue for="4" value="0.006549168229447591" />
-          <attvalue for="1" value="0.004141336982877146" />
+          <attvalue for="1" value="0.0041413369828771345" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
         </attvalues>
@@ -806,7 +806,7 @@
       <node id="교육" label="교육">
         <attvalues>
           <attvalue for="0" value="214" />
-          <attvalue for="1" value="0.015959298246604667" />
+          <attvalue for="1" value="0.015959298246604654" />
           <attvalue for="3" value="0.019981275338418193" />
           <attvalue for="2" value="0.04040404040404041" />
           <attvalue for="5" value="0.24781144781144782" />
@@ -818,7 +818,7 @@
           <attvalue for="0" value="273" />
           <attvalue for="4" value="0.01811581539319298" />
           <attvalue for="5" value="0.2238087683113861" />
-          <attvalue for="1" value="0.003421548213889475" />
+          <attvalue for="1" value="0.0034215482138894833" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
         </attvalues>
@@ -826,7 +826,7 @@
       <node id="성공" label="성공">
         <attvalues>
           <attvalue for="0" value="148" />
-          <attvalue for="1" value="0.01874087914903592" />
+          <attvalue for="1" value="0.018740879149035942" />
           <attvalue for="3" value="0.05194642790499316" />
           <attvalue for="5" value="0.28593628593628595" />
           <attvalue for="2" value="0.06060606060606061" />
@@ -840,7 +840,7 @@
           <attvalue for="3" value="0.005226176569713984" />
           <attvalue for="4" value="0.018086323478277037" />
           <attvalue for="2" value="0.020202020202020204" />
-          <attvalue for="1" value="0.004684331862243401" />
+          <attvalue for="1" value="0.004684331862243406" />
         </attvalues>
       </node>
       <node id="부모" label="부모">
@@ -850,14 +850,14 @@
           <attvalue for="5" value="0.22617711506600394" />
           <attvalue for="3" value="0.00369421457856832" />
           <attvalue for="2" value="0.020202020202020204" />
-          <attvalue for="1" value="0.005542190136351307" />
+          <attvalue for="1" value="0.005542190136351316" />
         </attvalues>
       </node>
       <node id="인터뷰" label="인터뷰">
         <attvalues>
           <attvalue for="0" value="147" />
           <attvalue for="3" value="0.03710575139146567" />
-          <attvalue for="1" value="0.00756141782693728" />
+          <attvalue for="1" value="0.0075614178269372756" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="5" value="0.19564061669324825" />
           <attvalue for="4" value="0.0028078529714218765" />
@@ -866,7 +866,7 @@
       <node id="3월" label="3월">
         <attvalues>
           <attvalue for="0" value="157" />
-          <attvalue for="1" value="0.008464406346900415" />
+          <attvalue for="1" value="0.008464406346900414" />
           <attvalue for="5" value="0.17202203117696074" />
           <attvalue for="4" value="0.0026521499598205186" />
           <attvalue for="2" value="0.010101010101010102" />
@@ -876,7 +876,7 @@
       <node id="세대" label="세대">
         <attvalues>
           <attvalue for="0" value="187" />
-          <attvalue for="1" value="0.004784611830739154" />
+          <attvalue for="1" value="0.004784611830739159" />
           <attvalue for="4" value="0.004215482733684857" />
           <attvalue for="5" value="0.18956751550986584" />
           <attvalue for="2" value="0.010101010101010102" />
@@ -886,7 +886,7 @@
       <node id="세상" label="세상">
         <attvalues>
           <attvalue for="0" value="203" />
-          <attvalue for="1" value="0.00678236733508511" />
+          <attvalue for="1" value="0.006782367335085117" />
           <attvalue for="5" value="0.16963283629950296" />
           <attvalue for="4" value="0.00080247133429555" />
           <attvalue for="2" value="0.010101010101010102" />
@@ -898,7 +898,7 @@
           <attvalue for="0" value="130" />
           <attvalue for="5" value="0.19928892656165384" />
           <attvalue for="4" value="0.007630967936433948" />
-          <attvalue for="1" value="0.003525377204876226" />
+          <attvalue for="1" value="0.0035253772048762346" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
         </attvalues>
@@ -906,7 +906,7 @@
       <node id="선물" label="선물">
         <attvalues>
           <attvalue for="0" value="143" />
-          <attvalue for="1" value="0.007130636667450931" />
+          <attvalue for="1" value="0.007130636667450926" />
           <attvalue for="2" value="0.010101010101010102" />
           <attvalue for="3" value="0.0" />
           <attvalue for="5" value="0.12231037123740987" />
@@ -916,7 +916,7 @@
       <node id="사랑" label="사랑">
         <attvalues>
           <attvalue for="0" value="242" />
-          <attvalue for="1" value="0.007790481315476844" />
+          <attvalue for="1" value="0.007790481315476826" />
           <attvalue for="3" value="0.0045312506042252485" />
           <attvalue for="2" value="0.020202020202020204" />
           <attvalue for="5" value="0.20211571984621632" />
@@ -930,13 +930,13 @@
           <attvalue for="4" value="0.041351524201028785" />
           <attvalue for="5" value="0.24781144781144782" />
           <attvalue for="2" value="0.030303030303030304" />
-          <attvalue for="1" value="0.006410016296132317" />
+          <attvalue for="1" value="0.006410016296132307" />
         </attvalues>
       </node>
       <node id="기억" label="기억">
         <attvalues>
           <attvalue for="0" value="158" />
-          <attvalue for="1" value="0.010966321880928167" />
+          <attvalue for="1" value="0.010966321880928172" />
           <attvalue for="3" value="0.0038702038702038703" />
           <attvalue for="4" value="0.011426112711624938" />
           <attvalue for="2" value="0.020202020202020204" />
@@ -1015,195 +1015,195 @@
       </node>
     </nodes>
     <edges>
-      <edge source="건강" target="칼럼" id="0" weight="0.0427764676227113" />
-      <edge source="건강" target="100세" id="1" weight="0.0342724396206082" />
+      <edge source="건강" target="칼럼" id="0" weight="0.0427764676227112" />
+      <edge source="건강" target="100세" id="1" weight="0.0342724396206081" />
       <edge source="건강" target="스마트" id="2" weight="0.0456301613736539" />
-      <edge source="건강" target="면역력" id="3" weight="0.0449874326306663" />
-      <edge source="건강" target="관절" id="4" weight="0.0559313963414883" />
+      <edge source="건강" target="면역력" id="3" weight="0.0449874326306665" />
+      <edge source="건강" target="관절" id="4" weight="0.0559313963414882" />
       <edge source="건강" target="행복" id="5" weight="0.0300761327469288" />
       <edge source="건강" target="미세" id="6" weight="0.0302794839348705" />
-      <edge source="칼럼" target="미래" id="7" weight="0.0375387732521942" />
-      <edge source="100세" target="시대" id="8" weight="0.2381558998371954" />
-      <edge source="100세" target="보장" id="9" weight="0.0371659403743925" />
-      <edge source="100세" target="금융" id="10" weight="0.0328080259149861" />
-      <edge source="100세" target="할머니" id="11" weight="0.0884067959557793" />
-      <edge source="100세" target="올해" id="12" weight="0.087534432957009" />
-      <edge source="100세" target="행복" id="13" weight="0.0499228480802428" />
-      <edge source="100세" target="기자" id="14" weight="0.0322753679871102" />
+      <edge source="칼럼" target="미래" id="7" weight="0.0375387732521941" />
+      <edge source="100세" target="시대" id="8" weight="0.2381558998371957" />
+      <edge source="100세" target="보장" id="9" weight="0.0371659403743924" />
+      <edge source="100세" target="금융" id="10" weight="0.0328080259149863" />
+      <edge source="100세" target="할머니" id="11" weight="0.0884067959557782" />
+      <edge source="100세" target="올해" id="12" weight="0.0875344329570098" />
+      <edge source="100세" target="행복" id="13" weight="0.0499228480802424" />
+      <edge source="100세" target="기자" id="14" weight="0.0322753679871101" />
       <edge source="스마트" target="개선" id="15" weight="0.0373988018482257" />
-      <edge source="스마트" target="해결" id="16" weight="0.0793866322418546" />
-      <edge source="스마트" target="관절" id="17" weight="0.1234809955174403" />
-      <edge source="면역력" target="위험" id="18" weight="0.0408639242190003" />
-      <edge source="관절" target="가족" id="19" weight="0.0369343178234465" />
+      <edge source="스마트" target="해결" id="16" weight="0.0793866322418545" />
+      <edge source="스마트" target="관절" id="17" weight="0.1234809955174407" />
+      <edge source="면역력" target="위험" id="18" weight="0.0408639242190007" />
+      <edge source="관절" target="가족" id="19" weight="0.0369343178234463" />
       <edge source="관절" target="치료" id="20" weight="0.0333885132264802" />
-      <edge source="관절" target="걱정" id="21" weight="0.0255792688359867" />
-      <edge source="관절" target="수술" id="22" weight="0.0446576631062124" />
-      <edge source="관절" target="해결" id="23" weight="0.0760300484179083" />
-      <edge source="관절" target="척추" id="24" weight="0.2015997116640579" />
-      <edge source="미세" target="수술" id="25" weight="0.0643027254202982" />
-      <edge source="미세" target="척추" id="26" weight="0.1032906359388905" />
-      <edge source="미세" target="기억" id="27" weight="0.1068205376243866" />
-      <edge source="치매" target="가족" id="28" weight="0.0346850036903191" />
-      <edge source="치매" target="환자" id="29" weight="0.0863830123121193" />
-      <edge source="치매" target="치료" id="30" weight="0.0479382080675752" />
-      <edge source="치매" target="보장" id="31" weight="0.0287672223875148" />
-      <edge source="치매" target="예방" id="32" weight="0.1945616814261716" />
+      <edge source="관절" target="걱정" id="21" weight="0.0255792688359868" />
+      <edge source="관절" target="수술" id="22" weight="0.0446576631062123" />
+      <edge source="관절" target="해결" id="23" weight="0.0760300484179088" />
+      <edge source="관절" target="척추" id="24" weight="0.2015997116640576" />
+      <edge source="미세" target="수술" id="25" weight="0.0643027254202984" />
+      <edge source="미세" target="척추" id="26" weight="0.1032906359388907" />
+      <edge source="미세" target="기억" id="27" weight="0.1068205376243862" />
+      <edge source="치매" target="가족" id="28" weight="0.034685003690319" />
+      <edge source="치매" target="환자" id="29" weight="0.0863830123121189" />
+      <edge source="치매" target="치료" id="30" weight="0.0479382080675751" />
+      <edge source="치매" target="보장" id="31" weight="0.0287672223875147" />
+      <edge source="치매" target="예방" id="32" weight="0.1945616814261702" />
       <edge source="치매" target="위험" id="33" weight="0.0375183887082017" />
-      <edge source="치매" target="우유" id="34" weight="0.1469272419413303" />
-      <edge source="치매" target="재산" id="35" weight="0.0481153365346337" />
+      <edge source="치매" target="우유" id="34" weight="0.1469272419413294" />
+      <edge source="치매" target="재산" id="35" weight="0.0481153365346336" />
       <edge source="가족" target="환자" id="36" weight="0.0547315377812533" />
-      <edge source="가족" target="치료" id="37" weight="0.065347601166086" />
+      <edge source="가족" target="치료" id="37" weight="0.0653476011660861" />
       <edge source="가족" target="걱정" id="38" weight="0.0291076876975823" />
       <edge source="가족" target="수술" id="39" weight="0.033451490424269" />
-      <edge source="가족" target="개선" id="40" weight="0.0438766305761681" />
-      <edge source="가족" target="생활" id="41" weight="0.0273848212303963" />
+      <edge source="가족" target="개선" id="40" weight="0.043876630576168" />
+      <edge source="가족" target="생활" id="41" weight="0.0273848212303964" />
       <edge source="환자" target="치료" id="42" weight="0.0334612293182333" />
-      <edge source="환자" target="증가" id="43" weight="0.0590809166041737" />
+      <edge source="환자" target="증가" id="43" weight="0.0590809166041736" />
       <edge source="환자" target="운동" id="44" weight="0.0278189742600765" />
-      <edge source="치료" target="위험" id="45" weight="0.0315393961504451" />
-      <edge source="치료" target="가능" id="46" weight="0.0343486789273247" />
+      <edge source="치료" target="위험" id="45" weight="0.0315393961504449" />
+      <edge source="치료" target="가능" id="46" weight="0.0343486789273245" />
       <edge source="치료" target="수술" id="47" weight="0.0645073272575561" />
-      <edge source="치료" target="척추" id="48" weight="0.0920145809111284" />
-      <edge source="보장" target="트렌드" id="49" weight="0.0496641315046413" />
+      <edge source="치료" target="척추" id="48" weight="0.0920145809111285" />
+      <edge source="보장" target="트렌드" id="49" weight="0.0496641315046414" />
       <edge source="보장" target="금융" id="50" weight="0.1294591139971438" />
-      <edge source="보장" target="최대" id="51" weight="0.1001844402151126" />
-      <edge source="보장" target="걱정" id="52" weight="0.0309588798882825" />
-      <edge source="보장" target="확대" id="53" weight="0.0409425550351179" />
-      <edge source="보장" target="보험" id="54" weight="0.1010927598554056" />
-      <edge source="보장" target="강화" id="55" weight="0.0439978280238736" />
+      <edge source="보장" target="최대" id="51" weight="0.1001844402151127" />
+      <edge source="보장" target="걱정" id="52" weight="0.0309588798882824" />
+      <edge source="보장" target="확대" id="53" weight="0.0409425550351178" />
+      <edge source="보장" target="보험" id="54" weight="0.1010927598554065" />
+      <edge source="보장" target="강화" id="55" weight="0.0439978280238735" />
       <edge source="보장" target="가능" id="56" weight="0.0546459493500159" />
-      <edge source="보장" target="상품" id="57" weight="0.0257686612479539" />
-      <edge source="보장" target="생활" id="58" weight="0.0282182269227344" />
+      <edge source="보장" target="상품" id="57" weight="0.025768661247954" />
+      <edge source="보장" target="생활" id="58" weight="0.0282182269227345" />
       <edge source="예방" target="노화" id="59" weight="0.0270553890129782" />
-      <edge source="예방" target="우유" id="60" weight="0.2882709920859667" />
+      <edge source="예방" target="우유" id="60" weight="0.2882709920859675" />
       <edge source="예방" target="화제" id="61" weight="0.0266216664490893" />
-      <edge source="위험" target="미세먼지" id="62" weight="0.025637659097135" />
+      <edge source="위험" target="미세먼지" id="62" weight="0.0256376590971351" />
       <edge source="위험" target="증가" id="63" weight="0.0253301777710573" />
-      <edge source="우유" target="화제" id="64" weight="0.0371286118540737" />
+      <edge source="우유" target="화제" id="64" weight="0.0371286118540735" />
       <edge source="재산" target="50대" id="65" weight="0.0254617905284764" />
-      <edge source="재산" target="40대" id="66" weight="0.0348262368783823" />
-      <edge source="재산" target="30대" id="67" weight="0.0365322593644135" />
-      <edge source="재산" target="부부" id="68" weight="0.0388142844040153" />
+      <edge source="재산" target="40대" id="66" weight="0.034826236878382" />
+      <edge source="재산" target="30대" id="67" weight="0.0365322593644134" />
+      <edge source="재산" target="부부" id="68" weight="0.0388142844040152" />
       <edge source="재산" target="부모" id="69" weight="0.0481122931751944" />
-      <edge source="한국" target="사설" id="70" weight="0.0315660092755661" />
+      <edge source="한국" target="사설" id="70" weight="0.0315660092755662" />
       <edge source="한국" target="경제" id="71" weight="0.0704272135032274" />
-      <edge source="한국" target="일본" id="72" weight="0.0355904297441922" />
-      <edge source="한국" target="고령화" id="73" weight="0.0542205872742209" />
-      <edge source="한국" target="세계" id="74" weight="0.0974521547238738" />
-      <edge source="한국" target="20년" id="75" weight="0.0277629654228012" />
-      <edge source="한국" target="성장" id="76" weight="0.0299095572911993" />
-      <edge source="사설" target="경제" id="77" weight="0.0263772322680323" />
-      <edge source="사설" target="미세먼지" id="78" weight="0.0250276580202609" />
-      <edge source="사설" target="논란" id="79" weight="0.0321786001482954" />
-      <edge source="경제" target="고령화" id="80" weight="0.0290682982406492" />
-      <edge source="경제" target="내년" id="81" weight="0.0461333135913384" />
-      <edge source="일본" target="고령화" id="82" weight="0.0653308401098907" />
-      <edge source="일본" target="할머니" id="83" weight="0.0332599637097667" />
+      <edge source="한국" target="일본" id="72" weight="0.0355904297441923" />
+      <edge source="한국" target="고령화" id="73" weight="0.0542205872742205" />
+      <edge source="한국" target="세계" id="74" weight="0.0974521547238739" />
+      <edge source="한국" target="20년" id="75" weight="0.0277629654228011" />
+      <edge source="한국" target="성장" id="76" weight="0.0299095572911994" />
+      <edge source="사설" target="경제" id="77" weight="0.0263772322680322" />
+      <edge source="사설" target="미세먼지" id="78" weight="0.0250276580202611" />
+      <edge source="사설" target="논란" id="79" weight="0.0321786001482953" />
+      <edge source="경제" target="고령화" id="80" weight="0.0290682982406493" />
+      <edge source="경제" target="내년" id="81" weight="0.0461333135913382" />
+      <edge source="일본" target="고령화" id="82" weight="0.0653308401098904" />
+      <edge source="일본" target="할머니" id="83" weight="0.0332599637097669" />
       <edge source="고령화" target="시대" id="84" weight="0.0767398800335026" />
-      <edge source="고령화" target="사회" id="85" weight="0.0379255121333628" />
+      <edge source="고령화" target="사회" id="85" weight="0.0379255121333626" />
       <edge source="고령화" target="해결" id="86" weight="0.0254622449278624" />
-      <edge source="세계" target="최고" id="87" weight="0.0644696933714414" />
+      <edge source="세계" target="최고" id="87" weight="0.0644696933714411" />
       <edge source="20년" target="세상" id="88" weight="0.0341326397492953" />
       <edge source="성장" target="인터뷰" id="89" weight="0.0334146945600608" />
-      <edge source="성장" target="내년" id="90" weight="0.0532981831644629" />
+      <edge source="성장" target="내년" id="90" weight="0.053298183164463" />
       <edge source="걱정" target="노후" id="91" weight="0.0391644656764023" />
-      <edge source="걱정" target="미세먼지" id="92" weight="0.0348936820965325" />
-      <edge source="걱정" target="보험" id="93" weight="0.0400892823016249" />
-      <edge source="수술" target="가능" id="94" weight="0.0337969343741666" />
+      <edge source="걱정" target="미세먼지" id="92" weight="0.0348936820965327" />
+      <edge source="걱정" target="보험" id="93" weight="0.0400892823016251" />
+      <edge source="수술" target="가능" id="94" weight="0.0337969343741667" />
       <edge source="수술" target="할머니" id="95" weight="0.0343293759909302" />
-      <edge source="수술" target="성공" id="96" weight="0.0348705406466046" />
-      <edge source="수술" target="척추" id="97" weight="0.0379833237971891" />
-      <edge source="개선" target="여성" id="98" weight="0.0287253470270474" />
-      <edge source="생활" target="노후" id="99" weight="0.0751199829614717" />
+      <edge source="수술" target="성공" id="96" weight="0.0348705406466047" />
+      <edge source="수술" target="척추" id="97" weight="0.0379833237971892" />
+      <edge source="개선" target="여성" id="98" weight="0.0287253470270477" />
+      <edge source="생활" target="노후" id="99" weight="0.0751199829614715" />
       <edge source="생활" target="50대" id="100" weight="0.0441678415437755" />
       <edge source="생활" target="분양" id="101" weight="0.0333511367394651" />
-      <edge source="생활" target="상품" id="102" weight="0.0564588729244074" />
-      <edge source="미세먼지" target="노후" id="103" weight="0.0435956693840226" />
-      <edge source="미세먼지" target="확대" id="104" weight="0.1577577439732311" />
-      <edge source="미세먼지" target="정부" id="105" weight="0.0358712027437078" />
-      <edge source="미세먼지" target="강화" id="106" weight="0.0275290967721759" />
-      <edge source="미세먼지" target="오늘" id="107" weight="0.0970426999103695" />
-      <edge source="미세먼지" target="수도권" id="108" weight="0.1429479249164212" />
-      <edge source="논란" target="내년" id="109" weight="0.0251903258687715" />
+      <edge source="생활" target="상품" id="102" weight="0.0564588729244077" />
+      <edge source="미세먼지" target="노후" id="103" weight="0.0435956693840225" />
+      <edge source="미세먼지" target="확대" id="104" weight="0.1577577439732322" />
+      <edge source="미세먼지" target="정부" id="105" weight="0.035871202743708" />
+      <edge source="미세먼지" target="강화" id="106" weight="0.027529096772176" />
+      <edge source="미세먼지" target="오늘" id="107" weight="0.0970426999103697" />
+      <edge source="미세먼지" target="수도권" id="108" weight="0.1429479249164217" />
+      <edge source="논란" target="내년" id="109" weight="0.0251903258687714" />
       <edge source="논란" target="성공" id="110" weight="0.1315208611155255" />
-      <edge source="미래" target="시대" id="111" weight="0.0406294478233182" />
-      <edge source="미래" target="세대" id="112" weight="0.0361838428118783" />
-      <edge source="내년" target="지원" id="113" weight="0.0388196429609928" />
-      <edge source="내년" target="확대" id="114" weight="0.0614710455864962" />
-      <edge source="내년" target="남성" id="115" weight="0.0900157392927815" />
-      <edge source="내년" target="성공" id="116" weight="0.0393055585989618" />
-      <edge source="시대" target="노후" id="117" weight="0.0282518998467043" />
-      <edge source="시대" target="트렌드" id="118" weight="0.0313473055898165" />
+      <edge source="미래" target="시대" id="111" weight="0.0406294478233183" />
+      <edge source="미래" target="세대" id="112" weight="0.0361838428118784" />
+      <edge source="내년" target="지원" id="113" weight="0.0388196429609929" />
+      <edge source="내년" target="확대" id="114" weight="0.0614710455864961" />
+      <edge source="내년" target="남성" id="115" weight="0.0900157392927822" />
+      <edge source="내년" target="성공" id="116" weight="0.0393055585989617" />
+      <edge source="시대" target="노후" id="117" weight="0.0282518998467042" />
+      <edge source="시대" target="트렌드" id="118" weight="0.0313473055898166" />
       <edge source="시대" target="금융" id="119" weight="0.0340025070107195" />
-      <edge source="시대" target="주목" id="120" weight="0.029538173951891" />
-      <edge source="시대" target="반퇴" id="121" weight="0.1004716292585183" />
-      <edge source="노후" target="40대" id="122" weight="0.037047995211239" />
+      <edge source="시대" target="주목" id="120" weight="0.0295381739518912" />
+      <edge source="시대" target="반퇴" id="121" weight="0.1004716292585184" />
+      <edge source="노후" target="40대" id="122" weight="0.0370479952112389" />
       <edge source="노후" target="30대" id="123" weight="0.0391222784792412" />
-      <edge source="노후" target="부부" id="124" weight="0.0608297199480637" />
-      <edge source="노후" target="준비" id="125" weight="0.2859612356339468" />
-      <edge source="노후" target="상품" id="126" weight="0.0325322248319479" />
-      <edge source="노후" target="수도권" id="127" weight="0.0285108928982035" />
-      <edge source="트렌드" target="투자" id="128" weight="0.0404594896804669" />
-      <edge source="트렌드" target="상품" id="129" weight="0.0706350289301927" />
+      <edge source="노후" target="부부" id="124" weight="0.0608297199480638" />
+      <edge source="노후" target="준비" id="125" weight="0.2859612356339464" />
+      <edge source="노후" target="상품" id="126" weight="0.032532224831948" />
+      <edge source="노후" target="수도권" id="127" weight="0.0285108928982036" />
+      <edge source="트렌드" target="투자" id="128" weight="0.040459489680467" />
+      <edge source="트렌드" target="상품" id="129" weight="0.0706350289301928" />
       <edge source="금융" target="확대" id="130" weight="0.0345795711788315" />
       <edge source="금융" target="보험" id="131" weight="0.0260340620369935" />
       <edge source="금융" target="가능" id="132" weight="0.0484637011035678" />
-      <edge source="반퇴" target="50대" id="133" weight="0.0336788374588728" />
-      <edge source="반퇴" target="엄마" id="134" weight="0.0271422924782373" />
-      <edge source="40대" target="50대" id="135" weight="0.0363490050231071" />
-      <edge source="40대" target="아파트" id="136" weight="0.0322135452330666" />
-      <edge source="40대" target="30대" id="137" weight="0.0521065987535072" />
+      <edge source="반퇴" target="50대" id="133" weight="0.0336788374588727" />
+      <edge source="반퇴" target="엄마" id="134" weight="0.0271422924782375" />
+      <edge source="40대" target="50대" id="135" weight="0.036349005023107" />
+      <edge source="40대" target="아파트" id="136" weight="0.0322135452330665" />
+      <edge source="40대" target="30대" id="137" weight="0.0521065987535073" />
       <edge source="40대" target="남성" id="138" weight="0.0251537799934027" />
-      <edge source="40대" target="부부" id="139" weight="0.128937908388504" />
-      <edge source="40대" target="준비" id="140" weight="0.0569154312349776" />
-      <edge source="30대" target="여성" id="141" weight="0.0629800068208323" />
-      <edge source="30대" target="부부" id="142" weight="0.1040178876985088" />
-      <edge source="30대" target="준비" id="143" weight="0.0596147798889759" />
-      <edge source="부부" target="50대" id="144" weight="0.0977648282799458" />
+      <edge source="40대" target="부부" id="139" weight="0.1289379083885041" />
+      <edge source="40대" target="준비" id="140" weight="0.0569154312349774" />
+      <edge source="30대" target="여성" id="141" weight="0.0629800068208325" />
+      <edge source="30대" target="부부" id="142" weight="0.1040178876985091" />
+      <edge source="30대" target="준비" id="143" weight="0.059614779888976" />
+      <edge source="부부" target="50대" id="144" weight="0.0977648282799455" />
       <edge source="부부" target="아파트" id="145" weight="0.0763263316448804" />
-      <edge source="부부" target="준비" id="146" weight="0.0466446775858627" />
+      <edge source="부부" target="준비" id="146" weight="0.0466446775858626" />
       <edge source="준비" target="수도권" id="147" weight="0.0259624490161157" />
-      <edge source="상품" target="성공" id="148" weight="0.0255758040251406" />
-      <edge source="상품" target="똑똑" id="149" weight="0.0264231380324259" />
-      <edge source="수도권" target="오늘" id="150" weight="0.1243241169505143" />
+      <edge source="상품" target="성공" id="148" weight="0.0255758040251407" />
+      <edge source="상품" target="똑똑" id="149" weight="0.0264231380324262" />
+      <edge source="수도권" target="오늘" id="150" weight="0.1243241169505152" />
       <edge source="증가" target="스트레스" id="151" weight="0.0274686930899176" />
-      <edge source="증가" target="청년" id="152" weight="0.0347362348657275" />
-      <edge source="일자리" target="청년" id="153" weight="0.1225808971837028" />
+      <edge source="증가" target="청년" id="152" weight="0.0347362348657274" />
+      <edge source="일자리" target="청년" id="153" weight="0.122580897183703" />
       <edge source="일자리" target="희망" id="154" weight="0.0287967271795483" />
-      <edge source="희망" target="선물" id="155" weight="0.0418575770980743" />
+      <edge source="희망" target="선물" id="155" weight="0.0418575770980742" />
       <edge source="여성" target="50대" id="156" weight="0.0289575488298831" />
       <edge source="여성" target="사회" id="157" weight="0.0268333325967041" />
       <edge source="여성" target="재취업" id="158" weight="0.0468613964603907" />
-      <edge source="여성" target="남성" id="159" weight="0.0651998173380274" />
-      <edge source="여성" target="해결" id="160" weight="0.0290882258450485" />
-      <edge source="여성" target="안전" id="161" weight="0.0260613947499807" />
-      <edge source="재취업" target="교육" id="162" weight="0.0724226197795474" />
-      <edge source="지원" target="최대" id="163" weight="0.0803671419067106" />
-      <edge source="지원" target="확대" id="164" weight="0.0943134506517318" />
-      <edge source="지원" target="정부" id="165" weight="0.0491786350372962" />
-      <edge source="최대" target="분양" id="166" weight="0.0456848575898407" />
-      <edge source="최대" target="가능" id="167" weight="0.0509556080333243" />
+      <edge source="여성" target="남성" id="159" weight="0.0651998173380277" />
+      <edge source="여성" target="해결" id="160" weight="0.0290882258450486" />
+      <edge source="여성" target="안전" id="161" weight="0.0260613947499808" />
+      <edge source="재취업" target="교육" id="162" weight="0.0724226197795473" />
+      <edge source="지원" target="최대" id="163" weight="0.0803671419067107" />
+      <edge source="지원" target="확대" id="164" weight="0.0943134506517321" />
+      <edge source="지원" target="정부" id="165" weight="0.0491786350372963" />
+      <edge source="최대" target="분양" id="166" weight="0.0456848575898408" />
+      <edge source="최대" target="가능" id="167" weight="0.0509556080333245" />
       <edge source="확대" target="투자" id="168" weight="0.0272332553506662" />
       <edge source="확대" target="강화" id="169" weight="0.0302198465631046" />
-      <edge source="정부" target="국민" id="170" weight="0.0269677279363992" />
+      <edge source="정부" target="국민" id="170" weight="0.0269677279363991" />
       <edge source="가능" target="보험" id="171" weight="0.0322874889842497" />
-      <edge source="강화" target="교육" id="172" weight="0.0349457426581339" />
-      <edge source="강화" target="관리" id="173" weight="0.025277818228707" />
+      <edge source="강화" target="교육" id="172" weight="0.034945742658134" />
+      <edge source="강화" target="관리" id="173" weight="0.0252778182287072" />
       <edge source="오늘" target="최고" id="174" weight="0.0275045241209746" />
-      <edge source="분양" target="최고" id="175" weight="0.0272332553506662" />
+      <edge source="분양" target="최고" id="175" weight="0.027233255350666" />
       <edge source="분양" target="아파트" id="176" weight="0.1134392517014371" />
-      <edge source="최고" target="아파트" id="177" weight="0.0282268847637436" />
-      <edge source="최고" target="스트레스" id="178" weight="0.0307041790916988" />
-      <edge source="스트레스" target="화제" id="179" weight="0.0448528806370948" />
-      <edge source="화제" target="3월" id="180" weight="0.324668971411406" />
+      <edge source="최고" target="아파트" id="177" weight="0.0282268847637435" />
+      <edge source="최고" target="스트레스" id="178" weight="0.0307041790916989" />
+      <edge source="스트레스" target="화제" id="179" weight="0.0448528806370951" />
+      <edge source="화제" target="3월" id="180" weight="0.3246689714114062" />
       <edge source="영화" target="매거진m" id="181" weight="0.0711411470661954" />
       <edge source="매거진m" target="인터뷰" id="182" weight="0.039427372211446" />
       <edge source="교육" target="개발" id="183" weight="0.0277891048177755" />
-      <edge source="교육" target="부모" id="184" weight="0.0333781309779881" />
-      <edge source="성공" target="개발" id="185" weight="0.0419276980577858" />
-      <edge source="성공" target="똑똑" id="186" weight="0.0268368585829297" />
-      <edge source="사랑" target="똑똑" id="187" weight="0.0252727887988844" />
-      <edge source="사랑" target="기억" id="188" weight="0.0570761481624598" />
+      <edge source="교육" target="부모" id="184" weight="0.0333781309779882" />
+      <edge source="성공" target="개발" id="185" weight="0.0419276980577861" />
+      <edge source="성공" target="똑똑" id="186" weight="0.0268368585829298" />
+      <edge source="사랑" target="똑똑" id="187" weight="0.0252727887988842" />
+      <edge source="사랑" target="기억" id="188" weight="0.0570761481624599" />
     </edges>
   </graph>
 </gexf>

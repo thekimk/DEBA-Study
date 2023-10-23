@@ -377,6 +377,7 @@ def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
     ## vector가 0의 비율이 많은 word 제거
     colnames_topweight = pd.Series((df_wordvec == 0).sum(axis=0) / df_wordvec.shape[0]).sort_values(ascending=True)
     colnames_topweight = colnames_topweight.sort_values(ascending=True)
+    display(colnames_topweight)
     colnames = colnames_topweight.index[:num_showkeyword]
     df_wordvec = df_wordvec[colnames].T.copy()
 #     ## vector가 0인 word 제거
@@ -415,6 +416,7 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
             # 단어 벡터화 및 상관관계
             _, _, word_corrpair = freq2vectorcorr_preprocessor(wf_sub.iloc[:,-2:], 
                                                                df_sub[colname_target], num_showkeyword=num_showkeyword)
+
             ## 카테고리 추가
             word_corrpair['category'] = str(category)
             word_corrpair = word_corrpair[['category']+list(word_corrpair.columns[:-1])]
