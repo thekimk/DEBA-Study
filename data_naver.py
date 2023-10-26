@@ -457,7 +457,7 @@ async def get_data_from_naverblogs(search_query, start, end, maxpage=1000, save_
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        folder_location = os.path.join(os.getcwd(), 'Data', 'NaverNews', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = 'NaverBlogs_{}_{}-{}_KK.csv'.format(search_query, df_blogs.Date.min()[:10], df_blogs.Date.max()[:10])
