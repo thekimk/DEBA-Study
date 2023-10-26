@@ -29,7 +29,7 @@ from gensim.models import Word2Vec, LdaModel, CoherenceModel
 def text_preprocessor(text, del_number=False, del_bracket_content=False):
     # 한글 맞춤법과 띄어쓰기 체크 (PyKoSpacing, Py-Hanspell)
     # html 태그 제거하기
-    text_new = re.sub(r'<[^>]+>', '', text)
+    text_new = re.sub(r'<[^>]+>', '', str(text))
     # 괄호와 내부문자 제거하기
     if del_bracket_content:
         text_new = re.sub(r'\([^)]*\)', '', text_new)
@@ -54,9 +54,11 @@ def text_preprocessor(text, del_number=False, del_bracket_content=False):
         text_new = re.sub(r'\d+', '', text_new)
     # 숫자를 문자로 인식하기
     text_new = ' '.join([str(word) for word in text_new.split(' ')])
-    # 문장구두점 및 양쪽공백 제거하기
+    # 양쪽공백 제거하기
+    text_new = text_new.strip()
+    # 문장구두점 제거하기
     translator = str.maketrans('', '', string.punctuation)
-    text_new = text_new.strip().translate(translator)
+    text_new = text_new.translate(translator)
     # 2개 이상의 반복글자 줄이기
     text_new = ' '.join([emoticon_normalize(word, num_repeats=2) for word in text_new.split(' ')])
     text_new = ' '.join([repeat_normalize(word, num_repeats=2) for word in text_new.split(' ')])

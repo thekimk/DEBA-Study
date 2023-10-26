@@ -29,7 +29,6 @@ import re
 import sys
 
 
-############################################### News ###############################################
 ### Date and Author: 20230731, Kyungwon Kim ###
 ### 여럿 user-agent 목록
 headers = {
@@ -379,7 +378,6 @@ def get_data_from_navernewsParallel(search_query, start, end, sort=0,
     print('News Info Extracting Time: ', time_end-time_start)
     
     return df_news
-####################################################################################################
 
 
 
