@@ -205,9 +205,9 @@ def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
     return df_adjacent
 
 
-def preprocessing_tfidf(df_series, del_lowfreq=True):
+def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
     # 빈도 학습
-    tfidfier = TfidfVectorizer()
+    tfidfier = TfidfVectorizer(max_features=max_features)
     tfidfier.fit(df_series.to_list())
 #     ## 빈도 정리
 #     df_wordfreq = pd.DataFrame.from_dict([tfidfier.vocabulary_]).T.reset_index()
@@ -277,7 +277,8 @@ class preprocessing_gephi:
         out.close()
 
 
-def preprocessing_wordfreq(df, colname_target, colname_category=None, num_showkeyword=5,
+def preprocessing_wordfreq(df, colname_target, colname_category=None, 
+                           max_tfidf_col=1000, num_showkeyword=5,
                            save_local=True, 
                            save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv']):
     word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
@@ -292,7 +293,7 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None, num_showke
         
         try:
             # TF-IDF 요약
-            word_freq_tfidf, sent_mat = preprocessing_tfidf(df[colname_target])
+            word_freq_tfidf, sent_mat = preprocessing_tfidf(df[colname_target], max_features=max_tfidf_col)
 
             # TF-IDF 인접어반영 요약
             wordadj_freq_tfidf = preprocessing_adjwordcount(word_freq_tfidf[['word']], 
@@ -307,6 +308,7 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None, num_showke
 
             # 문서 요약
             word_freq = preprocessing_nounextract(df_sub[colname_target])
+
             ## 카테고리 추가
             word_freq['category'] = str(category)
             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
@@ -318,10 +320,10 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None, num_showke
             wordadj_freq['category'] = str(category)
             wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
             wordadj_freq_soynlp = pd.concat([wordadj_freq_soynlp, wordadj_freq], axis=0, ignore_index=True)
-            
+
             try:
                 # TF-IDF 요약
-                word_freq, sent_mat = preprocessing_tfidf(df_sub[colname_target])
+                word_freq, sent_mat = preprocessing_tfidf(df_sub[colname_target], max_features=max_tfidf_col)
                 ## 카테고리 추가
                 word_freq['category'] = str(category)
                 word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
@@ -352,10 +354,11 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None, num_showke
             word_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
             save_name = os.path.join(folder_location, save_name_list[3])
             wordadj_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
-            return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
         except:
-            return word_freq_soynlp, wordadj_freq_soynlp
+            pass
         
+    return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
+
         
 def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
     # wordfreq to dict
