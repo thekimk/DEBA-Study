@@ -46,7 +46,7 @@ def plot_bar(df, summation=False, barmode='relative', title='Bar Plot'):
         yaxis_range=[-axis_max, axis_max])
     fig.show()
 
-
+    
 ### Date and Author: 20190716, Kyungwon Kim ###
 ### Histgram Visualization
 def plot_histogram(data_target, figsize=(10,5), fig_ncol=2):

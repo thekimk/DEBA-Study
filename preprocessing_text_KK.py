@@ -10,20 +10,21 @@ import kss    # 문장분리
 import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from gensim.models import Word2Vec, LdaModel, LdaMulticore, CoherenceModel
+from keybert import KeyBERT
 ## 영어
 from nltk.corpus import stopwords
 from spacy.lang.en.stop_words import STOP_WORDS as sw_eng
 ## 한국어
-from konlpy.tag import Hannanum, Kkma, Komoran, Okt
+from konlpy.tag import Hannanum, Kkma, Komoran, Okt, Mecab
 from kss import split_sentences
 from spacy.lang.ko.stop_words import STOP_WORDS as sw_kor
 from soynlp.normalizer import *
 from soynlp.word import WordExtractor
 from soynlp.noun import LRNounExtractor, LRNounExtractor_v2, NewsNounExtractor
 from soynlp.tokenizer import LTokenizer
-## 공통
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from gensim.models import Word2Vec, LdaModel, CoherenceModel
+from sentence_transformers import SentenceTransformer
 
 
 def text_preprocessor(text, del_number=False, del_bracket_content=False):
@@ -232,6 +233,22 @@ def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
         df_wordscore = df_wordscore[df_wordscore.word.apply(lambda x: False if x in del_columns else True)]
           
     return df_wordscore, df_sentvec
+
+
+def preprocessing_keybert(df_series, doc_topn_kwd=5, num_showkeyword=100):
+    # 키워드 추출
+    keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
+    scores = []
+    for text in tqdm(df_series.tolist()):
+        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=5)
+        scores.extend(score)
+        
+    # 정리
+    df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
+    df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
+    df_wordscore = df_wordscore.iloc[:num_showkeyword,:]
+    
+    return df_wordscore
 
 
 # gm = preprocessing_gephi()
