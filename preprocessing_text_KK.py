@@ -422,7 +422,6 @@ def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
     ## vector가 0의 비율이 많은 word 제거
     colnames_topweight = pd.Series((df_wordvec == 0).sum(axis=0) / df_wordvec.shape[0]).sort_values(ascending=True)
     colnames_topweight = colnames_topweight.sort_values(ascending=True)
-    display(colnames_topweight)
     colnames = colnames_topweight.index[:num_showkeyword]
     df_wordvec = df_wordvec[colnames].T.copy()
 #     ## vector가 0인 word 제거
