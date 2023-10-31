@@ -274,9 +274,12 @@ def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
 def preprocessing_wordfreq(df, colname_target, colname_category=None, 
                            max_tfidf_col=1000, num_showkeyword=5,
                            save_local=True, 
-                           save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv']):
+                           save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 
+                                           'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv',
+                                           'word_freq_keybert.csv', 'wordadj_freq_keybert.csv']):
     word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
     word_freq_tfidf, wordadj_freq_tfidf = pd.DataFrame(), pd.DataFrame()
+    worf_freq_keybert, wordadj_freq_keybert = pd.DataFrame(), pd.DataFrame()
     if colname_category == None:
         # 문서 요약
         word_freq_soynlp = preprocessing_nounextract(df[colname_target])
@@ -293,11 +296,11 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
         except:
             pass
         
-#         # keybert 요약
-#         word_freq_keybert = preprocessing_keybert(df_sub[colname_target])
-#         ## 인접어반영 요약
-#         wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-#                                                           df[colname_target], num_showkeyword=num_showkeyword)
+        # keybert 요약
+        word_freq_keybert = preprocessing_keybert(df[colname_target])
+        ## 인접어반영 요약
+        wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+                                                          df[colname_target], num_showkeyword=num_showkeyword)
         
     elif type(colname_category) == str:
         for category in tqdm(sorted(df[colname_category].unique())):
@@ -336,10 +339,26 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
                 pass
             
             # unique value groupby???
+            
+            # keybert 요약
+            word_freq = preprocessing_keybert(df_sub[colname_target])
+            ## 카테고리 추가
+            word_freq['category'] = str(category)
+            word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
+            word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
+            
+            # 인접어반영 요약
+            wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+                                                      df_sub[colname_target], num_showkeyword=num_showkeyword)
+            ## 카테고리 추가
+            wordadj_freq['category'] = str(category)
+            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+            wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
+            
 
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        folder_location = os.path.join(os.getcwd(), 'Data', 'WordFreq', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name_list[0])
@@ -353,8 +372,12 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
             wordadj_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
         except:
             pass
+        save_name = os.path.join(folder_location, save_name_list[4])
+        word_freq_keybert.to_csv(save_name, index=False, encoding='utf-8-sig')
+        save_name = os.path.join(folder_location, save_name_list[5])
+        wordadj_freq_keybert.to_csv(save_name, index=False, encoding='utf-8-sig')
         
-    return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
+    return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf, word_freq_keybert, wordadj_freq_keybert
 
 
 # gm = preprocessing_gephi()
