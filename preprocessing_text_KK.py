@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import math
 from tqdm import tqdm
+import multiprocessing as mp
+import ray
+ray.init(num_cpus=mp.cpu_count()-1, ignore_reinit_error=True, log_to_driver=False)
 
 import re
 import string
@@ -129,7 +132,7 @@ def text_preprocessor(text, del_number=False, del_bracket_content=False):
     return text_new
 
 
-def preprocessing_nounextract(df_series, num_showkeyword=100):
+def preprocessing_nounextract(df_series):
     # 단어 추출기
     ## cohesion/branching entropy/accessor variety값이 큰 경우 하나의 단어일 가능성 높음
     word_extractor = WordExtractor()
@@ -166,9 +169,71 @@ def preprocessing_nounextract(df_series, num_showkeyword=100):
         if (noun in noun in dict(nouns_WE).keys()) and (noun in noun in dict(nouns_LRE).keys()) and (noun in noun in dict(nouns_NE).keys()):
             nouns_intersection.append((noun, int(dict(nouns_WE)[noun] + dict(nouns_LRE)[noun] + dict(nouns_NE)[noun])))
     df_wordfreq = sorted(dict(nouns_intersection).items(), key=lambda x:x[1], reverse=True)
-    df_wordfreq = pd.DataFrame(df_wordfreq, columns=['word', 'score']).iloc[:num_showkeyword,:]
+    df_wordfreq = pd.DataFrame(df_wordfreq, columns=['word', 'score'])
 
     return df_wordfreq
+
+
+def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
+    # 빈도 학습
+    tfidfier = TfidfVectorizer(max_features=max_features)
+    tfidfier.fit(df_series.to_list())
+#     ## 빈도 정리
+#     df_wordfreq = pd.DataFrame.from_dict([tfidfier.vocabulary_]).T.reset_index()
+#     df_wordfreq.columns = ['word', 'freq']
+#     df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
+    ## TF-IDF 점수 정리
+    df_wordscore = pd.DataFrame(tfidfier.transform(df_series.to_list()).sum(axis=0), 
+                                columns=tfidfier.get_feature_names()).T.reset_index()
+    df_wordscore.columns = ['word', 'score']
+    df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False)
+    ## 문장 벡터 정리
+    df_sentvec = tfidfier.transform(df_series.to_list()).toarray()
+    df_sentvec = pd.DataFrame(df_sentvec, index=['sentence' + str(i+1) for i in range(df_series.shape[0])], 
+                              columns=tfidfier.get_feature_names())
+    
+    # 저빈도 삭제
+    if del_lowfreq:
+        del_criteria = df_sentvec.sum(axis=0).mean()
+        del_columns = df_sentvec.columns[df_sentvec.sum(axis=0) < del_criteria]
+        df_sentvec = df_sentvec[[col for col in df_sentvec.columns if col not in del_columns]]
+#         df_wordfreq = df_wordfreq[df_wordfreq.word.apply(lambda x: False if x in del_columns else True)]
+        df_wordscore = df_wordscore[df_wordscore.word.apply(lambda x: False if x in del_columns else True)]
+          
+    return df_wordscore, df_sentvec
+
+
+def preprocessing_keybert(df_series, doc_topn_kwd=5):
+    # 키워드 추출
+    keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
+    scores = []
+    for text in tqdm(df_series.tolist()):
+        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd)
+        scores.extend(score)
+        
+    # 정리
+    df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
+    df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
+    df_wordscore = df_wordscore
+    
+    return df_wordscore
+
+
+@ray.remote
+def preprocessing_keybertParallel(df_series, doc_topn_kwd=5):
+    # 키워드 추출
+    keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
+    scores = []
+    for text in tqdm(df_series.tolist()):
+        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd)
+        scores.extend(score)
+        
+    # 정리
+    df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
+    df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
+    df_wordscore = df_wordscore
+    
+    return df_wordscore
 
 
 def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
@@ -206,94 +271,6 @@ def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
     return df_adjacent
 
 
-def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
-    # 빈도 학습
-    tfidfier = TfidfVectorizer(max_features=max_features)
-    tfidfier.fit(df_series.to_list())
-#     ## 빈도 정리
-#     df_wordfreq = pd.DataFrame.from_dict([tfidfier.vocabulary_]).T.reset_index()
-#     df_wordfreq.columns = ['word', 'freq']
-#     df_wordfreq = df_wordfreq.sort_values(by=[df_wordfreq.columns[-1]], ascending=False)
-    ## TF-IDF 점수 정리
-    df_wordscore = pd.DataFrame(tfidfier.transform(df_series.to_list()).sum(axis=0), 
-                                columns=tfidfier.get_feature_names()).T.reset_index()
-    df_wordscore.columns = ['word', 'score']
-    df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False)
-    ## 문장 벡터 정리
-    df_sentvec = tfidfier.transform(df_series.to_list()).toarray()
-    df_sentvec = pd.DataFrame(df_sentvec, index=['sentence' + str(i+1) for i in range(df_series.shape[0])], 
-                              columns=tfidfier.get_feature_names())
-    
-    # 저빈도 삭제
-    if del_lowfreq:
-        del_criteria = df_sentvec.sum(axis=0).mean()
-        del_columns = df_sentvec.columns[df_sentvec.sum(axis=0) < del_criteria]
-        df_sentvec = df_sentvec[[col for col in df_sentvec.columns if col not in del_columns]]
-#         df_wordfreq = df_wordfreq[df_wordfreq.word.apply(lambda x: False if x in del_columns else True)]
-        df_wordscore = df_wordscore[df_wordscore.word.apply(lambda x: False if x in del_columns else True)]
-          
-    return df_wordscore, df_sentvec
-
-
-def preprocessing_keybert(df_series, doc_topn_kwd=5, num_showkeyword=100):
-    # 키워드 추출
-    keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
-    scores = []
-    for text in tqdm(df_series.tolist()):
-        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=5)
-        scores.extend(score)
-        
-    # 정리
-    df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
-    df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
-    df_wordscore = df_wordscore.iloc[:num_showkeyword,:]
-    
-    return df_wordscore
-
-
-# gm = preprocessing_gephi()
-# gm.wordfreq_to_gephiinput(word_corrpair.iloc[:,1:], '.\Data\word_corrpair.graphml')
-class preprocessing_gephi:
-    def wordfreq_to_gephiinput(self, pair_file, graphml_file):
-        out = open(graphml_file, 'w', encoding = 'utf-8')
-        entity = []
-        e_dict = {}
-        count = []
-        for i in range(len(pair_file)):
-            e1 = pair_file.iloc[i,0]
-            e2 = pair_file.iloc[i,1]
-            #frq = ((word_dict[e1], word_dict[e2]),  pair.split('\t')[2])
-            frq = ((e1, e2), pair_file.iloc[i,2])
-            if frq not in count: count.append(frq)   # ((a, b), frq)
-            if e1 not in entity: entity.append(e1)
-            if e2 not in entity: entity.append(e2)
-        print('# terms: %s'% len(entity))
-        #create e_dict {entity: id} from entity
-        for i, w in enumerate(entity):
-            e_dict[w] = i + 1 # {word: id}
-        out.write(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlnshttp://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">" +
-            "<key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"double\"/>" +
-            "<key id=\"d0\" for=\"node\" attr.name=\"label\" attr.type=\"string\"/>" +
-            "<graph id=\"Entity\" edgedefault=\"undirected\">" + "\n")
-        # nodes
-        for i in entity:
-            out.write("<node id=\"" + str(e_dict[i]) +"\">" + "\n")
-            out.write("<data key=\"d0\">" + i + "</data>" + "\n")
-            out.write("</node>")
-        # edges
-        for y in range(len(count)):
-            out.write("<edge source=\"" + str(e_dict[count[y][0][0]]) + "\" target=\"" + str(e_dict[count[y][0][1]]) + "\">" + "\n")
-            out.write("<data key=\"d1\">" + str(count[y][1]) + "</data>" + "\n")
-            #out.write("<edge source=\"" + str(count[y][0][0]) + "\" target=\"" + str(count[y][0][1]) +"\">"+"\n")
-            #out.write("<data key=\"d1\">" + str(count[y][1]) +"</data>"+"\n")
-            out.write("</edge>")
-        out.write("</graph> </graphml>")
-        print('now you can see %s' % graphml_file)
-        #pairs.close()
-        out.close()
-
-
 def preprocessing_wordfreq(df, colname_target, colname_category=None, 
                            max_tfidf_col=1000, num_showkeyword=5,
                            save_local=True, 
@@ -303,20 +280,24 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
     if colname_category == None:
         # 문서 요약
         word_freq_soynlp = preprocessing_nounextract(df[colname_target])
-
-        # 인접어반영 요약
+        ## 인접어반영 요약
         wordadj_freq_soynlp = preprocessing_adjwordcount(word_freq_soynlp[['word']], 
                                                          df[colname_target], num_showkeyword=num_showkeyword)
         
         try:
             # TF-IDF 요약
             word_freq_tfidf, sent_mat = preprocessing_tfidf(df[colname_target], max_features=max_tfidf_col)
-
-            # TF-IDF 인접어반영 요약
+            ## 인접어반영 요약
             wordadj_freq_tfidf = preprocessing_adjwordcount(word_freq_tfidf[['word']], 
                                                        df[colname_target], num_showkeyword=num_showkeyword)
         except:
             pass
+        
+#         # keybert 요약
+#         word_freq_keybert = preprocessing_keybert(df_sub[colname_target])
+#         ## 인접어반영 요약
+#         wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+#                                                           df[colname_target], num_showkeyword=num_showkeyword)
         
     elif type(colname_category) == str:
         for category in tqdm(sorted(df[colname_category].unique())):
@@ -325,7 +306,6 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
 
             # 문서 요약
             word_freq = preprocessing_nounextract(df_sub[colname_target])
-
             ## 카테고리 추가
             word_freq['category'] = str(category)
             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
@@ -376,6 +356,49 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
         
     return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf
 
+
+# gm = preprocessing_gephi()
+# gm.wordfreq_to_gephiinput(word_corrpair.iloc[:,1:], '.\Data\word_corrpair.graphml')
+class preprocessing_gephi:
+    def wordfreq_to_gephiinput(self, pair_file, graphml_file):
+        out = open(graphml_file, 'w', encoding = 'utf-8')
+        entity = []
+        e_dict = {}
+        count = []
+        for i in range(len(pair_file)):
+            e1 = pair_file.iloc[i,0]
+            e2 = pair_file.iloc[i,1]
+            #frq = ((word_dict[e1], word_dict[e2]),  pair.split('\t')[2])
+            frq = ((e1, e2), pair_file.iloc[i,2])
+            if frq not in count: count.append(frq)   # ((a, b), frq)
+            if e1 not in entity: entity.append(e1)
+            if e2 not in entity: entity.append(e2)
+        print('# terms: %s'% len(entity))
+        #create e_dict {entity: id} from entity
+        for i, w in enumerate(entity):
+            e_dict[w] = i + 1 # {word: id}
+        out.write(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlnshttp://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">" +
+            "<key id=\"d1\" for=\"edge\" attr.name=\"weight\" attr.type=\"double\"/>" +
+            "<key id=\"d0\" for=\"node\" attr.name=\"label\" attr.type=\"string\"/>" +
+            "<graph id=\"Entity\" edgedefault=\"undirected\">" + "\n")
+        # nodes
+        for i in entity:
+            out.write("<node id=\"" + str(e_dict[i]) +"\">" + "\n")
+            out.write("<data key=\"d0\">" + i + "</data>" + "\n")
+            out.write("</node>")
+        # edges
+        for y in range(len(count)):
+            out.write("<edge source=\"" + str(e_dict[count[y][0][0]]) + "\" target=\"" + str(e_dict[count[y][0][1]]) + "\">" + "\n")
+            out.write("<data key=\"d1\">" + str(count[y][1]) + "</data>" + "\n")
+            #out.write("<edge source=\"" + str(count[y][0][0]) + "\" target=\"" + str(count[y][0][1]) +"\">"+"\n")
+            #out.write("<data key=\"d1\">" + str(count[y][1]) +"</data>"+"\n")
+            out.write("</edge>")
+        out.write("</graph> </graphml>")
+        print('now you can see %s' % graphml_file)
+        #pairs.close()
+        out.close()
+
         
 def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
     # wordfreq to dict
@@ -399,7 +422,6 @@ def freq2vectorcorr_preprocessor(df_wordfreq, df_series, num_showkeyword=100):
     ## vector가 0의 비율이 많은 word 제거
     colnames_topweight = pd.Series((df_wordvec == 0).sum(axis=0) / df_wordvec.shape[0]).sort_values(ascending=True)
     colnames_topweight = colnames_topweight.sort_values(ascending=True)
-    display(colnames_topweight)
     colnames = colnames_topweight.index[:num_showkeyword]
     df_wordvec = df_wordvec[colnames].T.copy()
 #     ## vector가 0인 word 제거

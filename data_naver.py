@@ -172,7 +172,7 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
     for pg in url:
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        sleep(random.uniform(3,10)) # 요청 사이 무작위로 시간 간격을 두어(3~10초) 일정한 시간간격의 비정상적인 접근 방지
+        sleep(random.uniform(5,15)) # 요청 사이 무작위로 시간 간격을 두어(3~10초) 일정한 시간간격의 비정상적인 접근 방지
         
         # 테스트
         news_elements = soup.select('div.news_wrap.api_ani_send')
