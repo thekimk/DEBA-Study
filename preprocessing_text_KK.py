@@ -206,10 +206,8 @@ def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
 def preprocessing_keybert(df_series, doc_topn_kwd=5):
     # 키워드 추출
     keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
-    scores = []
-    for text in tqdm(df_series.tolist()):
-        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd)
-        scores.extend(score)
+    scores = df_series.apply(lambda x: keyword_extractor.extract_keywords(x, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd))
+    scores = [score_1d for score in scores.tolist() for score_1d in score]
         
     # 정리
     df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
@@ -220,20 +218,10 @@ def preprocessing_keybert(df_series, doc_topn_kwd=5):
 
 
 @ray.remote
-def preprocessing_keybertParallel(df_series, doc_topn_kwd=5):
+def preprocessing_keybertParallel(keyword_extractor, text, doc_topn_kwd=5):
     # 키워드 추출
-    keyword_extractor = KeyBERT('distilbert-base-nli-mean-tokens')
-    scores = []
-    for text in tqdm(df_series.tolist()):
-        score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd)
-        scores.extend(score)
-        
-    # 정리
-    df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
-    df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
-    df_wordscore = df_wordscore
-    
-    return df_wordscore
+    score = keyword_extractor.extract_keywords(text, keyphrase_ngram_range=(1,1), top_n=doc_topn_kwd)
+    return score
 
 
 def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
@@ -274,9 +262,7 @@ def preprocessing_adjwordcount(df_keyword, df_series, num_showkeyword=100):
 def preprocessing_wordfreq(df, colname_target, colname_category=None, 
                            max_tfidf_col=1000, num_showkeyword=5,
                            save_local=True, 
-                           save_name_list=['word_freq_soynlp.csv', 'wordadj_freq_soynlp.csv', 
-                                           'word_freq_tfidf.csv', 'wordadj_freq_tfidf.csv',
-                                           'word_freq_keybert.csv', 'wordadj_freq_keybert.csv']):
+                           save_name='wordfreq'):
     word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
     word_freq_tfidf, wordadj_freq_tfidf = pd.DataFrame(), pd.DataFrame()
     word_freq_keybert, wordadj_freq_keybert = pd.DataFrame(), pd.DataFrame()
@@ -361,21 +347,21 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
         folder_location = os.path.join(os.getcwd(), 'Data', 'WordFreq', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        save_name = os.path.join(folder_location, save_name_list[0])
-        word_freq_soynlp.to_csv(save_name, index=False, encoding='utf-8-sig')
-        save_name = os.path.join(folder_location, save_name_list[1])
-        wordadj_freq_soynlp.to_csv(save_name, index=False, encoding='utf-8-sig')
+        word_freq_soynlp.to_csv(os.path.join(folder_location, save_name+'_soynlp.csv'), 
+                                index=False, encoding='utf-8-sig')
+        wordadj_freq_soynlp.to_csv(os.path.join(folder_location, save_name+'_soynlpadj.csv'), 
+                                   index=False, encoding='utf-8-sig')
         try:
-            save_name = os.path.join(folder_location, save_name_list[2])
-            word_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
-            save_name = os.path.join(folder_location, save_name_list[3])
-            wordadj_freq_tfidf.to_csv(save_name, index=False, encoding='utf-8-sig')
+            word_freq_tfidf.to_csv(os.path.join(folder_location, save_name+'_tfidf.csv'), 
+                                   index=False, encoding='utf-8-sig')
+            wordadj_freq_tfidf.to_csv(os.path.join(folder_location, save_name+'_tfidfadj.csv'), 
+                                      index=False, encoding='utf-8-sig')
         except:
             pass
-        save_name = os.path.join(folder_location, save_name_list[4])
-        word_freq_keybert.to_csv(save_name, index=False, encoding='utf-8-sig')
-        save_name = os.path.join(folder_location, save_name_list[5])
-        wordadj_freq_keybert.to_csv(save_name, index=False, encoding='utf-8-sig')
+        word_freq_keybert.to_csv(os.path.join(folder_location, save_name+'_keybert.csv'), 
+                                 index=False, encoding='utf-8-sig')
+        wordadj_freq_keybert.to_csv(os.path.join(folder_location, save_name+'_keybertadj.csv'), 
+                                    index=False, encoding='utf-8-sig')
         
     return word_freq_soynlp, wordadj_freq_soynlp, word_freq_tfidf, wordadj_freq_tfidf, word_freq_keybert, wordadj_freq_keybert
 
