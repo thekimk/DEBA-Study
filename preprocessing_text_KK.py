@@ -279,7 +279,7 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
                                            'word_freq_keybert.csv', 'wordadj_freq_keybert.csv']):
     word_freq_soynlp, wordadj_freq_soynlp = pd.DataFrame(), pd.DataFrame()
     word_freq_tfidf, wordadj_freq_tfidf = pd.DataFrame(), pd.DataFrame()
-    worf_freq_keybert, wordadj_freq_keybert = pd.DataFrame(), pd.DataFrame()
+    word_freq_keybert, wordadj_freq_keybert = pd.DataFrame(), pd.DataFrame()
     if colname_category == None:
         # 문서 요약
         word_freq_soynlp = preprocessing_nounextract(df[colname_target])
