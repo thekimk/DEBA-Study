@@ -2,7 +2,8 @@ import os
 import numpy as np
 import pandas as pd
 import math
-from tqdm import tqdm
+from tqdm import tqdm, tqdm_pandas # execution time
+tqdm.pandas()
 import multiprocessing as mp
 import ray
 ray.init(num_cpus=mp.cpu_count()-1, ignore_reinit_error=True, log_to_driver=False)
