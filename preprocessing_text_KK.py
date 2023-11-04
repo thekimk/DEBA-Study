@@ -188,6 +188,7 @@ def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
                                 columns=tfidfier.get_feature_names()).T.reset_index()
     df_wordscore.columns = ['word', 'score']
     df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False)
+    df_wordscore['score'] = df_wordscore['score'].astype(int)
     ## 문장 벡터 정리
     df_sentvec = tfidfier.transform(df_series.to_list()).toarray()
     df_sentvec = pd.DataFrame(df_sentvec, index=['sentence' + str(i+1) for i in range(df_series.shape[0])], 
@@ -213,7 +214,8 @@ def preprocessing_keybert(df_series, doc_topn_kwd=5):
     # 정리
     df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
     df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
-    df_wordscore = df_wordscore
+    df_wordscore['score'] = df_wordscore['score'].astype(int)
+    df_wordscore = df_wordscore[df_wordscore['score'] > 1].reset_index().iloc[:,1:]
     
     return df_wordscore
 
@@ -283,11 +285,11 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
         except:
             pass
         
-        # keybert 요약
-        word_freq_keybert = preprocessing_keybert(df[colname_target])
-        ## 인접어반영 요약
-        wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-                                                          df[colname_target], num_showkeyword=num_showkeyword)
+#         # keybert 요약
+#         word_freq_keybert = preprocessing_keybert(df[colname_target])
+#         ## 인접어반영 요약
+#         wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+#                                                           df[colname_target], num_showkeyword=num_showkeyword)
         
     elif type(colname_category) == str:
         for category in tqdm(sorted(df[colname_category].unique())):
@@ -327,20 +329,20 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
             
             # unique value groupby???
             
-            # keybert 요약
-            word_freq = preprocessing_keybert(df_sub[colname_target])
-            ## 카테고리 추가
-            word_freq['category'] = str(category)
-            word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
-            word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
+#             # keybert 요약
+#             word_freq = preprocessing_keybert(df_sub[colname_target])
+#             ## 카테고리 추가
+#             word_freq['category'] = str(category)
+#             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
+#             word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
             
-            # 인접어반영 요약
-            wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-                                                      df_sub[colname_target], num_showkeyword=num_showkeyword)
-            ## 카테고리 추가
-            wordadj_freq['category'] = str(category)
-            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
-            wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
+#             # 인접어반영 요약
+#             wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+#                                                       df_sub[colname_target], num_showkeyword=num_showkeyword)
+#             ## 카테고리 추가
+#             wordadj_freq['category'] = str(category)
+#             wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+#             wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
             
 
     # 저장
@@ -478,7 +480,7 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
             
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        folder_location = os.path.join(os.getcwd(), 'Data', 'WordCorr', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)

@@ -1,8 +1,5 @@
 from import_KK import *
 
-from IPython.display import display, HTML
-display(HTML("<style>.container { width:100% !important; }</style>"))
-
 
 ### Date and Author: 20200820, Kyungwon Kim ###
 ### scaling of df
@@ -21,7 +18,8 @@ def feature_num_scaling_df(scaler, df):
 
 ### Date and Author: 20231020, Kyungwon Kim ###
 ### Bar Visualization
-def plot_bar(df, summation=False, barmode='relative', title='Bar Plot'):
+def plot_bar(df, summation=False, barmode='relative', title='Bar Plot',
+             save_local=True, save_name='barplot.png'):
     axis_max = abs(df).max().max() * 1.1
     fig = go.Figure()
     for col in df.columns:
@@ -45,6 +43,13 @@ def plot_bar(df, summation=False, barmode='relative', title='Bar Plot'):
         legend_font_color='white',
         yaxis_range=[-axis_max, axis_max])
     fig.show()
+    
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Result', 'Barplot', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, save_name)
+        fig.write_html(save_name)
 
     
 ### Date and Author: 20190716, Kyungwon Kim ###
@@ -142,10 +147,10 @@ def plot_timeseries(data_target, figsize=(10,5), fig_ncol=2,
                            fontstyle = 'italic', horizontalalignment='center')
     plt.tight_layout()
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'TimeSeries', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=100, bbox_inches='tight')
     plt.show()
     
 
@@ -163,10 +168,10 @@ def plot_timeseries_ver2(raw, save_local=False):
         plt.ylabel(sub, fontname='serif', fontsize=28)
         plt.grid()
         if save_local:
-            folder_location = os.path.join(os.getcwd(), 'Result', '')
+            folder_location = os.path.join(os.getcwd(), 'Result', 'TimeSeries', '')
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
-            plt.savefig(folder_location+sub+'.png', dpi=600, bbox_inches='tight')
+            plt.savefig(folder_location+sub+'.png', dpi=100, bbox_inches='tight')
         plt.show()
         
         
@@ -192,10 +197,10 @@ def plot_timeseries_dforigin(df, scaled=False, fontsize=20, ylabel='',
     plt.legend(fontsize=fontsize-2, ncol=legend_colnum, loc='best', bbox_to_anchor=legend_anchor)
     plt.grid(axis='y')
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'TimeSeries', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=100, bbox_inches='tight')
     plt.show()
 
     
@@ -226,10 +231,10 @@ def plot_timeseries_dfmeanstd(df, scaled=False, fontsize=20, ylabel='Average',
     plt.ylabel(ylabel, fontname='serif', fontsize=fontsize+4)
     plt.grid(axis='y')
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'TimeSeries', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(folder_location, save_name_initial), dpi=100, bbox_inches='tight')
     plt.show()
     
     
@@ -298,7 +303,7 @@ def plot_timeseries_dfmeanstd_comparing(list_df, fontsize=20, xlabel='Time', yla
         folder_location = os.path.join(os.getcwd(), 'Result', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
-        plt.savefig(folder_location+save_name+'.pdf', dpi=600, bbox_inches='tight')
+        plt.savefig(folder_location+save_name+'.pdf', dpi=100, bbox_inches='tight')
     plt.show()
         
     
@@ -664,7 +669,7 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
         
     
 def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subfigure=5, title='Bar Plot',
-                      save_local=True, save_name='barplot.png'):
+                      save_local=True, save_name='barplot_wordfreq.png'):
     # 하위함수 및 세팅
     def get_colordict(palette, number, start):
         pal = list(sns.color_palette(palette=palette, n_colors=number).as_hex())
@@ -684,7 +689,7 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
             y = list(range(0,int(num_showkeyword/num_subfigure)))
             yticklabel = [word + ': ' + str(score) for word,score in zip(df_sub.iloc[:,0],df_sub.iloc[:,1])]
             score_max = df_wordfreq.iloc[:,1].max()
-            ytickcolor = [get_colordict('viridis', score_max, 1).get(i) for i in df_sub.iloc[:,1]]
+            ytickcolor = [get_colordict('viridis', score_max, 1).get(i) for i in df_sub.iloc[:,1].astype(int)]
             ## barplot
             sns.barplot(x=x, y=y, data=df_sub, 
                         alpha=0.9, orient='h', palette=ytickcolor, ax=axs[0][col])
@@ -709,7 +714,7 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
         fig.show()
         ## 저장
         if save_local:
-            folder_location = os.path.join(os.getcwd(), 'Result', '')
+            folder_location = os.path.join(os.getcwd(), 'Result', 'BarplotWordFreq', '')
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
             save_name = os.path.join(folder_location, save_name)
@@ -727,7 +732,7 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
             y = list(range(0,df_sub.shape[0]))
             yticklabel = [word + ': ' + str(score) for word,score in zip(df_sub.iloc[:,1],df_sub.iloc[:,2])]
             score_max = df_wordfreq.iloc[:,2].max()
-            ytickcolor = [get_colordict('viridis', score_max, 1).get(i) for i in df_sub.iloc[:,2]]
+            ytickcolor = [get_colordict('viridis', score_max, 1).get(i) for i in df_sub.iloc[:,2].astype(int)]
             ## barplot
             sns.barplot(x=x, y=y, data=df_sub)
             sns.barplot(x=x, y=y, data=df_sub, 
@@ -743,11 +748,11 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'BarplotWordFreq', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
-        fig.savefig(save_name, dpi=300)
+        fig.savefig(save_name, dpi=100)
     
     
 def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plot_studio=False, 
@@ -785,7 +790,7 @@ def plot_treemap_wordfreq(df_wordfreq, num_showkeyword=100, title='Treemap', plo
         
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'Treemap', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
@@ -869,7 +874,7 @@ def plot_sunburst_wordfreq(df_wordfreq, title='Sunburst Plot', plot_studio=False
         
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'Sunburst', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
