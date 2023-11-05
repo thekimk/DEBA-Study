@@ -215,7 +215,7 @@ def preprocessing_keybert(df_series, doc_topn_kwd=5):
     df_wordscore = pd.DataFrame(scores, columns=['word', 'score'])
     df_wordscore = df_wordscore.groupby('word').agg('sum').sort_values('score', ascending=False).reset_index()
     df_wordscore['score'] = df_wordscore['score'].astype(int)
-    df_wordscore = df_wordscore[df_wordscore['score'] > 1].reset_index().iloc[:,1:]
+#     df_wordscore = df_wordscore[df_wordscore['score'] > 1].reset_index().iloc[:,1:]
     
     return df_wordscore
 
@@ -285,11 +285,11 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
         except:
             pass
         
-#         # keybert 요약
-#         word_freq_keybert = preprocessing_keybert(df[colname_target])
-#         ## 인접어반영 요약
-#         wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-#                                                           df[colname_target], num_showkeyword=num_showkeyword)
+        # keybert 요약
+        word_freq_keybert = preprocessing_keybert(df[colname_target])
+        ## 인접어반영 요약
+        wordadj_freq_keybert = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+                                                          df[colname_target], num_showkeyword=num_showkeyword)
         
     elif type(colname_category) == str:
         for category in tqdm(sorted(df[colname_category].unique())):
@@ -329,20 +329,20 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
             
             # unique value groupby???
             
-#             # keybert 요약
-#             word_freq = preprocessing_keybert(df_sub[colname_target])
-#             ## 카테고리 추가
-#             word_freq['category'] = str(category)
-#             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
-#             word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
+            # keybert 요약
+            word_freq = preprocessing_keybert(df_sub[colname_target])
+            ## 카테고리 추가
+            word_freq['category'] = str(category)
+            word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
+            word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
             
-#             # 인접어반영 요약
-#             wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-#                                                       df_sub[colname_target], num_showkeyword=num_showkeyword)
-#             ## 카테고리 추가
-#             wordadj_freq['category'] = str(category)
-#             wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
-#             wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
+            # 인접어반영 요약
+            wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+                                                      df_sub[colname_target], num_showkeyword=num_showkeyword)
+            ## 카테고리 추가
+            wordadj_freq['category'] = str(category)
+            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+            wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
             
 
     # 저장
