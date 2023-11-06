@@ -10,6 +10,7 @@ ray.init(num_cpus=mp.cpu_count()-1, ignore_reinit_error=True, log_to_driver=Fals
 
 import re
 import string
+from ast import literal_eval
 import kss    # 문장분리
 import nltk
 nltk.download('stopwords')
@@ -303,12 +304,15 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
             word_freq_soynlp = pd.concat([word_freq_soynlp, word_freq], axis=0, ignore_index=True)
 
-            # 인접어반영 요약
-            wordadj_freq = preprocessing_adjwordcount(word_freq[['word']], df_sub[colname_target], num_showkeyword=num_showkeyword)
-            ## 카테고리 추가
-            wordadj_freq['category'] = str(category)
-            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
-            wordadj_freq_soynlp = pd.concat([wordadj_freq_soynlp, wordadj_freq], axis=0, ignore_index=True)
+            try:
+                # 인접어반영 요약
+                wordadj_freq = preprocessing_adjwordcount(word_freq[['word']], df_sub[colname_target], num_showkeyword=num_showkeyword)
+                ## 카테고리 추가
+                wordadj_freq['category'] = str(category)
+                wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+                wordadj_freq_soynlp = pd.concat([wordadj_freq_soynlp, wordadj_freq], axis=0, ignore_index=True)
+            except:
+                pass
 
             try:
                 # TF-IDF 요약
@@ -336,13 +340,16 @@ def preprocessing_wordfreq(df, colname_target, colname_category=None,
             word_freq = word_freq[['category']+list(word_freq.columns[:-1])]
             word_freq_keybert = pd.concat([word_freq_keybert, word_freq], axis=0, ignore_index=True)
             
-            # 인접어반영 요약
-            wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
-                                                      df_sub[colname_target], num_showkeyword=num_showkeyword)
-            ## 카테고리 추가
-            wordadj_freq['category'] = str(category)
-            wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
-            wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
+            try:
+                # 인접어반영 요약
+                wordadj_freq = preprocessing_adjwordcount(word_freq_keybert[['word']], 
+                                                          df_sub[colname_target], num_showkeyword=num_showkeyword)
+                ## 카테고리 추가
+                wordadj_freq['category'] = str(category)
+                wordadj_freq = wordadj_freq[['category']+list(wordadj_freq.columns[:-1])]
+                wordadj_freq_keybert = pd.concat([wordadj_freq_keybert, wordadj_freq], axis=0, ignore_index=True)
+            except:
+                pass
             
 
     # 저장
@@ -470,8 +477,11 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
             df_sub = df[df[colname_category] == category]
             
             # 단어 벡터화 및 상관관계
-            _, _, word_corrpair = freq2vectorcorr_preprocessor(wf_sub.iloc[:,-2:], 
-                                                               df_sub[colname_target], num_showkeyword=num_showkeyword)
+            if wf_sub.shape[0] > 1:
+                _, _, word_corrpair = freq2vectorcorr_preprocessor(wf_sub.iloc[:,-2:], 
+                                                                   df_sub[colname_target], num_showkeyword=num_showkeyword)
+            else:
+                continue
 
             ## 카테고리 추가
             word_corrpair['category'] = str(category)

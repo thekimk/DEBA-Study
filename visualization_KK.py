@@ -633,18 +633,32 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
         mask = None
     if type(df_wordfreq) == pd.DataFrame:
         df_wordfreq = {row[-2]: row[-1] for _, row in df_wordfreq.iterrows()}
+    ## 색상함수
+    ## hsl: https://www.w3schools.com/colors/colors_picker.asp
+    def color_blue(word, font_size, position, orientation, random_state=None, **kwargs):
+        out_min, out_max = 10, 90
+        ## ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+        l_num = ((font_size-20)*(out_min-out_max)) / (200-20) + out_max
+        return ("hsl(240,100%, {:d}%)".format(int(l_num)))
+    def color_rdoryl(word, font_size, position, orientation, random_state=None, **kwargs):
+        out_min, out_max = 0, 50
+        ## ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+        l_num = ((font_size-20)*(out_min-out_max)) / (200-20) + out_max
+        return ("hsl({:d},100%, 50%)".format(int(l_num)))
     
     # 시각화
     word_clouder = WordCloud(background_color=background_color,    # 배경색
-                             contour_color='white',    # 경계색
-                             contour_width=1,    # 경계두께
-    #                          colormap='autumn',    # 글자컬러맵
+                             contour_color='black',    # 경계색
+                             contour_width=0.5,    # 경계두께
+#                              colormap='YlOrRd',    # 글자컬러맵: https://matplotlib.org/stable/users/explain/colors/colormaps.html
+#                              color_func=color_rdoryl,
                              width=1000, height=1000,    # 폭과 높이로 figsize랑 맞추어야
                              random_state=123,    # 랜덤 시각화 고정
-    #                          prefer_horizontal=False,    # 수평글자로 기록
+#                              prefer_horizontal=True,    # 수평글자로 기록
                              max_font_size=max_font_size,    # 최대 폰트 크기
                              max_words=max_words,    # 표현할 최대 단어 갯수)
                              stopwords=stopwords,
+                             scale=10,
                              mask=mask,
                              font_path=FONT_PATHS[0])
     word_clouder = word_clouder.generate_from_frequencies(df_wordfreq)
@@ -661,7 +675,7 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'WordCloud', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
@@ -745,6 +759,7 @@ def plot_bar_wordfreq(df_wordfreq, figsize=(16,8), num_showkeyword=100, num_subf
             axs[0][col].spines['left'].set_color('white')    
             title = df_sub.iloc[:,0].unique()[0]
             axs[0][col].set_title(title)  
+            fig.tight_layout()
     
     # 저장
     if save_local:
@@ -817,7 +832,7 @@ def plot_donut_wordfreq(df_wordfreq, num_showkeyword=30,
     
     # 저장
     if save_local:
-        folder_location = os.path.join(os.getcwd(), 'Result', '')
+        folder_location = os.path.join(os.getcwd(), 'Result', 'Donut', '')
         if not os.path.exists(folder_location):
             os.makedirs(folder_location)
         save_name = os.path.join(folder_location, save_name)
@@ -1023,7 +1038,7 @@ def plot_networkx(df_freq, df_pairweight, filter_criteria=None, plot=True, node_
             
         ## 저장
         if save_local:
-            folder_location = os.path.join(os.getcwd(), 'Result', '')
+            folder_location = os.path.join(os.getcwd(), 'Result', 'Networkx', '')
             if not os.path.exists(folder_location):
                 os.makedirs(folder_location)
             save_name = os.path.join(folder_location, save_name)
