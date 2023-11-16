@@ -188,7 +188,7 @@ def preprocessing_tfidf(df_series, max_features=1000, del_lowfreq=True):
     df_wordscore = pd.DataFrame(tfidfier.transform(df_series.to_list()).sum(axis=0), 
                                 columns=tfidfier.get_feature_names()).T.reset_index()
     df_wordscore.columns = ['word', 'score']
-    df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False)
+    df_wordscore = df_wordscore.sort_values(by=[df_wordscore.columns[-1]], ascending=False).reset_index().iloc[:,1:]
     df_wordscore['score'] = df_wordscore['score'].astype(int)
     ## 문장 벡터 정리
     df_sentvec = tfidfier.transform(df_series.to_list()).toarray()

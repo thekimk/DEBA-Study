@@ -651,7 +651,7 @@ def plot_wordcloud(df_wordfreq, title='Word Frequency',
                              contour_color='black',    # 경계색
                              contour_width=0.5,    # 경계두께
 #                              colormap='YlOrRd',    # 글자컬러맵: https://matplotlib.org/stable/users/explain/colors/colormaps.html
-#                              color_func=color_rdoryl,
+#                              color_func=color_blue,
                              width=1000, height=1000,    # 폭과 높이로 figsize랑 맞추어야
                              random_state=123,    # 랜덤 시각화 고정
 #                              prefer_horizontal=True,    # 수평글자로 기록
