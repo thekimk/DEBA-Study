@@ -1,8 +1,10 @@
 import numpy as np
+import pandas as pd
 import time
 import datetime
 from tqdm import tqdm, tqdm_pandas # execution time
 tqdm.pandas()
+from scipy.special import softmax
 import torch
 from torch.utils.data import Dataset, TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from torch.nn import CrossEntropyLoss
@@ -62,7 +64,8 @@ def preprocessing_sentence_to_BERTinput(tokenizer, X_series, Y_series,
 
 
 def modeling_BERTsentiment(device, model_name, train_dataloader, validation_dataloader,
-                           num_labels=2, epochs=10, learning_rate=1.0e-5, early_stopping_patience=10,
+                           num_labels=2, epochs=10, learning_rate=1.0e-5, l2_ratio=0,
+                           early_stopping_patience=10,
                            save_location=None):
     # 하위 함수
     ## 정확도 계산 함수
@@ -84,7 +87,7 @@ def modeling_BERTsentiment(device, model_name, train_dataloader, validation_data
     model = BertForSequenceClassification.from_pretrained(model_name, num_labels=num_labels)
     model.cuda()
     optimizer = AdamW(model.parameters(), lr=learning_rate, # 학습률
-                      eps=1e-8) # 0으로 나누는 것을 방지하기 위한 epsilon 값
+                      eps=1e-8, weight_decay=l2_ratio) # 0으로 나누는 것을 방지하기 위한 epsilon 값, 과적합 방지 정규화 파라미터
     total_steps = len(train_dataloader) * epochs
     scheduler = get_linear_schedule_with_warmup(optimizer,    # 처음에 학습률을 조금씩 변화시키는 스케줄러 생성
                                                 num_warmup_steps = 0,
@@ -237,4 +240,30 @@ def modeling_BERTsentiment(device, model_name, train_dataloader, validation_data
             
     return model
 
+
+def predict_sentiment_BERT(device, model, sentences, tokenizer,
+                           seq_len=128, batch_size=32):
+    # 문장을 입력 데이터로 변환
+    test_dataloader = preprocessing_sentence_to_BERTinput(tokenizer, sentences, [],
+                                                          seq_len=seq_len, batch_size=batch_size, sampler=None)
+
+    # 예측
+    model.eval()
+    logits = []
+    for batch_id, (tokens, masks) in enumerate(tqdm(test_dataloader)):
+        b_input_ids = tokens.to(device)
+        b_input_mask = masks.to(device)
+        with torch.no_grad():    # 그래디언트 계산 안함
+            outputs = model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask)    # Forward 수행
+
+        # 출력
+        logit = outputs[0].cpu().tolist()
+        logits.extend(logit)
+    
+    # 정리
+    probability = pd.DataFrame(softmax(np.array(logits)), columns=['Prob_Label'+str(i) for i in range(np.shape(logits)[1])])
+    sentiment = pd.DataFrame(np.argmax(softmax(np.array(logits)), axis=1), columns=['Sentiment'])
+    
+    return pd.concat([pd.Series(sentences).reset_index().iloc[:,1:], 
+                      probability, sentiment], axis=1)
 
