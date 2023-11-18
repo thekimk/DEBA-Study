@@ -259,10 +259,11 @@ def predict_sentiment_BERT(device, model, sentences, tokenizer,
         # 출력
         logit = outputs[0].cpu().tolist()
         logits.extend(logit)
+    logits = softmax(logits, axis=1)
     
     # 정리
-    probability = pd.DataFrame(softmax(np.array(logits)), columns=['Prob_Label'+str(i) for i in range(np.shape(logits)[1])])
-    sentiment = pd.DataFrame(np.argmax(softmax(np.array(logits)), axis=1), columns=['Sentiment'])
+    probability = pd.DataFrame(logits, columns=['Prob_Label'+str(i) for i in range(np.shape(logits)[1])])
+    sentiment = pd.DataFrame(np.argmax(logits, axis=1), columns=['Sentiment'])
     
     return pd.concat([pd.Series(sentences).reset_index().iloc[:,1:], 
                       probability, sentiment], axis=1)
