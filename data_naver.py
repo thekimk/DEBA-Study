@@ -168,11 +168,121 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
     
     # 개별 URL에 따른 데이터 추출 
     time_start = datetime.datetime.now()
+    time_articles, press_articles, category_articles, title_articles, content_articles, comment_articles = [], [], [], [], [], []
+    url_articles, url_articles_naver = [], []
+    for pg in url:
+        response = requests.get(pg, headers=headers)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        sleep(random.uniform(5,15))
+        print(category_articles)
+        
+        # 테스트
+        news_elements = soup.select('div.news_wrap.api_ani_send')
+        article_elements = soup.select("div.group_news > ul.list_news > li div.news_area > div.news_info > div.info_group > a.info")
+        for element in news_elements:
+            time = element.select_one('span.info').text.strip()
+            time_articles.append(time)
+            press = element.select_one('a.info.press').text.strip()
+            press_articles.append(press)
+            title = element.select_one('a.news_tit').text.strip()
+            title = re.sub(pattern='<[^>]*>', repl='', string=str(title))
+            title_articles.append(title)
+            each_url = element.select_one('a.news_tit')['href']
+            url_articles.append(each_url)     
+        
+
+        # 기사URL 중 네이버뉴스 주소로 반영된 것은 업데이트
+        article_elements = soup.select("div.group_news > ul.list_news > li div.news_area > div.news_info > div.info_group > a.info")
+        for article in article_elements:
+            ## 네이버 URL이 있는 경우
+            if "news.naver.com" in article.attrs['href']: #수정
+                url_articles_naver[-1] = article.attrs['href']
+                article_response = requests.get(url_articles_naver[-1], headers=headers, verify=False)
+                article_soup = BeautifulSoup(article_response.text, 'html.parser')
+                # 카테고리 불러오기
+                category = article_soup.select_one('#_LNB > ul > li.Nlist_item._LNB_ITEM.is_active > a > span')
+                print(category_articles, category_articles[-1], category)
+                if category != None:
+                    category_articles[-1] = str(category).split('menu">')[1].split('</span>')[0]
+                else:
+                    category_articles[-1] = ''
+                # 본문 불러오기
+                content = article_soup.select("article#dic_area")    # "div#dic_area"에서 "article#dic_area"로 변경
+                if content == []:
+                    content = article_soup.select("#articeBody")
+                ## 본문 전처리 정리
+                content = ''.join(str(content))
+                content = re.sub(pattern='<[^>]*>', repl='', string=content)
+                content = content.replace("""[\n\n\n\n\n// flash 오류를 우회하기 위한 함수 추가\nfunction _flash_removeCallback() {}""", '')
+                content = content.replace('\n', ' ').replace('\t', ' ')
+                content_articles[-1] = content
+                # 댓글 불러오기
+#                 comment = get_comments_from_navernews(url_articles_naver[-1]) #기존
+                comment = get_comments_from_navernews(article.attrs['href']) #수정
+                comment_articles[-1] = comment     
+                # 기사시간 업데이트
+                try:
+                    time_html = article_soup.select_one("div#ct> div.media_end_head.go_trans > div.media_end_head_info.nv_notrans > div.media_end_head_info_datestamp > div > span")
+                    time = time_html.attrs['data-date-time']
+                    time_articles[len(comment_articles)-1] = get_update_timeformat(time)
+                except AttributeError:
+                    time = article_soup.select_one("#content > div.end_ct > div > div.article_info > span > em")
+                    time = re.sub(pattern='<[^>]*>',repl='',string=str(time))
+                    time_articles[len(comment_articles)-1] = get_update_timeformat(time)      
+            else:
+                url_articles_naver.append(article.attrs['href'])      
+                category_articles.append([])
+                category_articles[-1] = ''
+                content_articles.append([])
+                comment_articles.append([])
+                          
+        # 마지막 페이지면 종료
+        if len(news_elements) < 10: 
+            break
+
+    # 정리
+    df_news = pd.DataFrame({'Date':time_articles,
+                            'Press':press_articles,
+                            'Category':category_articles,
+                            'Title':title_articles,
+                            'Content':content_articles,
+                            'Comment':comment_articles,
+                            'URL_Origin':url_articles,
+                            'URL_Naver':url_articles_naver})
+    time_end = datetime.datetime.now()
+#     print('News Info Extracting Time: ', time_end-time_start)
+#     print('Size of News Data: ', df_news.shape[0])
+    
+    # 저장
+    if save_local:
+        if folder_location == None:
+            folder_location = os.path.join(os.getcwd(), 'Data', search_query, '')
+        else:
+            folder_location = os.path.join(folder_location, search_query, '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        datetime_info = df_news.Date[df_news.Date.apply(lambda x: len(x[:10]) == 10)]
+        try:
+            save_name = 'NaverNews_{}-{}_KK.csv'.format(datetime_info.min()[:10], datetime_info.max()[:10])
+        except:
+            save_name = 'NaverNews_{}-{}_KK.csv'.format(start, end)
+        df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
+    
+    return df_news
+
+
+def get_navernews_old(search_query, start, end, sort=0, maxpage=1000, maxpage_count=False, 
+                  save_local=False, folder_location=None):
+    # URL 불러오기
+    url = get_urls_from_navernews(search_query, start, end, sort=sort, maxpage=maxpage, maxpage_count=maxpage_count)  
+    
+    # 개별 URL에 따른 데이터 추출 
+    time_start = datetime.datetime.now()
     df_news = []
     for pg in url:
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
-        sleep(random.uniform(5,15)) # 요청 사이 무작위로 시간 간격을 두어(3~10초) 일정한 시간간격의 비정상적인 접근 방지
+        sleep(random.uniform(5,15))
         
         # 테스트
         news_elements = soup.select('div.news_wrap.api_ani_send')
@@ -252,7 +362,11 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
 ### 입력 날짜 범위를 월별로 나누어서 시작과 종료 문자 생성
 def date_generator(start, end):
     date_list = []
+    if start == end: #수정(시작과 종료 날짜가 같은 경우 추가) *이 부분은 날짜가 같을 때만
+        date_list.append([start, end])
+    return date_list
     year_list = list(range(int(start[:4]), int(end[:4])+1))
+    
     # 연도가 시작과 종료가 같은 경우
     if len(year_list) == 1:
         year = year_list[0]
@@ -339,6 +453,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
         df_news.to_csv(os.path.join(folder_location, save_name), index=False, encoding='utf-8-sig')
     time_end = datetime.datetime.now()
     print('News Info Extracting Time: ', time_end-time_start)
+    print('Size of News Data: ', df_news.shape[0])
     
     return df_news
 
