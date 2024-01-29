@@ -90,6 +90,7 @@ def get_urls_from_navernews(search_query, start, end, sort=0, maxpage=1000, maxp
             sleep(random.uniform(2, 4))
             maxpage_numbers = []
             for link in soup.select('.sc_page_inner > a'):
+                print(link)
                 maxpage_number = int(link.text)
                 maxpage_numbers.append(maxpage_number)
             if maxpage_numbers != []: 
@@ -174,7 +175,6 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
         response = requests.get(pg, headers=headers)
         soup = BeautifulSoup(response.text, 'html.parser')
         sleep(random.uniform(5,15))
-        print(category_articles)
         
         # 테스트
         news_elements = soup.select('div.news_wrap.api_ani_send')
@@ -201,7 +201,6 @@ def get_navernews(search_query, start, end, sort=0, maxpage=1000, maxpage_count=
                 article_soup = BeautifulSoup(article_response.text, 'html.parser')
                 # 카테고리 불러오기
                 category = article_soup.select_one('#_LNB > ul > li.Nlist_item._LNB_ITEM.is_active > a > span')
-                print(category_articles, category_articles[-1], category)
                 if category != None:
                     category_articles[-1] = str(category).split('menu">')[1].split('</span>')[0]
                 else:
@@ -361,11 +360,14 @@ def get_navernews_old(search_query, start, end, sort=0, maxpage=1000, maxpage_co
 
 ### 입력 날짜 범위를 월별로 나누어서 시작과 종료 문자 생성
 def date_generator(start, end):
+    # 변수 선언
     date_list = []
-    if start == end: #수정(시작과 종료 날짜가 같은 경우 추가) *이 부분은 날짜가 같을 때만
-        date_list.append([start, end])
-    return date_list
     year_list = list(range(int(start[:4]), int(end[:4])+1))
+    
+    # 날짜의 시작과 종료가 같은 경우
+    if start == end:
+        date_list.append([start, end])
+        return date_list
     
     # 연도가 시작과 종료가 같은 경우
     if len(year_list) == 1:
@@ -428,7 +430,7 @@ def get_data_from_navernews(search_query, start, end, sort=0,
     # 날짜 생성
     time_start = datetime.datetime.now()
     date_list = date_generator(start, end)
-    
+
     # 데이터 수집
     df_news = pd.DataFrame()
     for period in tqdm(date_list):

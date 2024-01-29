@@ -503,6 +503,7 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
     
 
 
+##################################################################################################################
 def preprocessing_word2vec(df_series):
     # Word2Vec으로 데이터 훈련시키기
     # sentences: 문장 토큰화된 데이터
