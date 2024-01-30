@@ -24,6 +24,7 @@ from spacy.lang.en.stop_words import STOP_WORDS as sw_eng
 ## 한국어
 from konlpy.tag import Hannanum, Kkma, Komoran, Okt, Mecab
 from kss import split_sentences
+from kiwipiepy import Kiwi
 from spacy.lang.ko.stop_words import STOP_WORDS as sw_kor
 from soynlp.normalizer import *
 from soynlp.word import WordExtractor
@@ -497,6 +498,22 @@ def preprocessing_wordfreq_to_corr(df_wordfreq, df, colname_target, colname_cate
         word_corrpair_total.to_csv(save_name, index=False, encoding='utf-8-sig')
 
     return word_corrpair_total
+
+
+# 문장에서 통계수치 전후문장 추출 함수
+def statsentence_extractor(extranct_rule, sentences, window=2):
+    kiwi = Kiwi()
+    sent_list = [sent[0].strip() for sent in kiwi.split_into_sents(sentences)]
+    sent_short = []
+    for idx, sent in enumerate(sent_list):
+        import re
+        if re.search('[0-9]+\.?[0-9]+[%건명]', sent) != None:
+            sent_short.extend(['...'])
+            sent_short.extend(sent_list[idx-window:idx+window+1])
+            sent_short.extend(['...'])
+    sent_short = ' '.join(sent_short)
+    
+    return sent_short
      
     
     
