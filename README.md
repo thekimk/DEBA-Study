@@ -23,7 +23,7 @@
 저는 `핀테크`를 포함한 전반적인 `금융경제 산업 전반의 거래 시장과 온라인 광고 마케팅`을 주로 연구하지만,     
 여러분들은 소그룹에서 `브랜딩 목표를 달성`하는 방향으로 운영합니다.    
 `각자 원하는 트랙`으로 시작하면 되지만 `다른 멤버들의 배려를 위해 본인 수준에 맞게 선택`을 추천합니다.    
-- **과거 및 올해 프로젝트 계획:** https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf
+- **세부소개 및 올해 프로젝트 계획:** https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf
 
 - **자료:**
 > - [Tutorial-Python-Programming](https://github.com/thekimk/Tutorial-Python-Programming)
