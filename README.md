@@ -1,6 +1,6 @@
 ## ✔️ 모집 공고
 
-> `데바(DEBA: Digital Economy & Business Analytics)` 소그룹 멤버 모집
+> 2024년도 `DEBA(Digital Economy & Business Analytics) 소그룹 2기 멤버 모집`(김경원 교수)
 
 ## :office: 연구실 소개
 : DEBA 연구실은 디지털경제의 표준이 되어가고 있는 `빅데이터와 머신/딥러닝이란 인공지능 이론을 활용`하여,     
