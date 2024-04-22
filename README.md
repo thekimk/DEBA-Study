@@ -8,9 +8,7 @@
 
 #### :smirk: 지도교수: 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
 
-
-
-- **1기 최종멤버:** `손도언, 차명주, 장민재, 임보민`
+---
 
 - **모집시기:** `(매년 1학기 4월 경)` 2024년 4월 22일 ~ 4월 30일
 - **학과혜택1:** 소그룹 활동이 필요한 도서 구입이나 회의비, 현장 입장료 등의 `필요 경비를 100만원 내로 지원`(지원금은 매년 달라질 수 있음)
