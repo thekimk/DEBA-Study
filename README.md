@@ -4,13 +4,19 @@
 
 #### :smirk: 지도교수: 김경원 교수 소개 (<a href="https://sites.google.com/view/thekimk" target="_blank"><img src="https://img.shields.io/badge/Homepage-4285F4?style=flat-square&logo=Google&logoColor=white"/></a> <a href="https://scholar.google.com/citations?hl=ko&user=nHPe-4UAAAAJ&view_op=list_works&sortby=pubdate" target="_blank"><img src="https://img.shields.io/badge/Google Scholar-4285F4?style=flat-square&logo=Google Scholar&logoColor=white"/></a> <a href="https://www.youtube.com/channel/UCEYxJNI5dhnn_CdC9BEWTuA" target="_blank"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat-square&logo=YouTube&logoColor=white"/></a> <a href="https://github.com/thekimk" target="_blank"><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a>)
 
-- **모집시기:** `매년 1학기 4월 경`
-- **지원자격:** 전공제한은 없으나 본인의 `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스) 수업이나 유관 수업을 반드시 이수`한 학생
-- **학과지원:** 소그룹 활동이 필요한 도서 구입이나 회의비, 현장 입장료 등의 `필요 경비를 100만원 내로 지원`(지원금은 매년 달라질 수 있음)
-- **학과혜택:** 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
-- **지원방법:** 아래 내용을 자유롭게 담아 `아래 구글 폼`을 작성하여 `4월 31일`까지 제출
+- **모집시기:** `(매년 1학기 4월 경)` 2024년 4월 22일 ~ 4월 30일
+- **학과혜택1:** 소그룹 활동이 필요한 도서 구입이나 회의비, 현장 입장료 등의 `필요 경비를 100만원 내로 지원`(지원금은 매년 달라질 수 있음)
+- **학과혜택2:** 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
+
+---
+
+- **지원자격1:** 나이/휴학여부/전공이나 학과의 `제한없이 모집`할 것이나, 최소 1년 이상의 소그룹 활동 집중을 위해 `등록학기가 1~3학년 우대`
+- **지원자격2:** `무역학부 주전공/부전공/복수전공, 그외 타학과 학생` 모두 지원 가능 (단, 무역학부 지원금은 무역 주전공/부전공/복수전공 학생에만 활용)
+- **지원자격3:** `비즈니스데이터사이언스이해(구 E정보시스템), 디지털비즈니스애널리틱스(구 E데이터베이스) 수업이나 유관 수업을 반드시 이수`한 학생
+- **지원자격4:** 유관 수업이란 `데이터분석 관련 이론 또는 프로그래밍 도구 등을 활용할 수 있는 경험이 포함된 교내외 수업`들을 모두 의미함
+- **지원방법:** `모집기간 내 아래 구글 폼을 작성`하면 지원이 완료되며, 합격자는 지원 마감 후 1주일 내 통보 예정
+- 지원마감 이후에도 구글 폼을 작성 및 신청하면, 역량과 소그룹 상황에 맞춰 추가모집도 언제든 고려
 - https://docs.google.com/forms/d/e/1FAIpQLSdKWcH1BxF7qRhkmB5PG7ARpG3f8poAO5JGJJRoKVxjK7bXAQ/viewform?usp=sf_link
-- **합격통보:** 지원자들 중 `합격자에게만` 마감이후 `1주일 내 통보`
 
 ---
 
