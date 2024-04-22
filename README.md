@@ -11,18 +11,13 @@
 저는 `핀테크`를 포함한 전반적인 `금융경제 산업 전반의 거래 시장과 온라인 광고 마케팅`을 주로 연구하지만,     
 여러분들 중에서 `데이터 주도 애널리스트 또는 싸이언티스트로 경쟁력을 갖추고 본인을 브랜딩하는데 관심`있는 학생들을 모집합니다.
 
-- **세부소개 및 올해 프로젝트 계획:** https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf
 - **1기 최종멤버:** `손도언, 차명주, 장민재, 임보민`
-
+- **세부소개 및 올해 프로젝트 계획:** https://github.com/thekimk/DEBA-Study/blob/main/%5BDocument%5D/DEBA_Introduction_%EC%B5%9C%EC%A2%85.pdf
+- **학과혜택:** 소그룹 활동이 필요한 도서 구입이나 회의비 등의 `필요 경비를 100만원 내로 지원`하며, 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
+  
 ---
 
 ### :smirk: 지원자격 및 방법
-
-- **모집시기:** `(매년 1학기 4월 경)` 2024년 4월 22일 ~ 4월 30일
-- **학과혜택1:** 소그룹 활동이 필요한 도서 구입이나 회의비, 현장 입장료 등의 `필요 경비를 100만원 내로 지원`(지원금은 매년 달라질 수 있음)
-- **학과혜택2:** 향후 무역학부에서 기획하는 `다양한 특성화사업 선발에 우대`
-
----
 
 - **지원자격1:** 나이/휴학여부/전공이나 학과의 `제한없이 모집`할 것이나, 최소 1년 이상의 소그룹 활동 집중을 위해 `등록학기가 1~3학년 우대`
 - **지원자격2:** `무역학부 주전공/부전공/복수전공, 그외 타학과 학생` 모두 지원 가능 (단, 무역학부 지원금은 무역 주전공/부전공/복수전공 학생에만 활용)
@@ -31,13 +26,14 @@
 
 ---
 
+- **모집시기:** `(매년 1학기 4월 경)` 2024년 4월 22일 ~ 4월 30일
 - **지원방법:** `모집기간 내 아래 구글 폼을 작성`하면 지원이 완료되며, 합격자는 지원 마감 후 1주일 내 통보 예정
 - 지원마감 이후에도 구글 폼을 작성 및 신청하면, 역량과 소그룹 상황에 맞춰 추가모집도 언제든 고려
 - https://docs.google.com/forms/d/e/1FAIpQLSdKWcH1BxF7qRhkmB5PG7ARpG3f8poAO5JGJJRoKVxjK7bXAQ/viewform?usp=sf_link
 
 ---
 
-- **자료:**
+- **스터디 자료:**
 > - [Tutorial-Python-Programming](https://github.com/thekimk/Tutorial-Python-Programming)
 > - [Tutorial-Probability-Statistics-Algorithm-DataScience](https://github.com/thekimk/Tutorial-Probability-Statistics-Algorithm-DataScience)
 > - [All-About-Machine-Learning](https://github.com/thekimk/All-About-Machine-Learning)
