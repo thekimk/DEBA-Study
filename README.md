@@ -27,4 +27,4 @@
 > - **모집시기:** `(매년 1학기 4월 경)` 2024년 4월 22일 ~ 4월 30일
 > - **지원방법:** `모집기간 내 아래 구글 폼을 작성`하면 지원이 완료되며, 합격자는 지원 마감 후 1주일 내 통보 예정
 > - 지원마감 이후에도 구글 폼을 작성 및 신청하면, 역량과 소그룹 상황에 맞춰 추가모집도 언제든 고려
-> - https://docs.google.com/forms/d/e/1FAIpQLSdKWcH1BxF7qRhkmB5PG7ARpG3f8poAO5JGJJRoKVxjK7bXAQ/viewform?usp=sf_link
+> - https://docs.google.com/forms/d/e/1FAIpQLScWGLWgGfGMFT8fkvSRSA-bgmcd6IUw1TA234tH05XEQOQCzw/viewform?usp=sf_link
