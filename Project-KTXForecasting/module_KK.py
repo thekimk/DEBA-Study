@@ -13,7 +13,7 @@ from covid19dh import covid19
 
 
 
-def preprocessing_KTX():
+def preprocessing_KTX(save_local=True):
     # 데이터 로딩
     df_demand1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(201501-202305).xlsx'), skiprows=5)
     df_demand2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(202305-202403).xlsx'), skiprows=5)
@@ -41,15 +41,39 @@ def preprocessing_KTX():
     df_demand['1인당수입율'] = df_demand['승차수입금액']/df_demand['승차인원수']
     df_demand['공급대비승차율'] = df_demand['승차인원수']/df_demand['공급좌석합계수']
     df_demand['운행대비고객이동'] = df_demand['좌석거리']/df_demand['승차연인거리']
-    df_info = pd.concat([df_info.groupby(['주운행선', '운행일자'])['열차속성'].value_counts().unstack().fillna(0).reset_index(),
-                         df_info.groupby(['주운행선', '운행일자'])['열차구분'].value_counts().unstack().fillna(0).reset_index().iloc[:,-3:],
-                         df_info.groupby(['주운행선', '운행일자'])['시발역'].nunique().fillna(0).reset_index().iloc[:,-1],
-                         df_info.groupby(['주운행선', '운행일자'])['종착역'].nunique().fillna(0).reset_index().iloc[:,-1],
+    df_info = pd.concat([df_info.groupby(['주운행선', '운행일자'])['열차속성'].value_counts().unstack().reset_index(),
+                         df_info.groupby(['주운행선', '운행일자'])['열차구분'].value_counts().unstack().reset_index().iloc[:,-3:],
+                         df_info.groupby(['주운행선', '운행일자'])['시발역'].nunique().reset_index().iloc[:,-1],
+                         df_info.groupby(['주운행선', '운행일자'])['종착역'].nunique().reset_index().iloc[:,-1],
                          df_info.groupby(['주운행선', '운행일자'])[['공급좌석수', '열차운행횟수']].sum().reset_index().iloc[:,-2:]], axis=1)
     
-    # 시간변수 정의 및 추출
+    # 예측기간 확장
+    ## 시간변수 정의
     df_demand['운행일자'] = pd.to_datetime(df_demand['운행일자'], format='%Y년 %m월 %d일')
     df_info['운행일자'] = pd.to_datetime(df_info['운행일자'], format='%Y년 %m월 %d일')
+    ## 예측 시계열 생성
+    df_time = pd.DataFrame(pd.date_range(df_demand['운행일자'].min(), '2025-12-31', freq='D'))
+    df_time.columns = ['운행일자']
+    ## left 데이터 준비   
+    df_temp = df_demand.groupby(['주운행선', '운행일자']).sum().reset_index()
+    df_demand = pd.DataFrame()
+    for line in df_temp['주운행선'].unique():
+        df_sub = df_temp[df_temp['주운행선'] == line]
+        ## 결합
+        df_demand_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
+        df_demand_temp['주운행선'].fillna(line, inplace=True)
+        df_demand = pd.concat([df_demand, df_demand_temp], axis=0)
+    ## left 데이터 준비   
+    df_temp = df_info.groupby(['주운행선', '운행일자']).sum().reset_index()
+    df_info = pd.DataFrame()
+    for line in df_temp['주운행선'].unique():
+        df_sub = df_temp[df_temp['주운행선'] == line]
+        ## 결합
+        df_info_temp = pd.merge(df_sub, df_time, left_on='운행일자', right_on='운행일자', how='outer')
+        df_info_temp['주운행선'].fillna(line, inplace=True)
+        df_info = pd.concat([df_info, df_info_temp], axis=0)
+    
+    # 시간변수 추출
     ## 월집계용 변수생성
     df_demand['운행년월'] = pd.to_datetime(df_demand['운행일자'].apply(lambda x: str(x)[:7]))
     df_info['운행년월'] = pd.to_datetime(df_info['운행일자'].apply(lambda x: str(x)[:7]))
@@ -96,10 +120,11 @@ def preprocessing_KTX():
         corr = abs(pd.concat([Y, df_covid], axis=1).corr().iloc[:,[0]]).dropna()
         corr = corr.sort_values(by='승차인원수', ascending=False)
         feature_Yrelated.extend([i for i in corr[corr>0.5].dropna().index if i != corr.columns])
-    feature_Yrelated = [x for x in set(feature_Yrelated) if feature_Yrelated.count(x) == len(df_demand['주운행선'].unique())]
+    Y_related_max = np.max([feature_Yrelated.count(x) for x in set(feature_Yrelated)])
+    feature_Yrelated = [x for x in set(feature_Yrelated) if feature_Yrelated.count(x) == Y_related_max]
     df_covid = pd.concat([time_covid.reset_index().iloc[:,1:], df_covid[feature_Yrelated]], axis=1)
     ## 결합
-    df_demand = pd.merge(df_demand, df_covid, left_on='운행일자', right_on='date', how='left').fillna(0)
+    df_demand = pd.merge(df_demand, df_covid, left_on='운행일자', right_on='date', how='left')
     
     # 정리
     time_demand, time_info = df_demand['운행일자'], df_info['운행일자']
@@ -132,5 +157,13 @@ def preprocessing_KTX():
     df_demand = df_demand[['주운행선', '운행일자'] + [col for col in df_demand.columns if col not in ['주운행선', '운행일자']]]
     df_info = df_info[['주운행선', '운행일자'] + [col for col in df_info.columns if col not in ['주운행선', '운행일자']]]
     df = df[['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수'] + [col for col in df.columns if col not in ['전체주중주말', '주운행선', '운행년월', '일수', '주말수', '주중수', '공휴일수', '명절수']]]
+    
+    # 저장
+    if save_local:
+        folder_location = os.path.join(os.getcwd(), 'Data', '')
+        if not os.path.exists(folder_location):
+            os.makedirs(folder_location)
+        save_name = os.path.join(folder_location, 'df_KTX_KK.csv')
+        df.to_csv(save_name, encoding='utf-8-sig')
 
     return df
