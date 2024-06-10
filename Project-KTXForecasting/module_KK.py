@@ -41,10 +41,12 @@ def preprocessing_KTX(save_local=True):
     df_demand['1인당수입율'] = df_demand['승차수입금액']/df_demand['승차인원수']
     df_demand['공급대비승차율'] = df_demand['승차인원수']/df_demand['공급좌석합계수']
     df_demand['운행대비고객이동'] = df_demand['좌석거리']/df_demand['승차연인거리']
+    df_info['시발종착역'] = df_info['시발역']+df_info['종착역']
     df_info = pd.concat([df_info.groupby(['주운행선', '운행일자'])['열차속성'].value_counts().unstack().reset_index(),
                          df_info.groupby(['주운행선', '운행일자'])['열차구분'].value_counts().unstack().reset_index().iloc[:,-3:],
                          df_info.groupby(['주운행선', '운행일자'])['시발역'].nunique().reset_index().iloc[:,-1],
                          df_info.groupby(['주운행선', '운행일자'])['종착역'].nunique().reset_index().iloc[:,-1],
+                         df_info.groupby(['주운행선', '운행일자'])['시발종착역'].nunique().reset_index().iloc[:,-1],
                          df_info.groupby(['주운행선', '운행일자'])[['공급좌석수', '열차운행횟수']].sum().reset_index().iloc[:,-2:]], axis=1)
     
     # 예측기간 확장
