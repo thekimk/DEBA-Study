@@ -13,7 +13,7 @@ from covid19dh import covid19
 
 
 
-def preprocessing_KTX(save_local=True):
+def get_data_from_ktx(save_local=True):
     # 데이터 로딩
     df_demand1 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(201501-202305).xlsx'), skiprows=5)
     df_demand2 = pd.read_excel(os.path.join(os.getcwd(), 'Data', '(간선)수송-운행일-주운행(202305-202403).xlsx'), skiprows=5)
@@ -169,3 +169,54 @@ def preprocessing_KTX(save_local=True):
         df.to_csv(save_name, encoding='utf-8-sig')
 
     return df
+
+
+def feature_lagging(df, colname, direction='downward', lag_length=1):
+    # 변수명 생성
+    colname_lag = [colname+'_lag'+str(i+1) for i in range(lag_length)]
+    
+    # lag 생성
+    df_lag = pd.DataFrame()
+    for i in range(lag_length):
+        if direction == 'downward':
+            df_lag = pd.concat([df_lag, df[colname].shift(i+1)], axis=1)
+        elif direction == 'upward':
+            df_lag = pd.concat([df_lag, df[colname].shift(-i-1)], axis=1)
+    df_lag.columns = colname_lag
+    
+    # 결측치 처리
+    df_lag.fillna(method='bfill', inplace=True)
+    df_lag.fillna(method='ffill', inplace=True)
+    
+    # 결합 및 정리
+    df_lag.index = df.index.copy()
+    df = pd.concat([df, df_lag], axis=1)
+    
+    return df, colname_lag
+
+
+def preprocessing_ktx(df_raw, Y_colname, 
+                      lag_length=None, lag_direction='downward',
+                      date_splits=None):
+    # 시간인덱스
+    df = df_raw.copy()
+    df['운행년월'] = pd.to_datetime(df['운행년월'])
+    df = df.set_index('운행년월')
+    
+    # 지연값
+    if lag_length != None:
+        df, _ = feature_lagging(df, colname=Y_colname, lag_length=lag_length, direction=lag_direction)
+    
+    # 변수구분
+    df_validate = pd.DataFrame()
+    if date_splits == None:
+        df_train, df_test = df.iloc[:-int(df.shape[0] * 0.2),:], df.iloc[-int(df.shape[0] * 0.2):,:]
+    elif len(date_splits) == 1:
+        df_train = df[df.index <= date_splits[0]]
+        df_test = df[(df.index > date_splits[0])]
+    elif len(date_splits) == 2:
+        df_train = df[df.index <= date_splits[0]]
+        df_validate = df[(df.index > date_splits[0]) & (df.index <= date_splits[1])]
+        df_test = df[(df.index > date_splits[1])]
+        
+    return df_train, df_validate, df_test
